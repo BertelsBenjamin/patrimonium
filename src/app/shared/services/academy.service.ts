@@ -20,7 +20,7 @@ export class AcademyService {
     //GET ALL COUNTRIES
     getAcademies(): Observable<Academy[]> {
         return this.http.get<Academy[]>(this.url, httpOptions).pipe(
-            tap(result => console.log(`Via json-server: ${result}`))
+            tap(result => console.log(`Via localhost:3600/patrimonium: ${result}`))
         );
     }
     getAcademie(id: number) {
