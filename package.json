@@ -12,13 +12,17 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~8.2.4",
+    "@angular/cdk": "~8.2.1",
     "@angular/common": "~8.2.4",
     "@angular/compiler": "~8.2.4",
     "@angular/core": "~8.2.4",
     "@angular/forms": "~8.2.4",
+    "@angular/material": "^8.2.1",
     "@angular/platform-browser": "~8.2.4",
     "@angular/platform-browser-dynamic": "~8.2.4",
     "@angular/router": "~8.2.4",
+    "bootstrap": "^4.3.1",
+    "hammerjs": "^2.0.8",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
@@ -43,5 +47,17 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
-  }
+  },
+  "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.3.",
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BertelsBenjamin/patrimonium.git"
+  },
+  "author": "bertels123@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BertelsBenjamin/patrimonium/issues"
+  },
+  "homepage": "https://github.com/BertelsBenjamin/patrimonium#readme"
 }
