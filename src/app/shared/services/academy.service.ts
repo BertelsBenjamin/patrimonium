@@ -13,14 +13,14 @@ const httpOptions = {
 
 @Injectable()
 export class AcademyService {
-    url = "http://localhost:3306/patrimonium/academies";
+    url = "http://localhost:3306/patrimonium/";
     constructor(private http: HttpClient) {
 
     }
     //GET ALL COUNTRIES
-    getAcademies(): Observable<Academy[]> {
-        return this.http.get<Academy[]>(this.url, httpOptions).pipe(
-            tap(result => console.log(`Via localhost:3600/patrimonium: ${result}`))
+    getAcademies() {
+        return this.http.get(this.url, httpOptions).pipe(
+            tap(result => console.log(`Via localhost:3306/patrimonium: ${result}`))
         );
     }
     getAcademie(id: number) {

@@ -13,7 +13,7 @@ export class AppComponent {
   academies: Academy[];
   constructor(private http: HttpClient) {
     this.http
-      .get<Academy[]>('localhost:3306/patrimonium/academies')
+      .get<Academy[]>('http://localhost:3306/patrimonium/academies')
       .pipe(
         tap(result => console.log(result))
       )

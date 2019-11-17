@@ -1,4 +1,13 @@
 <div class="container">
-  <p>Hello World!</p>
-  <button (click)='getAcademies()'>Get Academies</button>
+  <div class="col-md-6">
+    <p>Hello World!</p>
+    <button (click)="getAcademies()">Get Academies</button>
+  </div>
+  <div class="col-md-6">
+    <div class="list-group">
+      <li class="list-group-item" *ngFor="let academy of academies">
+        {{academy.name}}
+      </li>
+    </div>
+  </div>
 </div>
