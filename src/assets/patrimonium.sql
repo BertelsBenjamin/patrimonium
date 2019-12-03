@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 16 nov 2019 om 21:59
+-- Gegenereerd op: 17 nov 2019 om 14:33
 -- Serverversie: 10.1.38-MariaDB
 -- PHP-versie: 7.3.4
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `academies` (
-  `id` int(3) DEFAULT NULL,
+  `id` int(3) NOT NULL,
   `name` varchar(67) DEFAULT NULL,
   `headquarter` varchar(5) DEFAULT NULL,
   `street` varchar(29) DEFAULT NULL,
@@ -737,7 +737,7 @@ INSERT INTO `academies` (`id`, `name`, `headquarter`, `street`, `house_number`, 
 --
 
 CREATE TABLE `directors` (
-  `id` int(3) DEFAULT NULL,
+  `id` int(3) NOT NULL,
   `last_name` varchar(25) DEFAULT NULL,
   `first_name` varchar(10) DEFAULT NULL,
   `email_director` varchar(41) DEFAULT NULL
@@ -859,7 +859,7 @@ INSERT INTO `directors` (`id`, `last_name`, `first_name`, `email_director`) VALU
 --
 
 CREATE TABLE `educational_nets` (
-  `id` int(1) DEFAULT NULL,
+  `id` int(1) NOT NULL,
   `type` varchar(33) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -880,7 +880,7 @@ INSERT INTO `educational_nets` (`id`, `type`) VALUES
 --
 
 CREATE TABLE `homepages` (
-  `id` int(3) DEFAULT NULL,
+  `id` int(3) NOT NULL,
   `url` varchar(38) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -999,11 +999,10 @@ INSERT INTO `homepages` (`id`, `url`) VALUES
 --
 
 CREATE TABLE `pianos` (
-  `id` int(2) DEFAULT NULL,
+  `id` int(2) NOT NULL,
   `sort_id` int(1) DEFAULT NULL,
   `brand_id` varchar(3) DEFAULT NULL,
   `type_id` varchar(2) DEFAULT NULL,
-  `finish_id` int(1) DEFAULT NULL,
   `serial_number` varchar(10) DEFAULT NULL,
   `academy_id` int(3) DEFAULT NULL,
   `room` varchar(15) DEFAULT NULL
@@ -1013,48 +1012,48 @@ CREATE TABLE `pianos` (
 -- Gegevens worden geëxporteerd voor tabel `pianos`
 --
 
-INSERT INTO `pianos` (`id`, `sort_id`, `brand_id`, `type_id`, `finish_id`, `serial_number`, `academy_id`, `room`) VALUES
-(1, 1, '1', '1', 1, '4135086', 29, '203'),
-(2, 1, '1', '3', 1, '6252160', 29, '202'),
-(3, 1, '1', '2', 1, 'S 5533937', 677, '3'),
-(4, 1, '1', '2', 1, '5155339', 678, 'Atelier 3'),
-(5, 1, '1', '1', 1, 'H2245613', 31, 'RKG lokaal'),
-(6, 1, '1', '1', 1, 'AH2466815', 679, 'A2'),
-(7, 1, '1', '3', 1, '6252281', 679, 'A1'),
-(8, 1, '1', '1', 1, 'H2248534', 36, 'MU -1.1'),
-(9, 1, '1', '1', 1, 'H2701149', 36, 'MU -1.4'),
-(10, 1, '1', '1', 1, 'A4387703', 36, 'MU -1.3'),
-(11, 1, '199', '4', 1, 'H00415', 36, 'MU 0.3'),
-(12, 1, '1', '5', 1, 'E334958', 36, 'MU 0.1'),
-(13, 2, '1', '6', 1, '2842015', 36, 'MU 0.4'),
-(14, 2, '1', '6', 1, '2944634', 36, 'DA 0.3'),
-(15, 2, '2', '10', 1, '2664907', 36, 'MU -1.2'),
-(16, 2, '1', '6', 1, 'J3469768', 36, 'DA 0.1'),
-(17, 1, '19', '', 1, '125359', 37, 'zaal 2'),
-(18, 1, '1', '3', 1, '6249530', 37, 'zaal 4'),
-(19, 1, '12', '20', 1, '169373', 37, 'zaal 3'),
-(20, 1, '1', '3', 1, '6221258', 32, 'Hobby 1'),
-(21, 2, '1', '6', 1, '3469767', 32, 'Danszaal'),
-(22, 1, '4', '21', 1, '123110', 32, 'Hobby 2'),
-(23, 1, '1', '1', 1, 'A4387702', 42, '2.04'),
-(24, 1, '1', '1', 1, 'A4847656', 42, '2.10'),
-(25, 2, '1', '16', 1, 'D3250497', 42, '2.05'),
-(26, 1, '1', '1', 1, 'A3714710', 42, '2.01'),
-(27, 2, '1', '16', 1, '1865499877', 42, '2.12'),
-(28, 1, '1', '3', 1, '6083193', 42, '2.06'),
-(29, 1, '1', '3', 1, '56252170', 42, '2.02'),
-(30, 1, '1', '3', 1, '56236173', 42, '2.03'),
-(31, 2, '2', '10', 1, '2667132', 42, '2.11'),
-(32, 2, '1', '6', 1, '2839597', 680, 'Sporthal'),
-(33, 1, '1', '1', 1, 'H2245642', 41, 'De Reppe'),
-(34, 1, '1', '1', 1, 'A4426499', 41, 'Expressielokaal'),
-(35, 1, '1', '3', 1, '6286593', 41, 'Theorielokaal'),
-(36, 1, '18', '', 1, '/', 681, '1.32'),
-(37, 1, '1', '1', 1, 'H2553174', 681, '1.31'),
-(38, 1, '1', '1', 1, 'A4484446', 681, '1.11'),
-(39, 1, '1', '1', 1, 'H3401757', 681, '1.33'),
-(40, 1, '1', '3', 1, '6174780', 681, '1.12'),
-(41, 1, '', '', 1, '336806', 33, '');
+INSERT INTO `pianos` (`id`, `sort_id`, `brand_id`, `type_id`, `serial_number`, `academy_id`, `room`) VALUES
+(1, 1, '1', '1', '4135086', 29, '203'),
+(2, 1, '1', '3', '6252160', 29, '202'),
+(3, 1, '1', '2', 'S 5533937', 677, '3'),
+(4, 1, '1', '2', '5155339', 678, 'Atelier 3'),
+(5, 1, '1', '1', 'H2245613', 31, 'RKG lokaal'),
+(6, 1, '1', '1', 'AH2466815', 679, 'A2'),
+(7, 1, '1', '3', '6252281', 679, 'A1'),
+(8, 1, '1', '1', 'H2248534', 36, 'MU -1.1'),
+(9, 1, '1', '1', 'H2701149', 36, 'MU -1.4'),
+(10, 1, '1', '1', 'A4387703', 36, 'MU -1.3'),
+(11, 1, '199', '4', 'H00415', 36, 'MU 0.3'),
+(12, 1, '1', '5', 'E334958', 36, 'MU 0.1'),
+(13, 2, '1', '6', '2842015', 36, 'MU 0.4'),
+(14, 2, '1', '6', '2944634', 36, 'DA 0.3'),
+(15, 2, '2', '10', '2664907', 36, 'MU -1.2'),
+(16, 2, '1', '6', 'J3469768', 36, 'DA 0.1'),
+(17, 1, '19', '', '125359', 37, 'zaal 2'),
+(18, 1, '1', '3', '6249530', 37, 'zaal 4'),
+(19, 1, '12', '20', '169373', 37, 'zaal 3'),
+(20, 1, '1', '3', '6221258', 32, 'Hobby 1'),
+(21, 2, '1', '6', '3469767', 32, 'Danszaal'),
+(22, 1, '4', '21', '123110', 32, 'Hobby 2'),
+(23, 1, '1', '1', 'A4387702', 42, '2.04'),
+(24, 1, '1', '1', 'A4847656', 42, '2.10'),
+(25, 2, '1', '16', 'D3250497', 42, '2.05'),
+(26, 1, '1', '1', 'A3714710', 42, '2.01'),
+(27, 2, '1', '16', '1865499877', 42, '2.12'),
+(28, 1, '1', '3', '6083193', 42, '2.06'),
+(29, 1, '1', '3', '56252170', 42, '2.02'),
+(30, 1, '1', '3', '56236173', 42, '2.03'),
+(31, 2, '2', '10', '2667132', 42, '2.11'),
+(32, 2, '1', '6', '2839597', 680, 'Sporthal'),
+(33, 1, '1', '1', 'H2245642', 41, 'De Reppe'),
+(34, 1, '1', '1', 'A4426499', 41, 'Expressielokaal'),
+(35, 1, '1', '3', '6286593', 41, 'Theorielokaal'),
+(36, 1, '18', '', '/', 681, '1.32'),
+(37, 1, '1', '1', 'H2553174', 681, '1.31'),
+(38, 1, '1', '1', 'A4484446', 681, '1.11'),
+(39, 1, '1', '1', 'H3401757', 681, '1.33'),
+(40, 1, '1', '3', '6174780', 681, '1.12'),
+(41, 1, '', '', '336806', 33, '');
 
 -- --------------------------------------------------------
 
@@ -1063,7 +1062,7 @@ INSERT INTO `pianos` (`id`, `sort_id`, `brand_id`, `type_id`, `finish_id`, `seri
 --
 
 CREATE TABLE `piano_brands` (
-  `id` int(2) DEFAULT NULL,
+  `id` int(2) NOT NULL,
   `name` varchar(17) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1099,7 +1098,7 @@ INSERT INTO `piano_brands` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `piano_sorts` (
-  `id` int(1) DEFAULT NULL,
+  `id` int(1) NOT NULL,
   `sort` varchar(7) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1118,7 +1117,7 @@ INSERT INTO `piano_sorts` (`id`, `sort`) VALUES
 --
 
 CREATE TABLE `piano_types` (
-  `id` int(2) DEFAULT NULL,
+  `id` int(2) NOT NULL,
   `type` varchar(7) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1156,7 +1155,7 @@ INSERT INTO `piano_types` (`id`, `type`) VALUES
 --
 
 CREATE TABLE `places` (
-  `id` int(4) DEFAULT NULL,
+  `id` int(4) NOT NULL,
   `postal_code` int(4) DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL,
   `submunicipality` varchar(5) DEFAULT NULL,
@@ -4004,7 +4003,7 @@ INSERT INTO `places` (`id`, `postal_code`, `name`, `submunicipality`, `main_muni
 --
 
 CREATE TABLE `provinces` (
-  `id` int(2) DEFAULT NULL,
+  `id` int(2) NOT NULL,
   `name` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -4024,6 +4023,134 @@ INSERT INTO `provinces` (`id`, `name`) VALUES
 (9, 'Luxemburg'),
 (10, 'Luik'),
 (11, 'Namen');
+
+--
+-- Indexen voor geëxporteerde tabellen
+--
+
+--
+-- Indexen voor tabel `academies`
+--
+ALTER TABLE `academies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `directors`
+--
+ALTER TABLE `directors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `educational_nets`
+--
+ALTER TABLE `educational_nets`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `homepages`
+--
+ALTER TABLE `homepages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `pianos`
+--
+ALTER TABLE `pianos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `piano_brands`
+--
+ALTER TABLE `piano_brands`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `piano_sorts`
+--
+ALTER TABLE `piano_sorts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `piano_types`
+--
+ALTER TABLE `piano_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `places`
+--
+ALTER TABLE `places`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `provinces`
+--
+ALTER TABLE `provinces`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT voor geëxporteerde tabellen
+--
+
+--
+-- AUTO_INCREMENT voor een tabel `academies`
+--
+ALTER TABLE `academies`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=682;
+
+--
+-- AUTO_INCREMENT voor een tabel `directors`
+--
+ALTER TABLE `directors`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+
+--
+-- AUTO_INCREMENT voor een tabel `educational_nets`
+--
+ALTER TABLE `educational_nets`
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT voor een tabel `homepages`
+--
+ALTER TABLE `homepages`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+
+--
+-- AUTO_INCREMENT voor een tabel `pianos`
+--
+ALTER TABLE `pianos`
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT voor een tabel `piano_brands`
+--
+ALTER TABLE `piano_brands`
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT voor een tabel `piano_sorts`
+--
+ALTER TABLE `piano_sorts`
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT voor een tabel `piano_types`
+--
+ALTER TABLE `piano_types`
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT voor een tabel `places`
+--
+ALTER TABLE `places`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2826;
+
+--
+-- AUTO_INCREMENT voor een tabel `provinces`
+--
+ALTER TABLE `provinces`
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
