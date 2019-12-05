@@ -1,6 +1,7 @@
 export class User {
   constructor(
     public id: number,
+    public username: string,
     public country_code: string,
     public first_name: string,
     public last_name: string,
@@ -11,6 +12,7 @@ export class User {
     public mobile: string,
     public skype: boolean,
     public province_id: any,
-    public birth_day: string
+    public birth_day: string,
+    public password: string
   ) {}
 }
