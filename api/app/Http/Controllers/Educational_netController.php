@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Director;
+use App\Educational_net;
 use Illuminate\Http\Request;
 
 class Educational_netController extends Controller

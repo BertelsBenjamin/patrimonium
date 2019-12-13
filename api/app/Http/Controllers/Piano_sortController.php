@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Director;
+use App\Piano_sort;
 use Illuminate\Http\Request;
 
 class Piano_sortController extends Controller

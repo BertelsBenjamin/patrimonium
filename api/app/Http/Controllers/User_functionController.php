@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Director;
+use App\User_function;
 use Illuminate\Http\Request;
 
 class User_functionController extends Controller

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Piano extends Model
+class Homepage extends Model
 {
 
     /**

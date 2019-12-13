@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Director;
+use App\Piano_brand;
 use Illuminate\Http\Request;
 
 class Piano_brandController extends Controller
