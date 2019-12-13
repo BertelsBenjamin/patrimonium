@@ -1,32 +1,32 @@
 country_code,last_name,first_name,department_id,function_id,level_id,email,mobile,skype,province_id,birth_day
-NL,BAKKER,Jeannette ,9,10,,JB@maene-ypma.nl,-,true,,11 juni 1962
-B,BASYN,Gregoir,2,9,,GB@maene.be,(0032) 472 47 56 55,true,3,2 juni 1991
+NL,BAKKER,Jeannette ,9,10,4,JB@maene-ypma.nl,-,true,,11 juni 1962
+B,BASYN,Gregoir,2,9,4,GB@maene.be,(0032) 472 47 56 55,true,3,2 juni 1991
 NL,BISSCHOP,Gerben,7,7,1,gbi@maene-ypma.nl,(0031)  6 15 028 424,false,,7 juni 1965
-B,BLONDEEL,Dries,2,5,,-,-,false,3,15 maart 1988
-B,BRUGGEMAN,Pascal,2,3,,-,-,false,3,11 augustus 1979
-B,CRESPO CARRASCO,Laurens,2,8,,-,-,false,3,9 maart 1988
+B,BLONDEEL,Dries,2,5,4,-,-,false,3,15 maart 1988
+B,BRUGGEMAN,Pascal,2,3,4,-,-,false,3,11 augustus 1979
+B,CRESPO CARRASCO,Laurens,2,8,4,-,-,false,3,9 maart 1988
 NL,DE LEEUW,Pelle,7,7,2,pdl@maene-ypma.nl,(0031)  6 15 028 422,false,,29 augustus 1980
-B,D'HAVE,Lennert,2,6,,-,-,false,4,9 juli 1983
+B,D'HAVE,Lennert,2,6,4,-,-,false,4,9 juli 1983
 NL,DIJKSTRA,Freek,7,7,3,fd@maene-Ypma.nl,(0031) 6 15 028 411,false,,12 oktober 1956
 B,DUYCK,Tim,3,7,2,-,-,false,4,22 januari 1992
 NL,ECKER,Martin,5,7,1,me@maene-Ypma.nl,-,false,,17 maart 1953
 B,FINCH,Linda A.,5,7,3,-,-,false,3,13 augustus 1957
-B,FRISCHER,Barbara,4,11,,BF@maene.be,-,true,5,4 september 1975
+B,FRISCHER,Barbara,4,11,4,BF@maene.be,-,true,5,4 september 1975
 B,GODDARD,Jeff,7,7,2,JGD@maene.be,(0032) 479 08 18 65,false,5,14 april 1969
 NL,HARLAAR,Marten,5,7,2,mh@maene-ypma.nl,-,false,,14 november 1982
 B,HEAD,Peter,5,7,3,PH@maene.be,(0032) 479 08 17 76,false,3,19 februari 1958
 B,HEROGUEL,Sylvain,5,7,1,-,-,false,5,4 september 1997
-B,JOLY,Yurith,2,3,,-,-,false,1,23 oktober 1990
+B,JOLY,Yurith,2,3,4,-,-,false,1,23 oktober 1990
 B,KAPEK,Minh,5,7,2,MK@maene.be,(0032) 479 08 18 56,false,5,31 maart 1983
 NL,KERSTEN,Ruud,7,7,1,rk@maene-Ypma.nl,(0031)  6 15 028 412,false,,31 augustus 1955
-NL,KIEBERT,Jos,10,1,,jk@maene-Ypma.nl,( 0031)  6 15 028 423,true,,14 september 1959
+NL,KIEBERT,Jos,10,1,4,jk@maene-Ypma.nl,( 0031)  6 15 028 423,true,,14 september 1959
 NL,KLAAIJSEN,Rutger,8,7,1,rkl@maene-Ypma.nl,(0031) 6 51 714 330,false,,12 augustus 1991
 B,KLEIJKERS,Jeroen,7,7,1,JK@maene.be,(0032) 484 15 16 96,false,5,14 maart 1978
 NL,LINDEBOOM,Paul,7,7,2,pl@maene-Ypma.nl,(0031)  6 15 028 413,false,,27 april 1967
-B,MAENE,Frederic,2,2,,FM@maene.be,(0032) 496 74 32 16,true,3,7 augustus 1983
-B,MANNAERTS,Tine,7,12,,TM@maene.be,(0032) 476 99 74 19,true,3,10 november 1987
+B,MAENE,Frederic,2,2,4,FM@maene.be,(0032) 496 74 32 16,true,3,7 augustus 1983
+B,MANNAERTS,Tine,7,12,4,TM@maene.be,(0032) 476 99 74 19,true,3,10 november 1987
 B,MERCELIS,Raf,7,7,3,RM@maene.be,(0032) 479 08 18 48,false,1,1 oktober 1972
-B,MORTELE,Arne,2,3,,-,-,false,3,20 november 1997
+B,MORTELE,Arne,2,3,4,-,-,false,3,20 november 1997
 B,NOPPE,Ruben,7,7,1,RN@maene.be,(0032) 489 17 88 39,false,3,23 juli 1988
 B,PETROU,Panagiotis,7,7,3,TP@maene.be,(0032) 479 08 18 27,false,5,6 april 1956
 NL,REINHOUT,Emiel,7,7,2,er@maene-Ypma.nl,( 0031) 6 15 028 416,false,,6 december 1977
@@ -35,13 +35,13 @@ B,SALL,Nico,5,7,1,NS@maene.be,(0032) 479 08 17 96,false,4,1 februari 1982
 B,SCHOUTROP,Ruben,7,7,1,-,(0032) 484 15 17 73,false,2,6 augustus 1989
 B,SIAROV,Svetlozar,6,7,3,SS@maene.be,(0032) 476 61 28 24,false,4,22 januari 1962
 B,SONDERMEIER,Yves,7,7,2,tbc,tbc,false,3,21 augustus 1984
-B,STAELENS,Sam,2,3,,-,-,false,3,10 september 1990
-B,VAN DEN EYNDE,Baptiste,2,13,,-,-,false,3,29 maart 1999
+B,STAELENS,Sam,2,3,4,-,-,false,3,10 september 1990
+B,VAN DEN EYNDE,Baptiste,2,13,4,-,-,false,3,29 maart 1999
 NL,VAN DER NAGEL,Stefan,7,7,2,svn@maene-Ypma.nl,(0031) 6 15 028 417,false,,5 april 1994
 NL,VAN DIJK,Martijn,7,7,1,mvd@maene-Ypma.nl,(0031) 6 15 028 414,false,,1 januari 1990
 NL,VAN DIJK,Ruud,5,7,2,rvd@maene-Ypma.nl,-,false,,26 december 1955
 NL,VAN WAGENINGEN,Marc,7,7,2,mvm@maene-Ypma.nl,(0031) 6 54 955 407,false,,24 oktober 1984
-B,VANDAELE,Thibault,1,3,,-,-,false,3,17 januari 1982
+B,VANDAELE,Thibault,1,3,4,-,-,false,3,17 januari 1982
 B,VAUDELLE,Guillaume,7,7,2,GVA@maene.be,(0032) 479 08 18 20,false,5,4 januari 1980
 B,VERBIST,Jozef,7,7,2,JV@maene.be,(0032) 479 08 18 46,false,3,20 september 1961
 B,VERGAUWEN,Joni,6,7,1,JVG@maene.be,(0032) 489 17 87 50,false,4,15 september 1995
