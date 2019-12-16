@@ -1,0 +1,9 @@
+header {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+/*# sourceMappingURL=home-header.component.css.map */
