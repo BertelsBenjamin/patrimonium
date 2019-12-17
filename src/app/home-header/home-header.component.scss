@@ -1,8 +1,14 @@
 header {
-  position: fixed;
-  right: 0;
-  top: 0;
   width: 100%;
   text-align: center;
+  background-color: rgba(0, 0, 0, 0.561);
   border-bottom: 1px solid lightgray;
+
+  p {
+    color: white;
+  }
+
+  a {
+    color: white;
+  }
 }

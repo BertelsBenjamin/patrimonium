@@ -1,10 +1,17 @@
 footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
   width: 100%;
   text-align: center;
+  color: white;
   border-top: 1px solid lightgray;
+  background-color: rgba(0, 0, 0, 0.561);
+
+  p {
+    color: white;
+  }
+
+  a {
+    color: white;
+  }
 }
 
 .fab {
