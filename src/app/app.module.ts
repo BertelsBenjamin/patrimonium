@@ -13,13 +13,16 @@ import { HomeHeaderComponent } from "./home-header/home-header.component";
 import { HomeFooterComponent } from "./home-footer/home-footer.component";
 import { PricingComponent } from "./pricing/pricing.component";
 import { ContactComponent } from "./contact/contact.component";
+import { TechnicianComponent } from "./technician/technician.component";
+import { AcademyService } from "./shared/services/academy.service";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
   { path: "home", component: HomeComponent },
   { path: "pricing", component: PricingComponent },
   { path: "contact", component: ContactComponent },
-  { path: "login", component: LoginComponent }
+  { path: "login", component: LoginComponent },
+  { path: "technician", component: TechnicianComponent }
 ];
 
 @NgModule({
@@ -31,7 +34,8 @@ const routes: Routes = [
     HomeFooterComponent,
     HomeComponent,
     PricingComponent,
-    ContactComponent
+    ContactComponent,
+    TechnicianComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,7 @@ const routes: Routes = [
     RoutingModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [AcademyService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

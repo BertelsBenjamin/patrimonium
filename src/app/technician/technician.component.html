@@ -1,1 +1,21 @@
-<p>technician works!</p>
+<button class="btn btn-dark mb-3" (click)='getAcademies()'>Get Academies</button>
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Street</th>
+      <th scope="col">House No.</th>
+      <th scope="col">Place</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor='let academy of academies'>
+      <td>{{academy.id}}</td>
+      <td>{{academy.name}}</td>
+      <td>{{academy.street}}</td>
+      <td>{{academy.house_number}}</td>
+      <td>{{academy.place_id}}</td>
+    </tr>
+  </tbody>
+</table>
