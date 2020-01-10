@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Piano_sort extends Model
+class Type extends Model
 {
 
     /**
@@ -13,7 +13,7 @@ class Piano_sort extends Model
      * @var array
      */
     protected $fillable = [
-        'sort'
+        'type_type'
     ];
 
     /**

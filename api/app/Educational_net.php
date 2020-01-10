@@ -13,7 +13,7 @@ class Educational_net extends Model
      * @var array
      */
     protected $fillable = [
-        'type'
+        'educational_net_type'
     ];
 
     /**

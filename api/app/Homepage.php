@@ -13,7 +13,7 @@ class Homepage extends Model
      * @var array
      */
     protected $fillable = [
-        'url'
+        'homepage_url'
     ];
 
     /**

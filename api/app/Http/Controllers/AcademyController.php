@@ -4,13 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Academy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AcademyController extends Controller
 {
-
     public function showAllAcademies()
     {
-        return response()->json(Academy::all());
+        $academies = DB::select('SELECT
+                                    academies.academy_id,
+                                    academies.academy_name,
+                                    academies.academy_headquarter,
+                                    academies.academy_street,
+                                    academies.academy_house_number,
+                                    places.place_name
+                                FROM academies
+                                JOIN places ON academies.academy_place_id = places.place_id
+                                JOIN directors ON academies.academy_director_id = directors.director_id
+                                JOIN homepages ON academies.academy_homepage_id = homepages.homepage_id
+                                JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id');
+        return response()->json($academies, 200);
     }
 
     public function showOneAcademy($id)
@@ -37,5 +49,17 @@ class AcademyController extends Controller
     {
         Academy::findOrFail($id)->delete();
         return response('Deleted Successfully', 200);
+    }
+
+    public function basicInfo ()
+    {
+        try {
+            return response()->json($data, 200);
+        } catch (\Illuminate\Database\QueryException $ex) {
+            $res['success'] = false;
+            $res['message'] = $ex->getMessage();
+            return response($res, 500);
+        }
+        return response('Joined succesfully', 200);
     }
 }

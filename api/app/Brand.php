@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Piano_type extends Model
+class Brand extends Model
 {
 
     /**
@@ -13,7 +13,7 @@ class Piano_type extends Model
      * @var array
      */
     protected $fillable = [
-        'type'
+        'brand_name'
     ];
 
     /**

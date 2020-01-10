@@ -13,7 +13,7 @@ class User extends Model
      * @var array
      */
     protected $fillable = [
-        'username', 'password', 'created_at', 'country_code', 'last_name', 'first_name', 'user_department_id', 'user_function_id', 'user_level_id', 'email', 'mobile', 'province_id', 'birth_day'
+        'user_username', 'user_password', 'user_created_at', 'user_country_code', 'user_last_name', 'user_first_name', 'user_user_department_id', 'user_user_function_id', 'user_level_id', 'user_email', 'user_mobile', 'user_province_id', 'user_birth_day'
     ];
 
     /**

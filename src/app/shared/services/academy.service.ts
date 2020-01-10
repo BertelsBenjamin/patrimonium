@@ -11,6 +11,12 @@ export class AcademyService {
   getAcademies(): Observable<Academy[]> {
     return this.http
       .get<Academy[]>(this.url + "academies")
+      .pipe(tap(result => console.log("Via service:\n", result)));
+  }
+
+  findAcademy(id): Observable<Academy> {
+    return this.http
+      .get<Academy>(this.url + "academies/" + id)
       .pipe(tap(result => console.log("Via service:", result)));
   }
 }

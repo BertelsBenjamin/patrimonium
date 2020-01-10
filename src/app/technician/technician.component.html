@@ -1,5 +1,12 @@
-<button class="btn btn-dark mb-3" (click)='getAcademies()'>Get Academies</button>
-<table class="table table-dark">
+<div class="input-group mb-sm-2">
+  <input id="technician-input" type="text" class="form-control rounded" placeholder="Search by name, street, place, ..."
+    #technicianInput (keyup)='filterAcademies(technicianInput.value)'>
+  <button class="btn btn-success rounded ml-3">Search</button>
+</div>
+
+<hr>
+
+<table id="table-academies" class="table table-striped table-dark">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -7,15 +14,59 @@
       <th scope="col">Street</th>
       <th scope="col">House No.</th>
       <th scope="col">Place</th>
+      <th scope="col">Change/Delete</th>
     </tr>
   </thead>
-  <tbody>
-    <tr *ngFor='let academy of academies'>
-      <td>{{academy.id}}</td>
-      <td>{{academy.name}}</td>
-      <td>{{academy.street}}</td>
-      <td>{{academy.house_number}}</td>
-      <td>{{academy.place_id}}</td>
+  <tbody id="allAcademies">
+    <tr *ngFor='let academy of academies' (click)=findAcademy(academy.academy_id) data-toggle='modal'
+      data-target='#exampleModal'>
+      <td class="academyId">{{academy.academy_id}}</td>
+      <td class="academyName">{{academy.academy_name}}</td>
+      <td class="academyStreet">{{academy.academy_street}}</td>
+      <td class="academyHouseNumber">{{academy.academy_house_number}}</td>
+      <td class="academyPlaceId">{{academy.academy_place_name}}</td>
+      <td>
+        <div class="d-flex justify-content-center align-content-center">
+          <a href="#"><i class="fas fa-pen mr-3"></i></a>
+          <a href="#"><i class="fas fa-trash mr-3"></i></a>
+        </div>
+      </td>
     </tr>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </tbody>
+  <!-- <tbody id="filteredAcademies">
+    <tr *ngFor='let filteredAcademy of filteredAcademies'>
+      <td>{{filteredAcademy.id}}</td>
+      <td>{{filteredAcademy.name}}</td>
+      <td>{{filteredAcademy.street}}</td>
+      <td>{{filteredAcademy.house_number}}</td>
+      <td>{{filteredAcademy.place_id}}</td>
+      <td>
+        <div class="d-flex justify-content-center align-content-center">
+          <a href="#"><i class="fas fa-pen mr-3"></i></a>
+          <a href="#"><i class="fas fa-trash mr-3"></i></a>
+        </div>
+      </td>
+    </tr>
+  </tbody> -->
 </table>

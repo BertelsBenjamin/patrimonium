@@ -1,9 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AcademyService } from "../shared/services/academy.service";
 import { Academy } from "../shared/models/academy.model";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { tap } from "rxjs/operators";
-import { cors } from "cors";
+import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-technician",
@@ -12,17 +10,31 @@ import { cors } from "cors";
 })
 export class TechnicianComponent implements OnInit {
   academies: Academy[];
+  academy: Academy;
+  filteredAcademies: Academy[];
+  technicianInput = new FormControl("");
+
   getAcademies() {
     this.AcademyService.getAcademies().subscribe(
-      academies => (this.academies = academies)
+      result => (this.academies = result)
     );
   }
+
+  filterAcademies(input) {
+    this.academies = this.academies.filter(e => {
+      return e.academy_name.includes(input);
+    });
+  }
+
+  findAcademy(id) {
+    this.AcademyService.findAcademy(id).subscribe(
+      result => (this.academy = result)
+    );
+  }
+
   constructor(public AcademyService: AcademyService) {}
 
   ngOnInit() {
-    /* this.http
-      .get<Academy>("http://localhost:8000/api/academies")
-      .pipe(tap(result => console.log("Opgehaald via API:", result)))
-      .subscribe(academies => (this.academies = academies)); */
+    this.getAcademies();
   }
 }

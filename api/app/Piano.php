@@ -13,7 +13,7 @@ class Piano extends Model
      * @var array
      */
     protected $fillable = [
-        'sort_id', 'brand_id', 'type_id', 'serial_number', 'academy_id', 'room'
+        'piano_sort_id', 'piano_brand_id', 'piano_type_id', 'piano_serial_number', 'piano_academy_id', 'piano_room'
     ];
 
     /**

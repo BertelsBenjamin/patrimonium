@@ -13,7 +13,7 @@ class Director extends Model
      * @var array
      */
     protected $fillable = [
-        'last_name', 'first_name', 'email_director'
+        'director_last_name', 'director_first_name', 'director_email'
     ];
 
     /**

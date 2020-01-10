@@ -1,0 +1,23 @@
+.form-group {
+  display: inline-block;
+}
+
+.fa-plus {
+  color: green;
+}
+
+.fa-pen {
+  color: rgb(40, 151, 255);
+}
+
+.fa-trash {
+  color: red;
+}
+
+tr {
+  cursor: pointer;
+
+  th {
+    cursor: default;
+  }
+}

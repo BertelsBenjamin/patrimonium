@@ -13,7 +13,7 @@ class User_function extends Model
      * @var array
      */
     protected $fillable = [
-        'description'
+        'user_function_description'
     ];
 
     /**

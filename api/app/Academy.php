@@ -13,7 +13,7 @@ class Academy extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'headquarter', 'street', 'house_number', 'place_id', 'phone', 'fax', 'director_id', 'homepage_id', 'net_id'
+        'academy_name', 'academy_headquarter', 'academy_street', 'academy_house_number', 'academy_place_id', 'academy_phone', 'academy_fax', 'academy_director_id', 'academy_homepage_id', 'academy_net_id'
     ];
 
     /**

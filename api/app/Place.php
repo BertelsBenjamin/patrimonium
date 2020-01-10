@@ -13,7 +13,7 @@ class Place extends Model
      * @var array
      */
     protected $fillable = [
-        'postal_code', 'name', 'submunicipality', 'main_municipality', 'province_id'
+        'place_postal_code', 'place_name', 'place_submunicipality', 'place_main_municipality', 'place_province_id'
     ];
 
     /**

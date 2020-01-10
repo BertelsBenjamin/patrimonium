@@ -13,7 +13,7 @@ class Province extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'country_code'
+        'province_name', 'province_country_code'
     ];
 
     /**

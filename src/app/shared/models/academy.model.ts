@@ -1,15 +1,16 @@
 export class Academy {
   constructor(
-    public id: number,
-    public name: string,
-    public hq: boolean,
-    public street: string,
-    public house_number: string,
-    public place_id: any,
-    public phone: number,
-    public fax: number,
-    public director_id: any,
-    public homepage_id: any,
-    public net_id: any
+    public academy_id: number,
+    public academy_name: string,
+    public academy_headquarters: boolean,
+    public academy_street: string,
+    public academy_house_number: string,
+    public academy_place_id: any,
+    public academy_phone: number,
+    public academy_fax: number,
+    public academy_director_id: any,
+    public academy_homepage_id: any,
+    public academy_educational_net_id: any,
+    public academy_place_name: any
   ) {}
 }

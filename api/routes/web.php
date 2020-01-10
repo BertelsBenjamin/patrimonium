@@ -19,7 +19,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
   // ACADEMIES
   $router->get('academies',  ['uses' => 'AcademyController@showAllAcademies']);
-  $router->get('academies/{id}', ['uses' => 'AcademyController@showOneAcademy']);
+  $router->get('academies/detail/{id}', ['uses' => 'AcademyController@showOneAcademy']);
+  $router->get('academies/basic-info', ['uses' => 'AcademyController@basicInfo']);
   $router->post('academies', ['uses' => 'AcademyController@create']);
   $router->delete('academies/{id}', ['uses' => 'AcademyController@delete']);
   $router->put('academies/{id}', ['uses' => 'AcademyController@update']);
