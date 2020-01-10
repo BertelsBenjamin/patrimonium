@@ -2,7 +2,7 @@ export class Academy {
   constructor(
     public academy_id: number,
     public academy_name: string,
-    public academy_headquarters: boolean,
+    public academy_headquarter: boolean,
     public academy_street: string,
     public academy_house_number: string,
     public academy_place_id: any,

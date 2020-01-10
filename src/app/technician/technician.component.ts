@@ -18,6 +18,7 @@ export class TechnicianComponent implements OnInit {
     this.AcademyService.getAcademies().subscribe(
       result => (this.academies = result)
     );
+    console.log(this.academies);
   }
 
   filterAcademies(input) {

@@ -10,24 +10,42 @@ class AcademyController extends Controller
 {
     public function showAllAcademies()
     {
-        $academies = DB::select('SELECT
+        $academies = DB::select("SELECT
                                     academies.academy_id,
                                     academies.academy_name,
                                     academies.academy_headquarter,
                                     academies.academy_street,
                                     academies.academy_house_number,
-                                    places.place_name
+                                    academies.academy_phone,
+                                    academies.academy_fax,
+                                    places.place_name AS academy_place_name
                                 FROM academies
                                 JOIN places ON academies.academy_place_id = places.place_id
                                 JOIN directors ON academies.academy_director_id = directors.director_id
                                 JOIN homepages ON academies.academy_homepage_id = homepages.homepage_id
-                                JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id');
-        return response()->json($academies, 200);
+                                JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id");
+        return response() -> json($academies, 200);
     }
 
     public function showOneAcademy($id)
     {
-        return response()->json(Academy::find($id));
+        /* settype($id, "integer"); */
+        $academy = DB::select("SELECT
+                                    academies.academy_id,
+                                    academies.academy_name,
+                                    academies.academy_headquarter,
+                                    academies.academy_street,
+                                    academies.academy_house_number,
+                                    academies.academy_phone,
+                                    academies.academy_fax,
+                                    places.place_name AS academy_place_name
+                                FROM academies
+                                JOIN places ON academies.academy_place_id = places.place_id
+                                JOIN directors ON academies.academy_director_id = directors.director_id
+                                JOIN homepages ON academies.academy_homepage_id = homepages.homepage_id
+                                JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id
+                                WHERE academies.academy_id = " + $id);
+        return response() -> json($academy, 200);
     }
 
     public function create(Request $request)
