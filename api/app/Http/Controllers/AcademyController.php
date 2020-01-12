@@ -23,7 +23,8 @@ class AcademyController extends Controller
                                 JOIN places ON academies.academy_place_id = places.place_id
                                 JOIN directors ON academies.academy_director_id = directors.director_id
                                 JOIN homepages ON academies.academy_homepage_id = homepages.homepage_id
-                                JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id");
+                                JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id
+                                LIMIT 10");
         return response() -> json($academies, 200);
     }
 
@@ -89,7 +90,7 @@ class AcademyController extends Controller
                                 JOIN directors ON academies.academy_director_id = directors.director_id
                                 JOIN homepages ON academies.academy_homepage_id = homepages.homepage_id
                                 JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id
-                                WHERE academies.academy_headquarter LIKE '%$value%'");
+                                WHERE academies.academy_headquarter = $value");
         return response() -> json($academies, 200);
     }
 
