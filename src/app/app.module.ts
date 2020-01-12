@@ -15,7 +15,7 @@ import { HomeFooterComponent } from "./home-footer/home-footer.component";
 import { PricingComponent } from "./pricing/pricing.component";
 import { ContactComponent } from "./contact/contact.component";
 import { TechnicianComponent } from "./technician/technician.component";
-import { AcademyService } from "./shared/services/academy.service";
+import { TechnicianService } from "./shared/services/technician.service";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -45,7 +45,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     ReactiveFormsModule
   ],
-  providers: [AcademyService],
+  providers: [TechnicianService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

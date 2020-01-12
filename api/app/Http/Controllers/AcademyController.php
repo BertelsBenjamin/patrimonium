@@ -44,8 +44,53 @@ class AcademyController extends Controller
                                 JOIN directors ON academies.academy_director_id = directors.director_id
                                 JOIN homepages ON academies.academy_homepage_id = homepages.homepage_id
                                 JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id
-                                WHERE academies.academy_id = " + $id);
+                                WHERE academies.academy_id = $id");
         return response() -> json($academy, 200);
+    }
+
+    public function filterAcademies($input){
+        $academies = DB::select("SELECT
+                                    academies.academy_id,
+                                    academies.academy_name,
+                                    academies.academy_headquarter,
+                                    academies.academy_street,
+                                    academies.academy_house_number,
+                                    academies.academy_phone,
+                                    academies.academy_fax,
+                                    places.place_name AS academy_place_name
+                                FROM academies
+                                JOIN places ON academies.academy_place_id = places.place_id
+                                JOIN directors ON academies.academy_director_id = directors.director_id
+                                JOIN homepages ON academies.academy_homepage_id = homepages.homepage_id
+                                JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id
+                                WHERE academies.academy_id LIKE '%$input%'
+                                    OR academies.academy_name LIKE '%$input%'
+                                    OR academies.academy_street LIKE '%$input%'
+                                    OR academies.academy_house_number LIKE '%$input%'
+                                    OR academies.academy_phone LIKE '%$input%'
+                                    OR academies.academy_fax LIKE '%$input%'
+                                    OR places.place_name LIKE '%$input%'"
+                                        );
+        return response() -> json($academies, 200);
+    }
+
+    public function filterHQ($value){
+        $academies = DB::select("SELECT
+                                    academies.academy_id,
+                                    academies.academy_name,
+                                    academies.academy_headquarter,
+                                    academies.academy_street,
+                                    academies.academy_house_number,
+                                    academies.academy_phone,
+                                    academies.academy_fax,
+                                    places.place_name AS academy_place_name
+                                FROM academies
+                                JOIN places ON academies.academy_place_id = places.place_id
+                                JOIN directors ON academies.academy_director_id = directors.director_id
+                                JOIN homepages ON academies.academy_homepage_id = homepages.homepage_id
+                                JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id
+                                WHERE academies.academy_headquarter LIKE '%$value%'");
+        return response() -> json($academies, 200);
     }
 
     public function create(Request $request)

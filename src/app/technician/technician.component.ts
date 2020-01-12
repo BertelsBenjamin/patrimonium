@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AcademyService } from "../shared/services/academy.service";
+import { TechnicianService } from "../shared/services/technician.service";
 import { Academy } from "../shared/models/academy.model";
 import { FormControl } from "@angular/forms";
 
@@ -13,27 +13,40 @@ export class TechnicianComponent implements OnInit {
   academy: Academy;
   filteredAcademies: Academy[];
   technicianInput = new FormControl("");
+  checkboxHQ = new FormControl("");
+  HQLabelValue = "";
 
   getAcademies() {
-    this.AcademyService.getAcademies().subscribe(
+    this.TechnicianService.getAcademies().subscribe(
       result => (this.academies = result)
     );
     console.log(this.academies);
   }
 
   filterAcademies(input) {
-    this.academies = this.academies.filter(e => {
+    this.TechnicianService.filterAcademies(input).subscribe(
+      result => (this.academies = result)
+    );
+
+    /* this.academies = this.academies.filter(e => {
       return e.academy_name.includes(input);
-    });
+    }); */
   }
 
   findAcademy(id) {
-    this.AcademyService.findAcademy(id).subscribe(
+    this.TechnicianService.findAcademy(id).subscribe(
       result => (this.academy = result)
     );
   }
 
-  constructor(public AcademyService: AcademyService) {}
+  filterHQ(value) {
+    value == true ? (value = "1") : (value = "0");
+    this.TechnicianService.filterHQ(value).subscribe(
+      result => (this.academies = result)
+    );
+  }
+
+  constructor(public TechnicianService: TechnicianService) {}
 
   ngOnInit() {
     this.getAcademies();

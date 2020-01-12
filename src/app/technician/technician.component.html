@@ -1,7 +1,15 @@
 <div class="input-group mb-sm-2">
-  <input id="technician-input" type="text" class="form-control rounded" placeholder="Search by name, street, place, ..."
+  <input id="technician-input" class="form-control rounded" placeholder="Search by name, street, place, ..."
     #technicianInput (keyup)='filterAcademies(technicianInput.value)'>
   <button class="btn btn-success rounded ml-3">Search</button>
+</div>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <div class="input-group-text">
+      <input type="checkbox" #checkboxHQ (change)="filterHQ(checkboxHQ.checked)">
+    </div>
+  </div>
+  <label type="text" class="form-control">Filter HQ's</label>
 </div>
 
 <hr>
@@ -15,7 +23,6 @@
       <th scope="col">House No.</th>
       <th scope="col">Place</th>
       <th scope="col">HQ?</th>
-      <th scope="col">Change/Delete</th>
     </tr>
   </thead>
   <tbody id="allAcademies">
@@ -26,12 +33,9 @@
       <td class="academyStreet">{{academy.academy_street}}</td>
       <td class="academyHouseNumber">{{academy.academy_house_number}}</td>
       <td class="academyPlaceId">{{academy.academy_place_name}}</td>
-      <td class="academyHeadQuarter">{{academy.academy_headquarter}}</td>
       <td>
-        <div class="d-flex justify-content-center align-content-center">
-          <a href="#"><i class="fas fa-pen mr-3"></i></a>
-          <a href="#"><i class="fas fa-trash mr-3"></i></a>
-        </div>
+        <div *ngIf="academy.academy_headquarter=='0'; else elseBlock">No</div>
+        <ng-template #elseBlock>Yes</ng-template>
       </td>
     </tr>
     <!-- Modal -->
@@ -56,19 +60,4 @@
       </div>
     </div>
   </tbody>
-  <!-- <tbody id="filteredAcademies">
-    <tr *ngFor='let filteredAcademy of filteredAcademies'>
-      <td>{{filteredAcademy.id}}</td>
-      <td>{{filteredAcademy.name}}</td>
-      <td>{{filteredAcademy.street}}</td>
-      <td>{{filteredAcademy.house_number}}</td>
-      <td>{{filteredAcademy.place_id}}</td>
-      <td>
-        <div class="d-flex justify-content-center align-content-center">
-          <a href="#"><i class="fas fa-pen mr-3"></i></a>
-          <a href="#"><i class="fas fa-trash mr-3"></i></a>
-        </div>
-      </td>
-    </tr>
-  </tbody> -->
 </table>
