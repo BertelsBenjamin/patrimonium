@@ -63,37 +63,51 @@
                     <div class="row">
                       <div class="col-12">
                         <ul id="academy-info-list" class="list">
-                          <li>
+                          <li class="list-item" *ngIf="academy.academy_street||academy.academy_house_number != ''">
                             <div class="academy-info">
                               <i class="fas fa-map-marker-alt mr-2"></i>
                               <label>{{academy.academy_street}} {{academy.academy_house_number}},
                                 {{academy.academy_place_name}}</label>
                             </div>
                           </li>
-                          <li>
-                            <div class="academy-info" *ngIf="academy.academy_phone != ''">
+                          <li class="list-item" *ngIf="academy.academy_phone != ''">
+                            <div class="academy-info">
                               <a [attr.href]="'tel:0' + academy.academy_phone">
                                 <i class="fas fa-phone mr-2"></i>
                                 <label>0{{academy.academy_phone}}</label>
                               </a>
                             </div>
                           </li>
-                          <li>
+                          <li class="list-item"
+                            *ngIf="academy.academy_director_last_name||academy.academy_director_first_name != ''">
                             <div class="academy-info">
                               <i class="fas fa-envelope mr-2"></i>
                               <label>{{academy.academy_director_last_name}}
                                 {{academy.academy_director_first_name}} (director)</label>
                             </div>
                           </li>
+                          <li class="list-item" *ngIf="academy.academy_homepage_url != ''">
+                            <div class="academy-info">
+                              <a [attr.href]="'https://' + academy.academy_homepage_url" target="_blank">
+                                <i class="fas fa-globe mr-2"></i>
+                                <label>{{academy.academy_homepage_url}}</label>
+                              </a>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="academy-info" *ngIf="academy.academy_educational_net_type != ''">
+                              <i class="fas fa-info mr-2"></i>
+                              <label>{{academy.academy_educational_net_type}}</label>
+                            </div>
+                          </li>
                         </ul>
-
                       </div>
                     </div>
-                    <a href="#" class="btn btn-primary btn-small">Go to academy page</a>
                   </div>
                 </div>
               </div>
               <div class="modal-footer">
+                <a routerLink="academy" class="btn btn-primary btn-small">Go to academy page</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>

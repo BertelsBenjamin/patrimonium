@@ -15,7 +15,11 @@ import { HomeFooterComponent } from "./home-footer/home-footer.component";
 import { PricingComponent } from "./pricing/pricing.component";
 import { ContactComponent } from "./contact/contact.component";
 import { TechnicianComponent } from "./technician/technician.component";
+import { AcademyComponent } from "./academy/academy.component";
+
+// SERVICES
 import { TechnicianService } from "./shared/services/technician.service";
+import { Academy } from "./shared/models/academy.model";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -23,7 +27,8 @@ const routes: Routes = [
   { path: "pricing", component: PricingComponent },
   { path: "contact", component: ContactComponent },
   { path: "login", component: LoginComponent },
-  { path: "technician", component: TechnicianComponent }
+  { path: "technician", component: TechnicianComponent },
+  { path: "academy", component: AcademyComponent }
 ];
 
 @NgModule({
@@ -36,7 +41,8 @@ const routes: Routes = [
     HomeComponent,
     PricingComponent,
     ContactComponent,
-    TechnicianComponent
+    TechnicianComponent,
+    AcademyComponent
   ],
   imports: [
     BrowserModule,
