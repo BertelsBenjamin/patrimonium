@@ -1,1 +1,25 @@
+#academy-info-list {
+  list-style-type: none;
 
+  .academy-info {
+    i {
+      display: inline;
+    }
+
+    .fa-map-marker-alt {
+      color: rgb(246, 66, 1)
+    }
+
+    .fa-phone {
+      color: rgba(255, 230, 0, 0.952);
+    }
+
+    .fa-envelope {
+      color: rgb(2, 206, 2);
+    }
+
+    label {
+      font-size: medium;
+    }
+  }
+}

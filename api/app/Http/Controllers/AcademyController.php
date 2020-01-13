@@ -18,7 +18,12 @@ class AcademyController extends Controller
                                     academies.academy_house_number,
                                     academies.academy_phone,
                                     academies.academy_fax,
-                                    places.place_name AS academy_place_name
+                                    places.place_name AS academy_place_name,
+                                    directors.director_last_name AS academy_director_last_name,
+                                    directors.director_first_name AS academy_director_first_name,
+                                    directors.director_email AS academy_director_email,
+                                    homepages.homepage_url AS academy_homepage_url,
+                                    educational_nets.educational_net_type AS academy_educational_net_type
                                 FROM academies
                                 JOIN places ON academies.academy_place_id = places.place_id
                                 JOIN directors ON academies.academy_director_id = directors.director_id

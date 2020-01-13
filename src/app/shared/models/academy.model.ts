@@ -6,11 +6,14 @@ export class Academy {
     public academy_street: string,
     public academy_house_number: string,
     public academy_place_id: any,
-    public academy_phone: number,
+    public academy_phone: any,
     public academy_fax: number,
     public academy_director_id: any,
     public academy_homepage_id: any,
     public academy_educational_net_id: any,
-    public academy_place_name: any
+    public academy_place_name: any,
+    public academy_director_last_name: any,
+    public academy_director_first_name: any,
+    public academy_homepage_url: any
   ) {}
 }
