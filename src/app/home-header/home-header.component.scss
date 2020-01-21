@@ -1,14 +1,35 @@
-header {
-  width: 100%;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.561);
-  border-bottom: 1px solid lightgray;
+$primary-blue: #292d3e;
+$primary-orange: rgb(230, 88, 23);
+$primary-yellow: rgb(229, 255, 0);
+$font-text: 'Poppins';
 
-  p {
-    color: white;
+header {
+  font-family: $font-text, sans-serif;
+  letter-spacing: 1px;
+  font-weight: 100;
+  color: $primary-orange;
+  background-color: $primary-blue;
+
+  #logo {
+    margin: 5px;
   }
 
   a {
-    color: white;
+    color: $primary-orange;
+  }
+
+  li {
+    display: inline-block;
+    align-items: right;
+
+    :hover {
+      text-decoration: underline;
+    }
+  }
+
+  button hr {
+    margin: 5px 5px;
+    width: 20px;
+    background-color: $primary-orange;
   }
 }

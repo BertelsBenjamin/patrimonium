@@ -1,22 +1,26 @@
+$primary-blue: #292d3e;
+$primary-orange: rgb(230, 88, 23);
+$font-text: 'Poppins';
+
 footer {
   width: 100%;
   text-align: center;
-  color: white;
-  border-top: 1px solid lightgray;
-  background-color: rgba(0, 0, 0, 0.561);
+  color: $primary-orange;
+  border-top: 1px solid $primary-blue;
+  background-color: #292d3e;
+  font-family: $font-text;
 
   p {
-    color: white;
+    color: $primary-orange;
   }
 
   a {
-    color: white;
+    color: $primary-orange;
   }
 }
 
 .fab {
   margin-right: 2vw;
-  /* width: 10px;
-  height: 10px; */
   font-weight: 900;
+  color: $primary-orange;
 }

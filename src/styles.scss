@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+$primary-blue: #292d3e;
+$primary-orange: rgba(255, 255, 255, 0.918);
+$primary-grey: #545e8a;
+$primary-light-blue: #d1b486;
+$font-text: 'Poppins';
 
 html,
 body {
@@ -7,5 +12,6 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: $font-text, sans-serif !important;
+  background-color: white !important;
 }

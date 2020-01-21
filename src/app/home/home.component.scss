@@ -1,3 +1,11 @@
+$primary-blue: #292d3e;
+$primary-orange: rgb(230, 88, 23);
+$font-text: 'Poppins';
+
+.container {
+  color: $primary-blue;
+}
+
 h5 {
-  color: red;
+  color: $primary-blue;
 }
