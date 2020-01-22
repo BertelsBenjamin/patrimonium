@@ -3,7 +3,7 @@
     <div class="text-center col-12">
       <h2>Login</h2>
     </div>
-    <form class="col" [formGroup]=''>
+    <form class="col" [formGroup]='loginInput'>
       <div class="form-group">
         <label for="input-username">Email</label>
         <input type="email" class="form-control" id="input-username" aria-describedby="usernameHelp" #userEmail required
@@ -23,7 +23,7 @@
         <input type="checkbox" class="form-check-input" id="check-sign-in">
         <label class="form-check-label" for="check-sign-in">Keep me signed in</label>
       </div>
-      <button type="submit" class="btn btn-success" id="btn-login"
+      <button class="btn btn-success" id="btn-login"
         (click)="authService.login(userEmail.value, userPassword.value)">Submit</button>
     </form>
   </div>
