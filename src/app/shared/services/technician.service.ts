@@ -22,10 +22,10 @@ export class TechnicianService {
       );
   }
 
-  filterAcademies(input): Observable<Academy[]> {
+  filterAcademies(input, hq): Observable<Academy[]> {
     return this.http
-      .get<Academy[]>(this.url + "academies/filter/" + input)
-      .pipe(tap(result => console.log("Academies HQ's:\n", result)));
+      .get<Academy[]>(this.url + `academies/filter/${input}/${hq}`)
+      .pipe(tap(result => console.log("Filtered academies:\n", result)));
   }
 
   filterHQ(value) {

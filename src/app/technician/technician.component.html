@@ -3,13 +3,16 @@
   <div class="col-6">
     <div class="input-group d-flex justify-content-start mb-3">
       <input id="technician-input" class="form-control rounded" placeholder="Search by name, street, place, ..."
-        #technicianInput (keyup)='filterAcademies(technicianInput.value)'>
+        #technicianInput (keyup)='filterAcademies(technicianInput.value, checkboxHQ.checked)'>
+      <!--*ngIf="technicianInput.value==''?getAcademies():filterAcademies(technicianInput.value, checkboxHQ.checked)"-->
     </div>
+
   </div>
 </div>
 <div class="row">
   <div class="col-6 d-flex justify-content-start align-content-center">
-    <input class="block" type="checkbox" #checkboxHQ (change)="filterHQ(checkboxHQ.checked)">
+    <input class="block" type="checkbox" #checkboxHQ
+      (change)="filterAcademies(technicianInput.value, checkboxHQ.checked)">
     <span type="text" class="ml-2">Only HQ's</span>
   </div>
 </div>
