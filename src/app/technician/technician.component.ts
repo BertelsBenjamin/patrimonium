@@ -27,10 +27,6 @@ export class TechnicianComponent implements OnInit {
     this.TechnicianService.filterAcademies(input).subscribe(
       result => (this.academies = result)
     );
-
-    /* this.academies = this.academies.filter(e => {
-      return e.academy_name.includes(input);
-    }); */
   }
 
   findAcademy(id) {
@@ -53,10 +49,5 @@ export class TechnicianComponent implements OnInit {
 
   ngOnInit() {
     this.getAcademies();
-    this.academies.forEach((a: Academy) => {
-      if (a.academy_id == this.route.snapshot.params.id) {
-        this.academy = a;
-      }
-    });
   }
 }
