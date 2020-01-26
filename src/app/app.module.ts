@@ -36,7 +36,10 @@ const routes: Routes = [
   { path: "technician", component: TechnicianComponent },
   { path: "dispatcher", component: DispatcherComponent },
   { path: "manager", component: ManagerComponent },
-  { path: "technician/academy", component: AcademyComponent }
+  {
+    path: "technician/academy/:id",
+    component: AcademyComponent
+  }
 ];
 
 @NgModule({

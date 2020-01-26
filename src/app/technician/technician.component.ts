@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { TechnicianService } from "../shared/services/technician.service";
 import { Academy } from "../shared/models/academy.model";
 import { FormControl } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-technician",
@@ -45,9 +46,17 @@ export class TechnicianComponent implements OnInit {
     );
   }
 
-  constructor(public TechnicianService: TechnicianService) {}
+  constructor(
+    public TechnicianService: TechnicianService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.getAcademies();
+    this.academies.forEach((a: Academy) => {
+      if (a.academy_id == this.route.snapshot.params.id) {
+        this.academy = a;
+      }
+    });
   }
 }

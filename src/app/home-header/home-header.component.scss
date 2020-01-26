@@ -18,12 +18,23 @@ header {
     color: $primary-orange;
   }
 
+
+
+  .active-link {
+    color: white;
+    background-color: $primary-orange;
+    border: white;
+    border-radius: 5px;
+  }
+
   li {
     display: inline-block;
     align-items: right;
+  }
 
+  li:hover {
     :hover {
-      text-decoration: underline;
+      text-decoration: unset;
     }
   }
 
