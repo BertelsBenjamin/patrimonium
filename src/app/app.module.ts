@@ -24,6 +24,8 @@ import { TechnicianService } from "./shared/services/technician.service";
 import { Academy } from "./shared/models/academy.model";
 import { config } from "rxjs";
 import { environment } from "src/environments/environment";
+import { DispatcherComponent } from "./dispatcher/dispatcher.component";
+import { ManagerComponent } from "./manager/manager.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -32,6 +34,8 @@ const routes: Routes = [
   { path: "contact", component: ContactComponent },
   { path: "login", component: LoginComponent },
   { path: "technician", component: TechnicianComponent },
+  { path: "dispatcher", component: DispatcherComponent },
+  { path: "manager", component: ManagerComponent },
   { path: "technician/academy", component: AcademyComponent }
 ];
 
@@ -46,7 +50,9 @@ const routes: Routes = [
     PricingComponent,
     ContactComponent,
     TechnicianComponent,
-    AcademyComponent
+    AcademyComponent,
+    DispatcherComponent,
+    ManagerComponent
   ],
   imports: [
     BrowserModule,

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFunctionsTable extends Migration
+class CreateUserFunctionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateFunctionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('functions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('description');
+        Schema::create('user_functions', function (Blueprint $table) {
+            $table->increments('user_function_id');
+            $table->string('user_function_description');
         });
     }
 
@@ -26,6 +26,6 @@ class CreateFunctionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('functions');
+        Schema::dropIfExists('user_functions');
     }
 }

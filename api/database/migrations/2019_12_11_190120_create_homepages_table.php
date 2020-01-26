@@ -14,8 +14,8 @@ class CreateHomepagesTable extends Migration
     public function up()
     {
         Schema::create('homepages', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('url');
+            $table->increments('homepage_id');
+            $table->string('homepage_url');
         });
     }
 

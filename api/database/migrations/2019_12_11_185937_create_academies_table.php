@@ -14,17 +14,17 @@ class CreateAcademiesTable extends Migration
     public function up()
     {
         Schema::create('academies', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->boolean('headquarter');
-            $table->string('street');
-            $table->string('house_number');
-            $table->integer('place_id');
-            $table->string('phone');
-            $table->string('fax');
-            $table->integer('director_id');
-            $table->integer('homepage_id');
-            $table->integer('net_id');
+            $table->increments('academy_id');
+            $table->string('academy_name');
+            $table->boolean('academy_headquarter');
+            $table->string('academy_street');
+            $table->string('academy_house_number');
+            $table->integer('academy_place_id');
+            $table->string('academy_phone');
+            $table->string('academy_fax');
+            $table->integer('academy_director_id');
+            $table->integer('academy_homepage_id');
+            $table->integer('academy_net_id');
 
         });
     }

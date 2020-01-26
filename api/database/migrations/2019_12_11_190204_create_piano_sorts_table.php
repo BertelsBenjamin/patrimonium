@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePianoSortsTable extends Migration
+class CreateSortsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreatePianoSortsTable extends Migration
      */
     public function up()
     {
-        Schema::create('piano_sorts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('sort');
+        Schema::create('sorts', function (Blueprint $table) {
+            $table->increments('sort_id');
+            $table->string('sort_sort');
         });
     }
 
@@ -26,6 +26,6 @@ class CreatePianoSortsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('piano_sorts');
+        Schema::dropIfExists('sorts');
     }
 }

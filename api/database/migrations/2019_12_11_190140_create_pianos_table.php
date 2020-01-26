@@ -14,13 +14,13 @@ class CreatePianosTable extends Migration
     public function up()
     {
         Schema::create('pianos', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('sort_id');
-            $table->integer('brand_id');
-            $table->integer('type_id');
-            $table->string('serial_number');
-            $table->integer('academy_id');
-            $table->string('room');
+            $table->increments('piano_id');
+            $table->integer('piano_sort_id');
+            $table->integer('piano_brand_id');
+            $table->integer('piano_type_id');
+            $table->string('piano_serial_number');
+            $table->integer('piano_academy_id');
+            $table->string('piano_room');
         });
     }
 

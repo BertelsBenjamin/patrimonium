@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePianoTypesTable extends Migration
+class CreateTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreatePianoTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('piano_types', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('type');
+        Schema::create('types', function (Blueprint $table) {
+            $table->increments('type_id');
+            $table->string('type_type');
         });
     }
 
@@ -26,6 +26,6 @@ class CreatePianoTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('piano_types');
+        Schema::dropIfExists('types');
     }
 }

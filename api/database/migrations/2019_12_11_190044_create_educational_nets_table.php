@@ -14,8 +14,8 @@ class CreateEducationalNetsTable extends Migration
     public function up()
     {
         Schema::create('educational_nets', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('type');
+            $table->increments('educational_net_id');
+            $table->string('educational_net_type');
         });
     }
 

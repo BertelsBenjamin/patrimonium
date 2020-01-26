@@ -4,6 +4,7 @@ import { auth } from "firebase/app";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { User } from "firebase";
 import { LoginComponent } from "src/app/login/login.component";
+import * as firebase from "firebase/app";
 
 @Injectable({
   providedIn: "root"
@@ -21,12 +22,13 @@ export class AuthService {
     });
   }
 
+  findUser(userEmail) {}
+
   async login(email: string, password: string) {
     try {
-      debugger;
       await this.afAuth.auth.signInWithEmailAndPassword(email, password);
-      alert("logged in");
-      this.router.navigate(["/"]);
+      console.log(firebase.auth().currentUser);
+      this.router.navigate(["/technician"]);
     } catch {
       alert("An error occured. Contact support.");
     }

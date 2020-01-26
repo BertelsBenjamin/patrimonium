@@ -14,10 +14,10 @@ class CreateDirectorsTable extends Migration
     public function up()
     {
         Schema::create('directors', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('last_name');
-            $table->string('first_name');
-            $table->string('email_director');
+            $table->increments('director_id');
+            $table->string('director_last_name');
+            $table->string('director_first_name');
+            $table->string('director_email_director');
         });
     }
 

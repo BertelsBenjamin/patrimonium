@@ -14,12 +14,12 @@ class CreatePlacesTable extends Migration
     public function up()
     {
         Schema::create('places', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('postal_code');
-            $table->string('name');
-            $table->boolean('submunicipality');
-            $table->string('main_municipality');
-            $table->integer('province_id');
+            $table->increments('place_id');
+            $table->string('place_postal_code');
+            $table->string('place_name');
+            $table->boolean('place_submunicipality');
+            $table->string('place_main_municipality');
+            $table->integer('place_province_id');
         });
     }
 
