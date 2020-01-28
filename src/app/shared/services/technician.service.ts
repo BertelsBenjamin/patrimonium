@@ -24,7 +24,7 @@ export class TechnicianService {
 
   filterAcademies(input, hq): Observable<Academy[]> {
     return this.http
-      .get<Academy[]>(this.url + `academies/filter/${input}/${hq}`)
+      .get<Academy[]>(this.url + `academies/filter/${hq}/${input}`)
       .pipe(tap(result => console.log("Filtered academies:\n", result)));
   }
 

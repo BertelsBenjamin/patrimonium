@@ -23,12 +23,13 @@ export class TechnicianComponent implements OnInit {
     );
   }
 
-  filterAcademies(input: string, hq: any) {
+  filterAcademies(input: any, hq: any) {
     // TODO: Fix routing in api/routing/web.php when TechnicianInput goes back to empty.
     // Check commented NgIf in technician.component.html under first <input> tag.
     // This NgIf generates endless calls of getAcademies().
-    console.log("input: " + input, "hq: " + hq);
     hq == true ? (hq = 1) : (hq = 0);
+    input == "" ? (input = undefined) : (input = input);
+    console.log("input: " + input, "hq: " + hq);
     this.TechnicianService.filterAcademies(input, hq).subscribe(
       result => (this.academies = result)
     );
