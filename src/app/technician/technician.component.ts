@@ -17,22 +17,35 @@ export class TechnicianComponent implements OnInit {
   checkboxHQ = new FormControl("");
   HQLabelValue = "";
 
-  getAcademies() {
-    this.TechnicianService.getAcademies().subscribe(
+  getAllAcademies() {
+    this.TechnicianService.getAllAcademies().subscribe(
       result => (this.academies = result)
     );
   }
 
-  filterAcademies(input: any, hq: any) {
-    // TODO: Fix routing in api/routing/web.php when TechnicianInput goes back to empty.
-    // Check commented NgIf in technician.component.html under first <input> tag.
-    // This NgIf generates endless calls of getAcademies().
+  filterAcademies(hq: any, input: any) {
     hq == true ? (hq = 1) : (hq = 0);
-    input == "" ? (input = undefined) : (input = input);
-    console.log("input: " + input, "hq: " + hq);
-    this.TechnicianService.filterAcademies(input, hq).subscribe(
-      result => (this.academies = result)
-    );
+    console.log(hq, input);
+    if (hq == "0" && input == "") {
+      this.TechnicianService.getAllAcademies().subscribe(
+        result => (this.academies = result)
+      );
+    }
+    if (hq == "0" && input !== "") {
+      this.TechnicianService.filterAcademiesByInput(input).subscribe(
+        result => (this.academies = result)
+      );
+    }
+    if (hq == "1" && input == "") {
+      this.TechnicianService.filterAcademiesByHQ(hq).subscribe(
+        result => (this.academies = result)
+      );
+    }
+    if (hq == "1" && input !== "") {
+      this.TechnicianService.filterAcademiesByHQAndInput(hq, input).subscribe(
+        result => (this.academies = result)
+      );
+    }
   }
 
   findAcademy(id: number) {
@@ -47,6 +60,6 @@ export class TechnicianComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getAcademies();
+    this.getAllAcademies();
   }
 }

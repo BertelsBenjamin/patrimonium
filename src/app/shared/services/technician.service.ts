@@ -8,10 +8,28 @@ import { tap } from "rxjs/operators";
 export class TechnicianService {
   url: string = "http://localhost:8000/api/";
   constructor(private http: HttpClient) {}
-  getAcademies(): Observable<Academy[]> {
+  getAllAcademies(): Observable<Academy[]> {
     return this.http
-      .get<Academy[]>(this.url + "academies")
+      .get<Academy[]>(this.url + `academies/`)
       .pipe(tap(result => console.log("Via service:\n", result)));
+  }
+
+  filterAcademiesByInput(input): Observable<Academy[]> {
+    return this.http
+      .get<Academy[]>(this.url + `academies/filter/input/${input}`)
+      .pipe(tap(result => console.log("Filter by input:\n", result)));
+  }
+
+  filterAcademiesByHQ(hq) {
+    return this.http
+      .get<Academy[]>(this.url + `academies/filter/hq/${hq}`)
+      .pipe(tap(result => console.log("Filter by HQ:\n", result)));
+  }
+
+  filterAcademiesByHQAndInput(hq, input) {
+    return this.http
+      .get<Academy[]>(this.url + `academies/filter/hq_and_input/${hq}/${input}`)
+      .pipe(tap(result => console.log("Filter by HQ and Input:\n", result)));
   }
 
   findAcademy(id): Observable<Academy> {
@@ -20,17 +38,5 @@ export class TechnicianService {
       .pipe(
         tap(result => console.log("Academy with id " + id + ":\n", result))
       );
-  }
-
-  filterAcademies(input, hq): Observable<Academy[]> {
-    return this.http
-      .get<Academy[]>(this.url + `academies/filter/${hq}/${input}`)
-      .pipe(tap(result => console.log("Filtered academies:\n", result)));
-  }
-
-  filterHQ(value) {
-    return this.http
-      .get<Academy[]>(this.url + "academies/filter/hq/" + value)
-      .pipe(tap(result => console.log("Academy is HQ:\n", result)));
   }
 }

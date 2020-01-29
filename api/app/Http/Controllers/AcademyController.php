@@ -28,7 +28,9 @@ class AcademyController extends Controller
                                 JOIN places ON academies.academy_place_id = places.place_id
                                 JOIN directors ON academies.academy_director_id = directors.director_id
                                 JOIN homepages ON academies.academy_homepage_id = homepages.homepage_id
-                                JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id");
+                                JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id
+                                ORDER BY academy_place_name
+                                LIMIT 9");
         return response() -> json($academies, 200);
     }
 
@@ -58,7 +60,65 @@ class AcademyController extends Controller
         return response() -> json($academy, 200);
     }
 
-    public function filterAcademies($input, $hq){
+    public function filterAcademiesByInput($input){
+        $academies = DB::select("SELECT
+                                    academies.academy_id,
+                                    academies.academy_name,
+                                    academies.academy_headquarter,
+                                    academies.academy_street,
+                                    academies.academy_house_number,
+                                    academies.academy_phone,
+                                    academies.academy_fax,
+                                    places.place_name AS academy_place_name,
+                                    directors.director_last_name AS academy_director_last_name,
+                                    directors.director_first_name AS academy_director_first_name,
+                                    directors.director_email AS academy_director_email,
+                                    homepages.homepage_url AS academy_homepage_url,
+                                    educational_nets.educational_net_type AS academy_educational_net_type
+                                FROM academies
+                                JOIN places ON academies.academy_place_id = places.place_id
+                                JOIN directors ON academies.academy_director_id = directors.director_id
+                                JOIN homepages ON academies.academy_homepage_id = homepages.homepage_id
+                                JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id
+                                WHERE academies.academy_id LIKE '%$input%'
+                                    OR academies.academy_name LIKE '%$input%'
+                                    OR academies.academy_street LIKE '%$input%'
+                                    OR academies.academy_house_number LIKE '%$input%'
+                                    OR academies.academy_phone LIKE '%$input%'
+                                    OR academies.academy_fax LIKE '%$input%'
+                                    OR places.place_name LIKE '%$input%'
+                                ORDER BY academy_place_name
+                                LIMIT 9");
+        return response() -> json($academies, 200);
+    }
+
+    public function filterAcademiesByHQ($hq){
+        $academies = DB::select("SELECT
+                                    academies.academy_id,
+                                    academies.academy_name,
+                                    academies.academy_headquarter,
+                                    academies.academy_street,
+                                    academies.academy_house_number,
+                                    academies.academy_phone,
+                                    academies.academy_fax,
+                                    places.place_name AS academy_place_name,
+                                    directors.director_last_name AS academy_director_last_name,
+                                    directors.director_first_name AS academy_director_first_name,
+                                    directors.director_email AS academy_director_email,
+                                    homepages.homepage_url AS academy_homepage_url,
+                                    educational_nets.educational_net_type AS academy_educational_net_type
+                                FROM academies
+                                JOIN places ON academies.academy_place_id = places.place_id
+                                JOIN directors ON academies.academy_director_id = directors.director_id
+                                JOIN homepages ON academies.academy_homepage_id = homepages.homepage_id
+                                JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id
+                                WHERE academies.academy_headquarter = $hq
+                                ORDER BY academy_place_name
+                                LIMIT 9");
+        return response() -> json($academies, 200);
+    }
+
+    public function filterAcademiesByHQAndInput($hq, $input){
         $academies = DB::select("SELECT
                                     academies.academy_id,
                                     academies.academy_name,
@@ -86,8 +146,8 @@ class AcademyController extends Controller
                                     OR academies.academy_fax LIKE '%$input%'
                                     OR places.place_name LIKE '%$input%'
                                     AND academies.academy_headquarter = $hq
-                                    "
-                                        );
+                                ORDER BY academy_place_name
+                                LIMIT 9");
         return response() -> json($academies, 200);
     }
 

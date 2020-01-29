@@ -20,8 +20,9 @@ $router->group(['prefix' => 'api'], function () use ($router) {
   // ACADEMIES
   $router->get('academies',  ['uses' => 'AcademyController@showAllAcademies']);
   $router->get('academies/{id}', ['uses' => 'AcademyController@showOneAcademy']);
-  $router->get('academies/filter/{hq}[/{input}]', ['uses' => 'AcademyController@filterAcademies']);
-  $router->post('academies', ['uses' => 'AcademyController@create']);
+  $router->get('academies/filter/input/{input}', ['uses' => 'AcademyController@filterAcademiesByInput']);
+  $router->get('academies/filter/hq/{hq}', ['uses' => 'AcademyController@filterAcademiesByHQ']);
+  $router->get('academies/filter/hq_and_input/{hq}/{input}', ['uses' => 'AcademyController@filterAcademiesByHQAndInput']);
   $router->delete('academies/{id}', ['uses' => 'AcademyController@delete']);
   $router->put('academies/{id}', ['uses' => 'AcademyController@update']);
 
