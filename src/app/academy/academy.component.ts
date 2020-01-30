@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnChanges, SimpleChange } from "@angular/core";
 import { Academy } from "../shared/models/academy.model";
 import { TechnicianService } from "../shared/services/technician.service";
 import {
@@ -8,6 +8,7 @@ import {
   RouterModule,
   ActivatedRoute
 } from "@angular/router";
+import { TechnicianComponent } from "../technician/technician.component";
 
 @Component({
   selector: "app-academy",
@@ -17,10 +18,11 @@ import {
 export class AcademyComponent implements OnInit {
   // VARIABLES
   academy: Academy;
-  id: number = this.route.snapshot.params.id;
+  id: number;
 
   //FUNCTIONS
-  findAcademy(id) {
+  findAcademy(id: number) {
+    console.log(id);
     this.TechnicianService.findAcademy(id).subscribe(
       result => (this.academy = result)
     );
@@ -33,6 +35,14 @@ export class AcademyComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.id = this.route.snapshot.params.id;
+    console.log("After OnInit: " + this.id);
     this.findAcademy(this.id);
   }
+  /* ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    console.log("afterViewInit: " + this.id);
+    this.findAcademy(this.id);
+  } */
 }

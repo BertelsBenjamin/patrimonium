@@ -29,7 +29,7 @@
   </thead>
   <tbody id="allAcademies" class="border">
     <tr class="small" [attr.id]="'Academy_' + academy.academy_id" *ngFor='let academy of academies'>
-      <td class="academyId">{{academy.academy_id}}</td>
+      <td class="academyId">#{{academy.academy_id}}</td>
       <td class="academyName">{{academy.academy_name}}</td>
       <td class="academyStreet">{{academy.academy_street}}</td>
       <td class="academyHouseNumber">{{academy.academy_house_number}}</td>

@@ -116,8 +116,4 @@ $router->group(['prefix' => 'api'], function () use ($router) {
   $router->post('users', ['uses' => 'UserController@create']);
   $router->delete('users/{id}', ['uses' => 'UserController@delete']);
   $router->put('users/{id}', ['uses' => 'UserController@update']);
-
-  // REGISTER USER
-  $router->post('register', ['uses' => 'AuthController@register']);
-  $router->post('login', ['uses' => 'AuthController@login']);
 });
