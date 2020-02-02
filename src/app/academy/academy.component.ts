@@ -18,7 +18,7 @@ import { TechnicianComponent } from "../technician/technician.component";
 export class AcademyComponent implements OnInit {
   // VARIABLES
   academy: Academy;
-  id: number;
+  id: number = this.route.snapshot.params.id;
 
   //FUNCTIONS
   findAcademy(id: number) {
@@ -35,7 +35,6 @@ export class AcademyComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.id = this.route.snapshot.params.id;
     console.log("After OnInit: " + this.id);
     this.findAcademy(this.id);
   }

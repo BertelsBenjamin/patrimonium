@@ -6,7 +6,7 @@ import { tap } from "rxjs/operators";
 
 @Injectable()
 export class TechnicianService {
-  url: string = "http://localhost:8000/api/";
+  url: string = "http://localhost:3000/";
   constructor(private http: HttpClient) {}
   getAllAcademies(): Observable<Academy[]> {
     return this.http
@@ -28,7 +28,7 @@ export class TechnicianService {
 
   filterAcademiesByHQAndInput(hq, input) {
     return this.http
-      .get<Academy[]>(this.url + `academies/filter/hq_and_input/${hq}/${input}`)
+      .get<Academy[]>(this.url + `academies/filter/hq/${hq}/input/${input}`)
       .pipe(tap(result => console.log("Filter by HQ and Input:\n", result)));
   }
 
