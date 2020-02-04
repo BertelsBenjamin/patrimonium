@@ -9,6 +9,7 @@ import {
   ActivatedRoute
 } from "@angular/router";
 import { TechnicianComponent } from "../technician/technician.component";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-academy",
@@ -17,16 +18,14 @@ import { TechnicianComponent } from "../technician/technician.component";
 })
 export class AcademyComponent implements OnInit {
   // VARIABLES
-  academy: Academy;
+  academyObservable: Observable<any>;
   id: number = this.route.snapshot.params.id;
 
   //FUNCTIONS
   findAcademy(id: number) {
     console.log(id);
-    this.TechnicianService.findAcademy(id).subscribe(
-      result => (this.academy = result)
-    );
-    console.log(this.academy);
+    // return observable
+    return this.TechnicianService.findAcademy(id);
   }
 
   constructor(
@@ -35,13 +34,6 @@ export class AcademyComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log("After OnInit: " + this.id);
-    this.findAcademy(this.id);
+    this.academyObservable = this.findAcademy(this.id);
   }
-  /* ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
-    console.log("afterViewInit: " + this.id);
-    this.findAcademy(this.id);
-  } */
 }

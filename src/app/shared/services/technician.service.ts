@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Academy } from "../models/academy.model";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { tap } from "rxjs/operators";
+import { tap, map } from "rxjs/operators";
 
 @Injectable()
 export class TechnicianService {
@@ -33,10 +33,11 @@ export class TechnicianService {
   }
 
   findAcademy(id): Observable<Academy> {
-    return this.http
-      .get<Academy>(this.url + "academies/" + id)
-      .pipe(
-        tap(result => console.log("Academy with id " + id + ":\n", result))
-      );
+    return this.http.get<Academy>(this.url + "academies/" + id).pipe(
+      map(result => result[0]),
+      tap(result =>
+        console.log("SERVICE: Academy with id " + id + ":\n", result)
+      )
+    );
   }
 }

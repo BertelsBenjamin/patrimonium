@@ -1,2 +1,6 @@
 <p>Academy works!</p>
-<p>{{academy.academy_name}}</p>
+
+
+<div *ngIf="academyObservable | async as academy">
+  {{academy.academy_name}}
+</div>
