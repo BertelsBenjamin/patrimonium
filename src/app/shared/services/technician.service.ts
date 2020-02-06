@@ -6,8 +6,13 @@ import { tap, map } from "rxjs/operators";
 
 @Injectable()
 export class TechnicianService {
+  // VARIABLES
   url: string = "http://localhost:3000/";
+
+  // CONSTRUCTOR
   constructor(private http: HttpClient) {}
+
+  // FUNCTIONS
   getAllAcademies(): Observable<Academy[]> {
     return this.http
       .get<Academy[]>(this.url + `academies/`)

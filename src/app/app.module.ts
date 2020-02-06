@@ -5,8 +5,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { RoutingModule } from "./routing/routing.module";
 import { Routes, RouterModule } from "@angular/router";
 import { ReactiveFormsModule } from "@angular/forms";
-import { AngularFireModule } from "@angular/fire";
-import { AngularFireAuthModule } from "@angular/fire/auth";
 
 // COMPONENTS
 import { AppComponent } from "./app.component";
@@ -18,14 +16,19 @@ import { PricingComponent } from "./pricing/pricing.component";
 import { ContactComponent } from "./contact/contact.component";
 import { TechnicianComponent } from "./technician/technician.component";
 import { AcademyComponent } from "./academy/academy.component";
+import { DispatcherComponent } from "./dispatcher/dispatcher.component";
+import { ManagerComponent } from "./manager/manager.component";
 
 // SERVICES
 import { TechnicianService } from "./shared/services/technician.service";
+import { LoginService } from "./shared/services/login.service";
+
+// MODELS
 import { Academy } from "./shared/models/academy.model";
+
+// VARIA
 import { config } from "rxjs";
 import { environment } from "src/environments/environment";
-import { DispatcherComponent } from "./dispatcher/dispatcher.component";
-import { ManagerComponent } from "./manager/manager.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -62,11 +65,9 @@ const routes: Routes = [
     HttpClientModule,
     RoutingModule,
     RouterModule.forRoot(routes),
-    ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    ReactiveFormsModule
   ],
-  providers: [TechnicianService],
+  providers: [TechnicianService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

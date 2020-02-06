@@ -8,6 +8,7 @@ const mysql = require('mysql');
 const urlencode = bodyParser.urlencoded({
   extended: false
 });
+const bcrypt = require('bcrypt');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -15,6 +16,8 @@ const connection = mysql.createConnection({
   database: 'patrimonium',
   port: '3306'
 });
+
+const users = [];
 
 /* FUNCTIONS */
 
@@ -55,6 +58,7 @@ function queryToDatabase(query, req, res) {
 /* HEADER SETTINGS */
 
 app.use(function (req, res, next) {
+  express.json();
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
@@ -69,6 +73,54 @@ app.use(function (req, res, next) {
 connect();
 
 /* QUERIES */
+
+app.get('/users', (req, res) => {
+  res.json(users)
+})
+
+app.post('/signup', urlencode, async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    console.log(hashedPassword)
+    const user = {
+      name: req.body.name,
+      password: hashedPassword
+    }
+    users.push(user)
+    res.status(201).send(`${user.name} was created!\nHis password is ${user.password}`)
+  } catch {
+    res.status(500).send('wtf went wrong?')
+  }
+});
+
+app.post('/login', urlencode, async (req, res) => {
+  connection.query(`SELECT * FROM users WHERE user_username = '${req.body.name}' AND user_password = '${req.body.password}'`, (err, rows, fields) => {
+    if (err) {
+      console.log(err);
+      throw err;
+    } else {
+      const user = Object(rows)[0];
+      if (user == null) {
+        return res.status(400).send('Cannot find user.')
+      }
+      try {
+        console.group('Data:')
+        console.log(`Request-password:\n ${req.body.password}`)
+        console.log(`Request-name:\n ${req.body.name}`)
+        console.log('User:', user)
+        console.groupEnd('Data')
+        if (req.body.password == user.user_password) {
+          res.send(`Logged in as ${user.user_last_name} ${user.user_first_name}!`)
+        } else {
+          res.send('Not allowed!')
+        }
+      } catch {
+        res.status(500).send('Login failed.')
+      }
+    }
+  });
+})
+
 /* --> ACADEMIES <-- */
 
 // GET ALL ACADEMIES
