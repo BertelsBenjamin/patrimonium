@@ -87,9 +87,9 @@ app.post('/signup', urlencode, async (req, res) => {
       password: hashedPassword
     }
     users.push(user)
-    res.status(201).send(`${user.name} was created!\nHis password is ${user.password}`)
+    res.status(201).send(`${user.name} was created!\nHis password is ${user.password}`, user)
   } catch {
-    res.status(500).send('wtf went wrong?')
+    res.status(500).send('Something went wrong!')
   }
 });
 
