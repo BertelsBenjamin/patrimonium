@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { LoginService } from "../shared/services/login.service";
+import { User } from "../shared/models/user.model";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -9,11 +11,22 @@ import { LoginService } from "../shared/services/login.service";
 })
 export class LoginComponent implements OnInit {
   loginInput = new FormControl("");
-  constructor(public LoginService: LoginService) {}
+  currentUser;
+  constructor(public LoginService: LoginService, public router: Router) {}
 
-  login(userName: any, userPassword: any) {
+  async login(userName: any, userPassword: any) {
     console.log(userName, userPassword);
-    return this.LoginService.login(userName, userPassword);
+    try {
+      await this.LoginService.login(userName, userPassword).subscribe(user => {
+        this.currentUser = user;
+        console.log(this.currentUser);
+      });
+      this.router.navigate([`/${this.currentUser.user_role}`]);
+    } catch (err) {
+      if (err) {
+        throw err;
+      }
+    }
   }
 
   ngOnInit() {}

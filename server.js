@@ -6,7 +6,7 @@ const port = 3000;
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const urlencode = bodyParser.urlencoded({
-  extended: false
+  extended: true
 });
 const bcrypt = require('bcrypt');
 const connection = mysql.createConnection({
@@ -59,6 +59,7 @@ function queryToDatabase(query, req, res) {
 
 app.use(function (req, res, next) {
   express.json();
+  bodyParser.json();
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
@@ -78,7 +79,7 @@ app.get('/users', (req, res) => {
   res.json(users)
 })
 
-app.post('/signup', urlencode, async (req, res) => {
+app.post('/signup', bodyParser.json(), async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     console.log(hashedPassword)
@@ -93,7 +94,9 @@ app.post('/signup', urlencode, async (req, res) => {
   }
 });
 
-app.post('/login', urlencode, async (req, res) => {
+app.post('/login', bodyParser.json(), async (req, res) => {
+  console.log(req.body)
+  //TODO: ADD JOINS TO QUERY TO ENSURE CORRECT ROUTE NAVIGATION IN LOGIN.COMPONENT.TS
   connection.query(`SELECT * FROM users WHERE user_username = '${req.body.name}' AND user_password = '${req.body.password}'`, (err, rows, fields) => {
     if (err) {
       console.log(err);
@@ -101,6 +104,7 @@ app.post('/login', urlencode, async (req, res) => {
     } else {
       const user = Object(rows)[0];
       if (user == null) {
+        console.log('Console: Cannot find user')
         return res.status(400).send('Cannot find user.')
       }
       try {
@@ -110,7 +114,7 @@ app.post('/login', urlencode, async (req, res) => {
         console.log('User:', user)
         console.groupEnd('Data')
         if (req.body.password == user.user_password) {
-          res.send(`Logged in as ${user.user_last_name} ${user.user_first_name}!`)
+          res.send(user)
         } else {
           res.send('Not allowed!')
         }

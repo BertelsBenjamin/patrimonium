@@ -9,7 +9,7 @@ import { tap, map, catchError } from "rxjs/operators";
 })
 export class LoginService {
   // VARIABLES
-  url: string = "http://localhost:3000/";
+  url: string = "http://localhost:3000";
 
   // CONSTRUCTOR
   constructor(private http: HttpClient) {}
@@ -17,6 +17,7 @@ export class LoginService {
   // FUNCTIONS
   login(userName: any, userPassword: any): Observable<User> {
     console.log("LoginService.login() is being executed");
+    console.log(userName, userPassword, `${this.url}login`);
     return this.http
       .post<any>(`${this.url}/login`, {
         name: userName,

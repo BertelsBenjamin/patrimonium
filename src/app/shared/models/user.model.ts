@@ -13,6 +13,7 @@ export class User {
     public skype: boolean,
     public province_id: any,
     public birth_day: string,
-    public password: string
+    public password: string,
+    public role: any
   ) {}
 }
