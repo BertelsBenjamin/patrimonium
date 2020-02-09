@@ -17,11 +17,11 @@ export class LoginComponent implements OnInit {
   async login(userName: any, userPassword: any) {
     console.log(userName, userPassword);
     try {
-      await this.LoginService.login(userName, userPassword).subscribe(user => {
+      this.LoginService.login(userName, userPassword).subscribe(user => {
         this.currentUser = user;
         console.log(this.currentUser);
+        this.router.navigate([`/${this.currentUser.user_role}`]);
       });
-      this.router.navigate([`/${this.currentUser.user_role}`]);
     } catch (err) {
       if (err) {
         throw err;

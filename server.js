@@ -95,9 +95,18 @@ app.post('/signup', bodyParser.json(), async (req, res) => {
 });
 
 app.post('/login', bodyParser.json(), async (req, res) => {
-  console.log(req.body)
-  //TODO: ADD JOINS TO QUERY TO ENSURE CORRECT ROUTE NAVIGATION IN LOGIN.COMPONENT.TS
-  connection.query(`SELECT * FROM users WHERE user_username = '${req.body.name}' AND user_password = '${req.body.password}'`, (err, rows, fields) => {
+  const query = `
+  SELECT users.user_id, users.user_password, users.user_username, users.updated_at, users.created_at, users.user_country_code, users.user_last_name, users.user_first_name, users.user_email, users.user_mobile, users.user_birth_day, provinces.province_name AS user_province_name, levels.level_description AS user_level, user_functions.user_function_description AS user_function_description, departments.department_name AS user_department, user_roles.role_role AS user_role
+  FROM users
+  JOIN user_roles ON users.user_role_id = user_roles.role_id
+  JOIN departments ON users.user_department_id = departments.department_id
+  JOIN user_functions ON users.user_user_function_id = user_functions.user_function_id
+  JOIN levels ON users.user_level_id = levels.level_id
+  JOIN provinces ON users.user_province_id = provinces.province_id
+  WHERE user_username = '${req.body.name}'
+  AND user_password = '${req.body.password}'
+  `
+  connection.query(query, (err, rows, fields) => {
     if (err) {
       console.log(err);
       throw err;
