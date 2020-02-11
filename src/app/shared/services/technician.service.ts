@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Academy } from "../models/academy.model";
+import { Piano } from "../models/piano.model";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { tap, map } from "rxjs/operators";
@@ -8,6 +9,7 @@ import { tap, map } from "rxjs/operators";
 export class TechnicianService {
   // VARIABLES
   url: string = "http://localhost:3000/";
+  currentAcademy;
 
   // CONSTRUCTOR
   constructor(private http: HttpClient) {}
@@ -40,9 +42,17 @@ export class TechnicianService {
   findAcademy(id): Observable<Academy> {
     return this.http.get<Academy>(this.url + "academies/" + id).pipe(
       map(result => result[0]),
-      tap(result =>
-        console.log("SERVICE: Academy with id " + id + ":\n", result)
+      tap(
+        result => (
+          (this.currentAcademy = result), console.log(this.currentAcademy)
+        )
       )
     );
+  }
+
+  getPianosByAcademy(academyId) {
+    return this.http
+      .get<Piano>(`${this.url}pianos/${academyId}`)
+      .pipe(tap(result => console.log("Via TechnicianService:\n", result)));
   }
 }

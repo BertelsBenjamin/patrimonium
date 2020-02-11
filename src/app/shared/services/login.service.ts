@@ -13,7 +13,7 @@ export class LoginService {
 
   // CONSTRUCTOR
   constructor(private http: HttpClient) {}
-
+  user: any;
   // FUNCTIONS
   login(userName: any, userPassword: any): Observable<User> {
     console.log("LoginService.login() is being executed");
@@ -23,6 +23,11 @@ export class LoginService {
         name: userName,
         password: userPassword
       })
-      .pipe(tap(result => console.log("Login service:\n", result)));
+      .pipe(
+        tap(result => {
+          this.user = result;
+          console.log("Login service:\n", result);
+        })
+      );
   }
 }

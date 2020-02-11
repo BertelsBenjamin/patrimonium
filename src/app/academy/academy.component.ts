@@ -20,11 +20,10 @@ export class AcademyComponent implements OnInit {
   // VARIABLES
   academyObservable: Observable<any>;
   id: number = this.route.snapshot.params.id;
+  currentAcademy: object;
 
   //FUNCTIONS
   findAcademy(id: number) {
-    console.log(id);
-    // return observable
     return this.TechnicianService.findAcademy(id);
   }
 
@@ -34,6 +33,8 @@ export class AcademyComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.academyObservable = this.findAcademy(this.id);
+    this.findAcademy(this.TechnicianService.currentAcademy.academy_id);
+    this.currentAcademy = this.TechnicianService.currentAcademy;
+    console.log(this.currentAcademy);
   }
 }
