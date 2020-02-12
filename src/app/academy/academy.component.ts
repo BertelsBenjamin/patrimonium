@@ -18,13 +18,16 @@ import { Observable } from "rxjs";
 })
 export class AcademyComponent implements OnInit {
   // VARIABLES
-  academyObservable: Observable<any>;
-  id: number = this.route.snapshot.params.id;
-  currentAcademy: object;
+  currentAcademy;
+  currentAcademyPianos;
 
   //FUNCTIONS
-  findAcademy(id: number) {
-    return this.TechnicianService.findAcademy(id);
+  findCurrentAcademy(academyId: number) {
+    return this.TechnicianService.findAcademy(academyId);
+  }
+
+  findCurrentPianos(academyId: number) {
+    return this.TechnicianService.getPianosByAcademy(academyId);
   }
 
   constructor(
@@ -33,8 +36,12 @@ export class AcademyComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.findAcademy(this.TechnicianService.currentAcademy.academy_id);
+    this.findCurrentAcademy(this.TechnicianService.currentAcademy.academy_id);
     this.currentAcademy = this.TechnicianService.currentAcademy;
-    console.log(this.currentAcademy);
+    this.findCurrentPianos(this.TechnicianService.currentAcademy.academy_id);
+    this.currentAcademyPianos = this.TechnicianService.currentAcademyPianos;
+
+    console.log("Current Academy", this.currentAcademy);
+    console.log("Current Pianos", this.currentAcademyPianos);
   }
 }

@@ -10,6 +10,7 @@ export class TechnicianService {
   // VARIABLES
   url: string = "http://localhost:3000/";
   currentAcademy;
+  currentAcademyPianos;
 
   // CONSTRUCTOR
   constructor(private http: HttpClient) {}
@@ -18,7 +19,7 @@ export class TechnicianService {
   getAllAcademies(): Observable<Academy[]> {
     return this.http
       .get<Academy[]>(this.url + `academies/`)
-      .pipe(tap(result => console.log("Via service:\n", result)));
+      .pipe(tap(result => console.log("All academies", result)));
   }
 
   filterAcademiesByInput(input): Observable<Academy[]> {
@@ -27,7 +28,7 @@ export class TechnicianService {
       .pipe(tap(result => console.log("Filter by input:\n", result)));
   }
 
-  filterAcademiesByHQ(hq) {
+  filterAcademiesByHQ(hq): Observable<Academy[]> {
     return this.http
       .get<Academy[]>(this.url + `academies/filter/hq/${hq}`)
       .pipe(tap(result => console.log("Filter by HQ:\n", result)));
@@ -50,9 +51,12 @@ export class TechnicianService {
     );
   }
 
-  getPianosByAcademy(academyId) {
-    return this.http
-      .get<Piano>(`${this.url}pianos/${academyId}`)
-      .pipe(tap(result => console.log("Via TechnicianService:\n", result)));
+  getPianosByAcademy(academyId): Observable<Piano[]> {
+    return this.http.get<Piano[]>(this.url + "pianos/" + academyId).pipe(
+      tap(
+        result => console.log(result),
+        err => console.log(err)
+      )
+    );
   }
 }
