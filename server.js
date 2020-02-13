@@ -160,7 +160,7 @@ app.get('/academies/filter/hq/:hq/input/:input', bodyParser.json(), function (re
 
 /* --> PIANOS <-- */
 
-app.get('/pianos/:academyId', bodyParser.json(), function (req, res) {
+app.get('/pianos/:academyId', urlencode, (req, res) => {
   queryToDatabase(`SELECT pianos.piano_id, sorts.sort_sort AS 'piano_sort', brands.brand_name AS 'piano_brand', types.type_type AS 'piano_type', pianos.piano_serial_number, academies.academy_id AS 'piano_academy_id', pianos.piano_room FROM pianos JOIN sorts ON pianos.piano_sort_id = sorts.sort_id JOIN brands ON pianos.piano_brand_id = brands.brand_id JOIN types ON pianos.piano_type_id = types.type_id JOIN academies ON pianos.piano_academy_id = academies.academy_id WHERE pianos.piano_academy_id = ${req.params.academyId}`, req, res)
 })
 

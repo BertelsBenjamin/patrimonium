@@ -23,11 +23,15 @@ export class AcademyComponent implements OnInit {
 
   //FUNCTIONS
   findCurrentAcademy(academyId: number) {
-    return this.TechnicianService.findAcademy(academyId);
+    return this.TechnicianService.findAcademy(academyId).subscribe(
+      result => (this.currentAcademy = result)
+    );
   }
 
   findCurrentPianos(academyId: number) {
-    return this.TechnicianService.getPianosByAcademy(academyId);
+    return this.TechnicianService.findPianosByAcademy(academyId).subscribe(
+      result => (this.currentAcademyPianos = result)
+    );
   }
 
   constructor(
@@ -37,8 +41,8 @@ export class AcademyComponent implements OnInit {
 
   ngOnInit() {
     this.findCurrentAcademy(this.TechnicianService.currentAcademy.academy_id);
-    this.currentAcademy = this.TechnicianService.currentAcademy;
     this.findCurrentPianos(this.TechnicianService.currentAcademy.academy_id);
+    this.currentAcademy = this.TechnicianService.currentAcademy;
     this.currentAcademyPianos = this.TechnicianService.currentAcademyPianos;
 
     console.log("Current Academy", this.currentAcademy);

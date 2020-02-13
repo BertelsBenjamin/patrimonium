@@ -51,12 +51,13 @@ export class TechnicianService {
     );
   }
 
-  getPianosByAcademy(academyId): Observable<Piano[]> {
-    return this.http.get<Piano[]>(this.url + "pianos/" + academyId).pipe(
-      tap(
-        result => console.log(result),
-        err => console.log(err)
-      )
+  findPianosByAcademy(academyId): Observable<Piano[]> {
+    debugger;
+    return this.http.get<Piano[]>(`${this.url}pianos/${academyId}`).pipe(
+      tap(result => {
+        console.log("WORKS!!!!", result);
+        this.currentAcademyPianos = result;
+      })
     );
   }
 }
