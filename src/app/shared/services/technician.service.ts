@@ -14,8 +14,6 @@ import {
 export class TechnicianService {
   // VARIABLES
   url: string = "http://localhost:3000/";
-  currentAcademy;
-  currentAcademyPianos;
 
   // CONSTRUCTOR
   constructor(private http: HttpClient) {}
@@ -47,23 +45,11 @@ export class TechnicianService {
       .pipe(tap(result => console.log("Filter by HQ and Input:\n", result)));
   }
 
-  findAcademy(id) {
-    return this.http.get(this.url + "academies/" + id).pipe(
-      map(result => result[0]),
-      tap(
-        result => (
-          (this.currentAcademy = result), console.log(this.currentAcademy)
-        )
-      )
-    );
+  findAcademy(id: number): Observable<Academy> {
+    return this.http.get<Academy>(`${this.url}academies/${id}`);
   }
 
-  findPianosByAcademy(academyId) {
-    return this.http.get(`${this.url}pianos/${academyId}`).pipe(
-      tap(result => {
-        console.log("Pianos of the current Academy:", result);
-        this.currentAcademyPianos = result;
-      })
-    );
+  findPianosByAcademy(academyId: number): Observable<Piano[]> {
+    return this.http.get<Piano[]>(`${this.url}pianos/${academyId}`);
   }
 }

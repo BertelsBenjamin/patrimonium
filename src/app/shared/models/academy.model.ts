@@ -15,6 +15,7 @@ export class Academy {
     public academy_director_last_name: any,
     public academy_director_first_name: any,
     public academy_homepage_url: any,
-    public academy_educational_net_type: any
+    public academy_educational_net_type: any,
+    public academy_pianos: any
   ) {}
 }

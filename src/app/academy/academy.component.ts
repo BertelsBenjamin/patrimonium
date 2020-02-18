@@ -2,17 +2,8 @@ import { Component, OnInit, OnChanges, SimpleChange } from "@angular/core";
 import { Academy } from "../shared/models/academy.model";
 import { Piano } from "../shared/models/piano.model";
 import { TechnicianService } from "../shared/services/technician.service";
-import {
-  RouterLink,
-  Router,
-  Routes,
-  RouterModule,
-  ActivatedRoute
-} from "@angular/router";
-import { TechnicianComponent } from "../technician/technician.component";
+import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
-import { resolve } from "url";
-import { PianoSort } from "../shared/models/piano_sort.model";
 
 @Component({
   selector: "app-academy",
@@ -21,26 +12,25 @@ import { PianoSort } from "../shared/models/piano_sort.model";
 })
 export class AcademyComponent implements OnInit {
   // VARIABLES
-  currentAcademy;
-  currentAcademyPianos;
+  currentAcademy: Observable<Academy>;
+  currentAcademyPianos: Observable<Piano[]>;
 
   // PROMISES
 
   //FUNCTIONS
-  findCurrentAcademy(academyId: number) {
-    return this.TechnicianService.findAcademy(academyId).subscribe(result => {
-      this.currentAcademy = result;
-      console.log("Current Academy", this.currentAcademy);
-    });
+  getCurrentAcademy(id) {
+    this.TechnicianService.findAcademy(id).subscribe(
+      result => (
+        console.log("Academy: ", result), (this.currentAcademy = result)
+      )
+    );
   }
 
-  findCurrentPianos(academyId: number) {
-    return this.TechnicianService.findPianosByAcademy(academyId).subscribe(
-      result => {
-        this.currentAcademyPianos = result;
-        this.currentAcademy.academy_pianos = this.currentAcademyPianos;
-        console.log(this.currentAcademy);
-      }
+  getCurrentAcademyPianos(id) {
+    this.TechnicianService.findPianosByAcademy(id).subscribe(
+      result => (
+        console.log("Pianos: ", result), (this.currentAcademyPianos = result)
+      )
     );
   }
 
@@ -50,11 +40,13 @@ export class AcademyComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.findCurrentAcademy(this.TechnicianService.currentAcademy.academy_id);
-    this.findCurrentPianos(this.TechnicianService.currentAcademy.academy_id);
-    this.currentAcademy = this.TechnicianService.currentAcademy;
-    this.currentAcademyPianos = this.TechnicianService.currentAcademyPianos;
+    // GET ACADEMY
+    this.getCurrentAcademy(this.route.snapshot.params.id);
 
+    //GET PIANOS FROM ACADEMY
+    this.getCurrentAcademyPianos(this.route.snapshot.params.id);
+
+    // LOG RESULTS
     console.log("Current Academy", this.currentAcademy);
     console.log("Current Pianos", this.currentAcademyPianos);
   }
