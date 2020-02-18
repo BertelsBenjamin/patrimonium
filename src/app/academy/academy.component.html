@@ -1,3 +1,28 @@
 <div>
   {{currentAcademy.academy_name}} - {{currentAcademy.academy_place_name}}
 </div>
+<table id="table-pianos" class="table table-striped">
+  <thead class="">
+    <tr class="small">
+      <th scope="col">#</th>
+      <th scope="col">Sort</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Type</th>
+      <th scope="col">Serial No.</th>
+      <th scope="col">Room</th>
+      <th scope="col">Change</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody id="allPianos" class="border">
+    <tr class="small" [attr.id]="'Piano_' + piano.piano_id" *ngFor='let piano of currentAcademy.academy_pianos[0]'>
+      <td class="pianoID">#{{piano.piano_id}}</td>
+      <td class="pianoSort">{{piano.piano_sort}}</td>
+      <td class="pianoBrand">{{piano.piano_brand}}</td>
+      <td class="pianoType">{{piano.piano_type}}</td>
+      <td class="pianoSerialNumber">{{piano.piano_serial_number}}</td>
+      <td class="pianoRoom">{{piano.piano_room}}</td>
+      <td><i class="fas fa-pen"></i></td>
+      <td><i class="fas fa-trash-alt"></i></td>
+    </tr>
+</table>

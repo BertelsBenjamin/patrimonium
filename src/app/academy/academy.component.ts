@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges, SimpleChange } from "@angular/core";
 import { Academy } from "../shared/models/academy.model";
+import { Piano } from "../shared/models/piano.model";
 import { TechnicianService } from "../shared/services/technician.service";
 import {
   RouterLink,
@@ -10,6 +11,8 @@ import {
 } from "@angular/router";
 import { TechnicianComponent } from "../technician/technician.component";
 import { Observable } from "rxjs";
+import { resolve } from "url";
+import { PianoSort } from "../shared/models/piano_sort.model";
 
 @Component({
   selector: "app-academy",
@@ -21,16 +24,23 @@ export class AcademyComponent implements OnInit {
   currentAcademy;
   currentAcademyPianos;
 
+  // PROMISES
+
   //FUNCTIONS
   findCurrentAcademy(academyId: number) {
-    return this.TechnicianService.findAcademy(academyId).subscribe(
-      result => (this.currentAcademy = result)
-    );
+    return this.TechnicianService.findAcademy(academyId).subscribe(result => {
+      this.currentAcademy = result;
+      console.log("Current Academy", this.currentAcademy);
+    });
   }
 
   findCurrentPianos(academyId: number) {
     return this.TechnicianService.findPianosByAcademy(academyId).subscribe(
-      result => (this.currentAcademyPianos = result)
+      result => {
+        this.currentAcademyPianos = result;
+        this.currentAcademy.academy_pianos = this.currentAcademyPianos;
+        console.log(this.currentAcademy);
+      }
     );
   }
 

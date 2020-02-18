@@ -4,6 +4,11 @@ import { Piano } from "../models/piano.model";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { tap, map } from "rxjs/operators";
+import {
+  Resolve,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot
+} from "@angular/router";
 
 @Injectable()
 export class TechnicianService {
@@ -14,6 +19,8 @@ export class TechnicianService {
 
   // CONSTRUCTOR
   constructor(private http: HttpClient) {}
+
+  // RESOLVE
 
   // FUNCTIONS
   getAllAcademies(): Observable<Academy[]> {
@@ -40,8 +47,8 @@ export class TechnicianService {
       .pipe(tap(result => console.log("Filter by HQ and Input:\n", result)));
   }
 
-  findAcademy(id): Observable<Academy> {
-    return this.http.get<Academy>(this.url + "academies/" + id).pipe(
+  findAcademy(id) {
+    return this.http.get(this.url + "academies/" + id).pipe(
       map(result => result[0]),
       tap(
         result => (
@@ -51,11 +58,10 @@ export class TechnicianService {
     );
   }
 
-  findPianosByAcademy(academyId): Observable<Piano[]> {
-    debugger;
-    return this.http.get<Piano[]>(`${this.url}pianos/${academyId}`).pipe(
+  findPianosByAcademy(academyId) {
+    return this.http.get(`${this.url}pianos/${academyId}`).pipe(
       tap(result => {
-        console.log("WORKS!!!!", result);
+        console.log("Pianos of the current Academy:", result);
         this.currentAcademyPianos = result;
       })
     );
