@@ -46,10 +46,14 @@ export class TechnicianService {
   }
 
   findAcademy(id: number): Observable<Academy> {
-    return this.http.get<Academy>(`${this.url}academies/${id}`);
+    return this.http
+      .get<Academy>(`${this.url}academies/${id}`)
+      .pipe(tap(result => console.log(result)));
   }
 
   findPianosByAcademy(academyId: number): Observable<Piano[]> {
-    return this.http.get<Piano[]>(`${this.url}pianos/${academyId}`);
+    return this.http
+      .get<Piano[]>(`${this.url}pianos/${academyId}`)
+      .pipe(tap(result => console.log(result)));
   }
 }

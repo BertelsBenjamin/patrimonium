@@ -1,7 +1,7 @@
-<div *ngIf="currentAcademy | async">
-  <h3>{{currentAcademy.academy_name}} - {{currentAcademy.academy_place_name}}</h3>
+<div *ngIf="currentAcademy$ | async as academy">
+  <h3>{{academy[0].academy_name}} - {{academy[0].academy_place_name}}</h3>
 </div>
-<table id="table-pianos" class="table table-striped" *ngIf="currentAcademyPianos | async">
+<table id="table-pianos" class="table table-striped" *ngIf="currentAcademyPianos$ | async as pianos">
   <thead class="">
     <tr class="small">
       <th scope="col">#</th>
@@ -15,7 +15,7 @@
     </tr>
   </thead>
   <tbody id="allPianos" class="border">
-    <tr class="small" [attr.id]="'Piano_' + piano.piano_id" *ngFor='let piano of currentAcademyPianos'>
+    <tr class="small" [attr.id]="'Piano_' + piano.piano_id" *ngFor='let piano of pianos'>
       <td class="pianoID">#{{piano.piano_id}}</td>
       <td class="pianoSort">{{piano.piano_sort}}</td>
       <td class="pianoBrand">{{piano.piano_brand}}</td>
