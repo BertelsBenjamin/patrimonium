@@ -17,47 +17,30 @@ export class AcademyComponent implements OnInit {
   currentAcademyPianos$: Observable<Piano[]>;
   currentAcademyPianos: Piano[];
 
-  // PROMISES
-
-  //FUNCTIONS
-  /* getCurrentAcademy(id) {
-    this.TechnicianService.findAcademy(id).subscribe(
-      result => (
-        console.log("Academy: ", result), (this.currentAcademy = result)
-      )
-    );
-  }
-
-  getCurrentAcademyPianos(id) {
-    this.TechnicianService.findPianosByAcademy(id).subscribe(
-      result => (
-        console.log("Pianos: ", result), (this.currentAcademyPianos = result)
-      )
-    );
-  } */
-
   constructor(
     public TechnicianService: TechnicianService,
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
-    // GET ACADEMY
-    //this.getCurrentAcademy(this.route.snapshot.params.id);
-
+  getCurrentAcademy() {
     this.currentAcademy$ = this.TechnicianService.findAcademy(
       this.route.snapshot.params.id
     );
     this.currentAcademy$.subscribe(result => (this.currentAcademy = result));
+  }
 
-    //GET PIANOS FROM ACADEMY
-    //this.getCurrentAcademyPianos(this.route.snapshot.params.id);
+  getCurrentAcademyPianos() {
     this.currentAcademyPianos$ = this.TechnicianService.findPianosByAcademy(
       this.route.snapshot.params.id
     );
     this.currentAcademyPianos$.subscribe(
       result => (this.currentAcademyPianos = result)
     );
+  }
+
+  ngOnInit() {
+    this.getCurrentAcademy();
+    this.getCurrentAcademyPianos();
     // LOG RESULTS
     console.log("Current Academy", this.currentAcademy);
     console.log("Current Pianos", this.currentAcademyPianos$);

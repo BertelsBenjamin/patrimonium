@@ -1,28 +1,152 @@
-<div *ngIf="currentAcademy$ | async as academy">
+<!-- <div *ngFor="let academy of currentAcademy$ | async">
   <h3>{{academy[0].academy_name}} - {{academy[0].academy_place_name}}</h3>
+</div> -->
+
+<div class="row" *ngIf="currentAcademy$ | async as academy">
+  <h2 class="title">{{academy[0].academy_name}} - {{academy[0].academy_place_name}}</h2>
 </div>
-<table id="table-pianos" class="table table-striped" *ngIf="currentAcademyPianos$ | async as pianos">
-  <thead class="">
-    <tr class="small">
-      <th scope="col">#</th>
-      <th scope="col">Sort</th>
-      <th scope="col">Brand</th>
-      <th scope="col">Type</th>
-      <th scope="col">Serial No.</th>
-      <th scope="col">Room</th>
-      <th scope="col">Change</th>
-      <th scope="col">Delete</th>
-    </tr>
-  </thead>
-  <tbody id="allPianos" class="border">
-    <tr class="small" [attr.id]="'Piano_' + piano.piano_id" *ngFor='let piano of pianos'>
-      <td class="pianoID">#{{piano.piano_id}}</td>
-      <td class="pianoSort">{{piano.piano_sort}}</td>
-      <td class="pianoBrand">{{piano.piano_brand}}</td>
-      <td class="pianoType">{{piano.piano_type}}</td>
-      <td class="pianoSerialNumber">{{piano.piano_serial_number}}</td>
-      <td class="pianoRoom">{{piano.piano_room}}</td>
-      <td><i class="fas fa-pen"></i></td>
-      <td><i class="fas fa-trash-alt"></i></td>
-    </tr>
-</table>
+
+<hr>
+
+<div class="row">
+  <h4 class="title">Instruments</h4>
+  <table id="table-pianos" class="table table-striped mt-3" *ngIf="currentAcademyPianos$ | async as pianos">
+    <thead class="thead-dark">
+      <tr class="small">
+        <th scope="col">#</th>
+        <th scope="col">Sort</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Type</th>
+        <th scope="col">Serial No.</th>
+        <th scope="col">Room</th>
+        <th scope="col">Comments</th>
+        <th scope="col">Edit</th>
+      </tr>
+    </thead>
+    <tbody id="allPianos" class="border">
+      <tr class="small" [attr.id]="'Piano_' + piano.piano_id" *ngFor='let piano of pianos'>
+        <td class="pianoID">#{{piano.piano_id}}</td>
+        <td class="pianoSort">{{piano.piano_sort}}</td>
+        <td class="pianoBrand">{{piano.piano_brand}}</td>
+        <td class="pianoType">{{piano.piano_type}}</td>
+        <td class="pianoSerialNumber">{{piano.piano_serial_number}}</td>
+        <td class="pianoRoom">{{piano.piano_room}}</td>
+        <td>
+          <button type="button" class="btn btn-link btn-sm" data-toggle="modal"
+            [attr.data-target]="'#Modal_comment_' + piano.piano_id">
+            <i class="far fa-comment"></i>
+          </button>
+          <div class="modal fade" [attr.id]="'Modal_comment_' + piano.piano_id" tabindex="-1" role="dialog"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title">{{piano.piano_brand}}
+                    {{piano.piano_type}} ({{piano.piano_serial_number}}) - {{piano.piano_sort}}
+                  </h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-12">
+                          <h4 class="mt-3 title">Latest intervention</h4>
+                          <table id="piano_details" class="table table-striped mt-3 ml-3">
+                            <thead class="thead-dark">
+                              <th scope="col">#</th>
+                              <th scope="col">Date</th>
+                              <th scope="col">Technician</th>
+                              <th scope="col">Intervention</th>
+                              <th scope="col">Comment</th>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="log_id">1</td>
+                                <td class="log_date">22/11/1989</td>
+                                <td class="log_technician">Benjamin Bertels</td>
+                                <td class="log_intervention">Tuning</td>
+                                <td class="log_comment">Mid range keys are too stiff. Needs intonation and minor
+                                  réglage.</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <a href="#" class="btn btn-primary mt-3 ml-3">Show all</a>
+                        </div>
+                      </div>
+                      <hr>
+                      <form class="mt-3" [formGroup]>
+                        <h4 class="title">New intervention</h4>
+                        <div class="col-12 form-group">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox"
+                              [attr.id]="'piano_' + piano.piano_id + '_tuning'" value=" tuning">
+                            <label class="form-check-label" for="checkbox_tuning">Tuning</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox"
+                              [attr.id]="'piano_' + piano.piano_id + '_regulation'" value="regulation">
+                            <label class="form-check-label" for="checkbox_regulation">Regulation</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox"
+                              [attr.id]="'piano_' + piano.piano_id + '_intonation'" value="intonation">
+                            <label class="form-check-label" for="checkbox_intonation">Intonation</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox"
+                              [attr.id]="'piano_' + piano.piano_id + '_other'" value="other">
+                            <label class="form-check-label" for="checkbox_other">Other</label>
+                          </div>
+                          <textarea class="form-control mt-3" [attr.id]="'piano_' + piano.piano_id + '_comment'"
+                            placeholder="Enter comment here..." autofocus></textarea>
+                          <button class="btn btn-success btn-small mt-3" data-dismiss="modal">Submit</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <button type="button" class="btn btn-link btn-sm" data-toggle="modal"
+            [attr.data-target]="'#Modal_edit_' + piano.piano_id">
+            <i class="fas fa-edit"></i>
+          </button>
+          <div class="modal fade" [attr.id]="'Modal_edit_' + piano.piano_id" tabindex="-1" role="dialog"
+            [attr.aria-labelledby]="'ModalLabel_' + piano.piano_id" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h3 class="modal-title">{{piano.piano_brand}}
+                    {{piano.piano_type}} ({{piano.piano_serial_number}}) - {{piano.piano_sort}}
+                  </h3>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="card">
+                    <div class="card-body">
+
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-success btn-small mt-3" data-dismiss="modal">Submit</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+  </table>
+</div>
