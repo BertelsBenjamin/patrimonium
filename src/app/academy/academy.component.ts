@@ -1,9 +1,19 @@
 import { Component, OnInit } from "@angular/core";
 import { Academy } from "../shared/models/academy.model";
 import { Piano } from "../shared/models/piano.model";
+import { Log } from "../shared/models/log.model";
 import { TechnicianService } from "../shared/services/technician.service";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  ReactiveFormsModule,
+  FormBuilder
+} from "@angular/forms";
+import { ValueTransformer } from "@angular/compiler/src/util";
+import { getLocaleDateFormat } from "@angular/common";
 
 @Component({
   selector: "app-academy",
@@ -19,7 +29,9 @@ export class AcademyComponent implements OnInit {
 
   constructor(
     public TechnicianService: TechnicianService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private interventionForm: FormBuilder,
+    private piano_editForm: FormBuilder
   ) {}
 
   getCurrentAcademy() {
@@ -36,6 +48,31 @@ export class AcademyComponent implements OnInit {
     this.currentAcademyPianos$.subscribe(
       result => (this.currentAcademyPianos = result)
     );
+  }
+
+  postIntervention(
+    tuning: boolean,
+    regulation: boolean,
+    intonation: boolean,
+    comment: string,
+    piano_id: number
+  ) {
+    let log = new Log(
+      null,
+      new Date().toJSON().slice(0, 10),
+      34,
+      null,
+      comment,
+      piano_id,
+      null,
+      tuning,
+      regulation,
+      intonation
+    );
+    console.log(log);
+    this.TechnicianService.postLog(log).subscribe((postedLog: Log) => {
+      console.log(postedLog);
+    });
   }
 
   ngOnInit() {

@@ -165,4 +165,11 @@ app.get('/pianos/:academyId', urlencode, (req, res) => {
 })
 
 
+/* --> LOGS <-- */
+app.post('/logs/post', bodyParser.json(), (req, res) => {
+  console.log(req.body)
+  queryToDatabase(`INSERT INTO logs (log_id, log_date, log_user_id, log_comment, log_piano_id, log_tuning, log_regulation, log_intonation) VALUES (${req.body.log_id}, ${req.body.log_date}, ${req.body.log_user_id}, "${req.body.log_comment}", ${req.body.log_piano_id}, ${req.body.log_tuning}, ${req.body.log_regulation}, ${req.body.log_intonation})`, req, res)
+})
+
+
 app.listen(port, () => console.log(`Server listening on port ${port}`));

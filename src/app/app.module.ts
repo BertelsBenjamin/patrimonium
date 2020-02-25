@@ -4,7 +4,7 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { RoutingModule } from "./routing/routing.module";
 import { Routes, RouterModule } from "@angular/router";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 // COMPONENTS
 import { AppComponent } from "./app.component";

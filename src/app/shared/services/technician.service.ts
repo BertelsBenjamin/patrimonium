@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Academy } from "../models/academy.model";
+import { Log } from "../models/log.model";
 import { Piano } from "../models/piano.model";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
@@ -55,5 +56,10 @@ export class TechnicianService {
     return this.http
       .get<Piano[]>(`${this.url}pianos/${academyId}`)
       .pipe(tap(result => console.log(result)));
+  }
+
+  postLog(log: Log) {
+    const headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this.http.post(`${this.url}logs/post`, log, { headers: headers });
   }
 }

@@ -59,7 +59,9 @@
                               <th scope="col">#</th>
                               <th scope="col">Date</th>
                               <th scope="col">Technician</th>
-                              <th scope="col">Intervention</th>
+                              <th scope="col">Tuning</th>
+                              <th scope="col">Regulation</th>
+                              <th scope="col">Intonation</th>
                               <th scope="col">Comment</th>
                             </thead>
                             <tbody>
@@ -67,7 +69,9 @@
                                 <td class="log_id">1</td>
                                 <td class="log_date">22/11/1989</td>
                                 <td class="log_technician">Benjamin Bertels</td>
-                                <td class="log_intervention">Tuning</td>
+                                <td class="log_intervention">Yes</td>
+                                <td class="log_intervention">No</td>
+                                <td class="log_intervention">No</td>
                                 <td class="log_comment">Mid range keys are too stiff. Needs intonation and minor
                                   réglage.</td>
                               </tr>
@@ -77,34 +81,29 @@
                         </div>
                       </div>
                       <hr>
-                      <form class="mt-3" [formGroup]>
-                        <h4 class="title">New intervention</h4>
-                        <div class="col-12 form-group">
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox"
-                              [attr.id]="'piano_' + piano.piano_id + '_tuning'" value=" tuning">
-                            <label class="form-check-label" for="checkbox_tuning">Tuning</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox"
-                              [attr.id]="'piano_' + piano.piano_id + '_regulation'" value="regulation">
-                            <label class="form-check-label" for="checkbox_regulation">Regulation</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox"
-                              [attr.id]="'piano_' + piano.piano_id + '_intonation'" value="intonation">
-                            <label class="form-check-label" for="checkbox_intonation">Intonation</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox"
-                              [attr.id]="'piano_' + piano.piano_id + '_other'" value="other">
-                            <label class="form-check-label" for="checkbox_other">Other</label>
-                          </div>
-                          <textarea class="form-control mt-3" [attr.id]="'piano_' + piano.piano_id + '_comment'"
-                            placeholder="Enter comment here..." autofocus></textarea>
-                          <button class="btn btn-success btn-small mt-3" data-dismiss="modal">Submit</button>
+                      <h4 class="title">New intervention</h4>
+                      <div class="col-12 form-group">
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" #tuning
+                            [attr.id]="'piano_' + piano.piano_id + '_tuning'" value="tuning">
+                          <label class="form-check-label" for="checkbox_tuning">Tuning</label>
                         </div>
-                      </form>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" #regulation
+                            [attr.id]="'piano_' + piano.piano_id + '_regulation'" value="regulation">
+                          <label class="form-check-label" for="checkbox_regulation">Regulation</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="checkbox" #intonation
+                            [attr.id]="'piano_' + piano.piano_id + '_intonation'" value="intonation">
+                          <label class="form-check-label" for="checkbox_intonation">Intonation</label>
+                        </div>
+                        <textarea class="form-control mt-3" #comment [attr.id]="'piano_' + piano.piano_id + '_comment'"
+                          placeholder="Enter comment here..." autofocus></textarea>
+                        <button
+                          (click)='postIntervention(tuning.checked, regulation.checked, intonation.checked, comment.value, piano.piano_id)'
+                          class="btn btn-success btn-small mt-3" data-dismiss="modal">Submit</button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -122,7 +121,7 @@
           </button>
           <div class="modal fade" [attr.id]="'Modal_edit_' + piano.piano_id" tabindex="-1" role="dialog"
             [attr.aria-labelledby]="'ModalLabel_' + piano.piano_id" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h3 class="modal-title">{{piano.piano_brand}}
@@ -135,13 +134,19 @@
                 <div class="modal-body">
                   <div class="card">
                     <div class="card-body">
+                      <div class="row">
+                        <h4>Change room</h4>
+                      </div>
+                      <!-- <form [formGroup]='piano_edit'></form>
+                      <textarea class="form-control" formControlName='room'
+                        [attr.placeholder]="'Current Room: ' + piano.piano_room">
 
+                      </textarea> -->
                     </div>
                   </div>
                 </div>
                 <div class="modal-footer">
                   <button class="btn btn-success btn-small mt-3" data-dismiss="modal">Submit</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
               </div>
             </div>
