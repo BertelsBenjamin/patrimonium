@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
       });
     } catch (err) {
       if (err) {
+        alert("Something went wrong. Call support.");
         throw err;
       }
     }

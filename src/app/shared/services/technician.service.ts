@@ -58,6 +58,12 @@ export class TechnicianService {
       .pipe(tap(result => console.log(result)));
   }
 
+  getLogs(pianoId: number): Observable<Log[]> {
+    return this.http
+      .get<Log[]>(`${this.url}logs/${pianoId}`)
+      .pipe(tap(result => console.log(result)));
+  }
+
   postLog(log: Log) {
     const headers = new HttpHeaders().set("Content-Type", "application/json");
     return this.http.post(`${this.url}logs/post`, log, { headers: headers });

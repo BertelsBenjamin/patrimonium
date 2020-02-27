@@ -5,22 +5,27 @@ $font-text: 'Poppins';
 footer {
   width: 100%;
   text-align: center;
-  color: $primary-orange;
-  border-top: 1px solid $primary-blue;
-  background-color: #292d3e;
+  color: blue;
+  border-top: 2px solid blue;
+  background-color: white;
   font-family: $font-text;
 
   p {
-    color: $primary-orange;
+    color: blue;
   }
 
   a {
-    color: $primary-orange;
+    color: blue;
+  }
+
+  a:hover {
+    text-decoration: underline;
+
   }
 }
 
 .fab {
   margin-right: 2vw;
   font-weight: 900;
-  color: $primary-orange;
+  color: blue;
 }

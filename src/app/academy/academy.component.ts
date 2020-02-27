@@ -3,6 +3,7 @@ import { Academy } from "../shared/models/academy.model";
 import { Piano } from "../shared/models/piano.model";
 import { Log } from "../shared/models/log.model";
 import { TechnicianService } from "../shared/services/technician.service";
+import { LoginService } from "../shared/services/login.service";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
 import {
@@ -26,9 +27,12 @@ export class AcademyComponent implements OnInit {
   currentAcademy: Academy;
   currentAcademyPianos$: Observable<Piano[]>;
   currentAcademyPianos: Piano[];
+  pianoLogs$: Observable<Log[]>;
+  pianoLogs: Log[];
 
   constructor(
     public TechnicianService: TechnicianService,
+    public LoginService: LoginService,
     private route: ActivatedRoute,
     private interventionForm: FormBuilder,
     private piano_editForm: FormBuilder
@@ -50,6 +54,11 @@ export class AcademyComponent implements OnInit {
     );
   }
 
+  getInterventions(piano_id) {
+    this.pianoLogs$ = this.TechnicianService.getLogs(piano_id);
+    this.pianoLogs$.subscribe(result => (this.pianoLogs = result));
+  }
+
   postIntervention(
     tuning: boolean,
     regulation: boolean,
@@ -60,8 +69,8 @@ export class AcademyComponent implements OnInit {
     let log = new Log(
       null,
       new Date().toJSON().slice(0, 10),
-      34,
-      null,
+      this.LoginService.user.user_id,
+      this.LoginService.user.user_username,
       comment,
       piano_id,
       null,

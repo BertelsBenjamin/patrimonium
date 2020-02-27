@@ -166,6 +166,22 @@ app.get('/pianos/:academyId', urlencode, (req, res) => {
 
 
 /* --> LOGS <-- */
+app.get('/logs/:pianoId', urlencode, (req, res) => {
+  queryToDatabase(`SELECT
+logs.log_id, logs.log_date, logs.log_comment, logs.log_tuning, logs.log_regulation, logs.log_intonation,
+users.user_username AS log_user_username, users.user_email AS log_user_user_email,
+pianos.piano_serial_number AS log_piano_piano_serial_number, pianos.piano_id,
+sorts.sort_sort AS log_sort_sort_sort,
+brands.brand_name AS log_brand_brand_name
+FROM logs
+JOIN users ON logs.log_user_id = users.user_id
+JOIN pianos ON logs.log_piano_id = pianos.piano_id
+JOIN brands ON pianos.piano_brand_id = brands.brand_id
+JOIN sorts ON pianos.piano_sort_id = sorts.sort_id
+JOIN academies ON pianos.piano_academy_id = academies.academy_id
+WHERE logs.log_piano_id = ${req.params.pianoId};`, req, res)
+})
+
 app.post('/logs/post', bodyParser.json(), (req, res) => {
   console.log(req.body)
   queryToDatabase(`INSERT INTO logs (log_id, log_date, log_user_id, log_comment, log_piano_id, log_tuning, log_regulation, log_intonation) VALUES (${req.body.log_id}, ${req.body.log_date}, ${req.body.log_user_id}, "${req.body.log_comment}", ${req.body.log_piano_id}, ${req.body.log_tuning}, ${req.body.log_regulation}, ${req.body.log_intonation})`, req, res)

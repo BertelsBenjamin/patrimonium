@@ -7,22 +7,23 @@ header {
   font-family: $font-text, sans-serif;
   letter-spacing: 1px;
   font-weight: 100;
-  color: $primary-orange;
-  background-color: $primary-blue;
+  color: blue;
+  background-color: white;
+  border-bottom: 2px solid blue;
 
   #logo {
     margin: 5px;
   }
 
   a {
-    color: $primary-orange;
+    color: blue;
   }
 
 
 
   .active-link {
     color: white;
-    background-color: $primary-orange;
+    background-color: orangered;
     border: white;
     border-radius: 5px;
   }

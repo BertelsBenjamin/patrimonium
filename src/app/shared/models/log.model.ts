@@ -3,7 +3,7 @@ export class Log {
     public log_id: number,
     public log_date: string,
     public log_user_id: number,
-    public log_user: string,
+    public log_user_username: string,
     public log_comment: string,
     public log_piano_id: number,
     public log_piano: string,

@@ -1,8 +1,11 @@
+.container {
+  color: blue !important;
+}
+
 .maps {
   display: inline-block;
   width: 100%;
   height: 200px;
-  margin-top: 10vh;
 }
 
 ul {
@@ -14,10 +17,10 @@ ul {
   margin: 2vw;
 }
 
-a p {
-  color: black;
+a {
+  color: blue;
 }
 
 a:hover {
-  text-decoration: none;
+  color: rgb(91, 91, 245);
 }
