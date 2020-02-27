@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { LoginService } from "../shared/services/login.service";
-import { User } from "../shared/models/user.model";
 import { Router } from "@angular/router";
 
 @Component({
@@ -12,11 +11,12 @@ import { Router } from "@angular/router";
 export class LoginComponent implements OnInit {
   loginInput = new FormControl("");
   currentUser;
+  loginError;
   constructor(public LoginService: LoginService, public router: Router) {}
 
   async login(userName: any, userPassword: any) {
     console.log(userName, userPassword);
-    try {
+    /* try {
       this.LoginService.login(userName, userPassword).subscribe(user => {
         this.currentUser = user;
         console.log(this.currentUser);
@@ -27,7 +27,22 @@ export class LoginComponent implements OnInit {
         alert("Something went wrong. Call support.");
         throw err;
       }
-    }
+    } */
+
+    this.LoginService.login(userName, userPassword).subscribe({
+      next(response) {
+        this.currentUser = response;
+        console.log(this.currentUser.user_role);
+      },
+      error(err) {
+        console.log("Error:", err);
+        this.loginError = err;
+      },
+      complete() {
+        console.log("Request completed.");
+        this.router.navigate([`/${this.currentUser.user_role}`]);
+      }
+    });
   }
 
   ngOnInit() {}

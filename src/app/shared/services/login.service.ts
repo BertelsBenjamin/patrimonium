@@ -16,8 +16,6 @@ export class LoginService {
   user: any;
   // FUNCTIONS
   login(userName: any, userPassword: any): Observable<User> {
-    console.log("LoginService.login() is being executed");
-    console.log(userName, userPassword, `${this.url}login`);
     return this.http
       .post<any>(`${this.url}/login`, {
         name: userName,
