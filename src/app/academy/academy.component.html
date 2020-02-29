@@ -132,7 +132,7 @@
           </button>
           <div class="modal fade" [attr.id]="'Modal_edit_' + piano.piano_id" tabindex="-1" role="dialog"
             [attr.aria-labelledby]="'ModalLabel_' + piano.piano_id" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h3 class="modal-title">{{piano.piano_brand}}
@@ -145,19 +145,16 @@
                 <div class="modal-body">
                   <div class="card">
                     <div class="card-body">
-                      <div class="row">
-                        <h4>Change room</h4>
-                      </div>
-                      <!-- <form [formGroup]='piano_edit'></form>
-                      <textarea class="form-control" formControlName='room'
-                        [attr.placeholder]="'Current Room: ' + piano.piano_room">
-
-                      </textarea> -->
+                      <h4>Edit piano</h4>
+                      <p>Change room from "{{piano.piano_room}}" to:</p>
+                      <input class="form-control" type='text' #updateRoomInput>
+                      <button class="btn btn-success btn-small mt-3"
+                        (click)='updateRoom(piano.piano_id, piano.piano_room, updateRoomInput.value)'>Update</button>
                     </div>
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button class="btn btn-success btn-small mt-3">Submit</button>
+
                 </div>
               </div>
             </div>

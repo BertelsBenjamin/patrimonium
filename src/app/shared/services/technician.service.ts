@@ -68,4 +68,13 @@ export class TechnicianService {
     const headers = new HttpHeaders().set("Content-Type", "application/json");
     return this.http.post(`${this.url}logs/post`, log, { headers: headers });
   }
+
+  updateRoom(pianoID: number, oldRoom: string, newRoom: string) {
+    const headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this.http.put(
+      `${this.url}rooms/update`,
+      { pianoID: pianoID, oldRoom: oldRoom, newRoom: newRoom },
+      { headers: headers }
+    );
+  }
 }

@@ -84,6 +84,15 @@ export class AcademyComponent implements OnInit {
     });
   }
 
+  updateRoom(pianoID: number, oldRoom: string, newRoom: string) {
+    this.TechnicianService.updateRoom(pianoID, oldRoom, newRoom).subscribe(
+      (postedRoom: string) => {
+        console.log(pianoID, oldRoom, newRoom);
+      }
+    );
+    this.getCurrentAcademyPianos();
+  }
+
   ngOnInit() {
     this.getCurrentAcademy();
     this.getCurrentAcademyPianos();
