@@ -1,18 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Academy } from "../models/academy.model";
-import { Log } from "../models/log.model";
-import { Piano } from "../models/piano.model";
+import { Academy } from "../../models/academy.model";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { tap, map } from "rxjs/operators";
-import {
-  Resolve,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot
-} from "@angular/router";
+import { tap } from "rxjs/operators";
 
 @Injectable()
-export class TechnicianService {
+export class AcademiesService {
   // VARIABLES
   url: string = "http://localhost:3000/";
 
@@ -49,32 +42,6 @@ export class TechnicianService {
   findAcademy(id: number): Observable<Academy> {
     return this.http
       .get<Academy>(`${this.url}academies/${id}`)
-      .pipe(tap(result => console.log(result)));
-  }
-
-  findPianosByAcademy(academyId: number): Observable<Piano[]> {
-    return this.http
-      .get<Piano[]>(`${this.url}pianos/${academyId}`)
-      .pipe(tap(result => console.log(result)));
-  }
-
-  getLogs(pianoId: number): Observable<Log[]> {
-    return this.http
-      .get<Log[]>(`${this.url}logs/${pianoId}`)
-      .pipe(tap(result => console.log(result)));
-  }
-
-  postLog(log: Log) {
-    const headers = new HttpHeaders().set("Content-Type", "application/json");
-    return this.http.post(`${this.url}logs/post`, log, { headers: headers });
-  }
-
-  updateRoom(pianoID: number, oldRoom: string, newRoom: string) {
-    const headers = new HttpHeaders().set("Content-Type", "application/json");
-    return this.http.put(
-      `${this.url}rooms/update`,
-      { pianoID: pianoID, oldRoom: oldRoom, newRoom: newRoom },
-      { headers: headers }
-    );
+      .pipe(tap(result => console.log("TECH_SERVICE: findAcademy", result)));
   }
 }

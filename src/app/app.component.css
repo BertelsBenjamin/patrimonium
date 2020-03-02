@@ -1,14 +1,25 @@
 app-home-header {
-  display: block;
+  display: block !important;
+  height: 10%;
+  position: absolute;
 }
 
 router-outlet {
-  margin-top: 75px;
-  margin-bottom: 75px;
-  display: inline-block;
+  display: block;
+  margin-top: 10%;
+  margin-bottom: 10%;
 }
 
-app-home-footer {
+/* app-technician {
   display: block;
+  height: auto;
+  max-height: 80%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+} */
+app-home-footer {
+  display: block !important;
+  position: absolute;
+  height: 10%;
 }
 /*# sourceMappingURL=app.component.css.map */

@@ -1,18 +1,27 @@
 <div class="container">
-  <h1 class="d-flex justify-content-left">Academies</h1>
+  <h3>Academies</h3>
   <div class="row">
     <div class="col-6">
       <div class="input-group d-flex justify-content-start mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">
+            <i class="fas fa-search"></i>
+          </span>
+        </div>
         <input id="technician-input" class="form-control rounded" placeholder="Search by name, street, place, ..."
           #technicianInput (keyup)='filterAcademies(checkboxHQ.checked, technicianInput.value)'>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-6 d-flex justify-content-start align-content-center">
-      <input class="block" type="checkbox" #checkboxHQ
-        (change)="filterAcademies(checkboxHQ.checked, technicianInput.value)">
-      <span type="text" class="ml-2">Only HQ's</span>
+    <div class="col-6 form-group">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <input class="" type="checkbox" #checkboxHQ
+              (change)="filterAcademies(checkboxHQ.checked, technicianInput.value)">
+          </div>
+        </div>
+        <input type="text" class="form-control" disabled placeholder="Filter Headquarters">
+      </div>
     </div>
   </div>
   <table id="table-academies" class="table table-striped">

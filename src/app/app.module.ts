@@ -4,7 +4,7 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { RoutingModule } from "./routing/routing.module";
 import { Routes, RouterModule } from "@angular/router";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 
 // COMPONENTS
 import { AppComponent } from "./app.component";
@@ -15,20 +15,16 @@ import { HomeFooterComponent } from "./home-footer/home-footer.component";
 import { PricingComponent } from "./pricing/pricing.component";
 import { ContactComponent } from "./contact/contact.component";
 import { TechnicianComponent } from "./technician/technician.component";
-import { AcademyComponent } from "./academy/academy.component";
+import { TechAcademyComponent } from "./technician/tech_academy/tech_academy.component";
 import { DispatcherComponent } from "./dispatcher/dispatcher.component";
+import { DispAcademyComponent } from "./dispatcher/disp-academy/disp-academy.component";
 import { ManagerComponent } from "./manager/manager.component";
 
 // SERVICES
-import { TechnicianService } from "./shared/services/technician.service";
-import { LoginService } from "./shared/services/login.service";
-
-// MODELS
-import { Academy } from "./shared/models/academy.model";
-
-// VARIA
-import { config } from "rxjs";
-import { environment } from "src/environments/environment";
+import { AcademiesService } from "./shared/services/academies/academies.service";
+import { LoginService } from "./shared/services/login/login.service";
+import { DispTechniciansComponent } from "./dispatcher/disp-technicians/disp-technicians.component";
+import { DispLogsComponent } from "./dispatcher/disp-logs/disp-logs.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "home", pathMatch: "full" },
@@ -36,13 +32,16 @@ const routes: Routes = [
   { path: "pricing", component: PricingComponent },
   { path: "contact", component: ContactComponent },
   { path: "login", component: LoginComponent },
-  { path: "technician", component: TechnicianComponent },
-  { path: "dispatcher", component: DispatcherComponent },
-  { path: "manager", component: ManagerComponent },
+  { path: "technician/academies", component: TechnicianComponent },
   {
-    path: "technician/academy/:id",
-    component: AcademyComponent
-  }
+    path: "technician/academies/academy/:id",
+    component: TechAcademyComponent
+  },
+  { path: "dispatcher/academies", component: DispatcherComponent },
+  { path: "dispatcher/academies/academy/:id", component: DispAcademyComponent },
+  { path: "dispatcher/technicians", component: DispTechniciansComponent },
+  { path: "dispatcher/logs", component: DispLogsComponent },
+  { path: "manager", component: ManagerComponent }
 ];
 
 @NgModule({
@@ -56,9 +55,12 @@ const routes: Routes = [
     PricingComponent,
     ContactComponent,
     TechnicianComponent,
-    AcademyComponent,
+    TechAcademyComponent,
     DispatcherComponent,
-    ManagerComponent
+    DispAcademyComponent,
+    ManagerComponent,
+    DispTechniciansComponent,
+    DispLogsComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     ReactiveFormsModule
   ],
-  providers: [TechnicianService, LoginService],
+  providers: [AcademiesService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

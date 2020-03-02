@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { LoginService } from "../shared/services/login.service";
+import { LoginService } from "../shared/services/login/login.service";
 import { Router } from "@angular/router";
-import { User } from "../shared/models/user.model";
 
 @Component({
   selector: "app-login",
@@ -28,7 +27,7 @@ export class LoginComponent implements OnInit {
           document.cookie = `${keys[i]}=${values[i]}`;
         }
         console.log(this.currentUser);
-        this.router.navigate([`/${this.currentUser.user_role}`]);
+        this.router.navigate([`/${this.currentUser.user_role}/academies`]);
       });
     } catch (err) {
       if (err) {

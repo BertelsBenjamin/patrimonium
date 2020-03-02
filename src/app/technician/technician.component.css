@@ -1,0 +1,29 @@
+.container {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#academy-info-list {
+  list-style-type: none;
+}
+
+#academy-info-list .academy-info i {
+  display: inline;
+}
+
+#academy-info-list .academy-info .fa-map-marker-alt {
+  color: #f64201;
+}
+
+#academy-info-list .academy-info .fa-phone {
+  color: rgba(255, 230, 0, 0.952);
+}
+
+#academy-info-list .academy-info .fa-envelope {
+  color: #02ce02;
+}
+
+#academy-info-list .academy-info label {
+  font-size: medium;
+}
+/*# sourceMappingURL=technician.component.css.map */

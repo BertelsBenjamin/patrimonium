@@ -1,0 +1,27 @@
+.container {
+  color: blue !important;
+}
+
+.maps {
+  display: inline-block;
+  width: 100%;
+  height: 200px;
+}
+
+ul {
+  width: 100%;
+}
+
+.list-item {
+  display: inline-block;
+  margin: 2vw;
+}
+
+a {
+  color: blue;
+}
+
+a:hover {
+  color: #5b5bf5;
+}
+/*# sourceMappingURL=contact.component.css.map */

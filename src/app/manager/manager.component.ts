@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { LoginService } from "../shared/services/login.service";
+import { LoginService } from "../shared/services/login/login.service";
 import { Observable } from "rxjs";
 
 @Component({

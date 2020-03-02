@@ -1,1 +1,138 @@
-<p>Hello, {{user.user_first_name}} {{user.user_last_name}}. You are logged in as a "{{user.user_role}}".</p>
+<div class="row">
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link active" routerLink='/dispatcher/academies'>Academies</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/dispatcher/technicians">Technicians</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/dispatcher/logs">Logs<span class="badge badge-secondary"></span></a>
+    </li>
+  </ul>
+</div>
+<hr>
+<div class="row">
+  <div class="col-6">
+    <div class="input-group d-flex justify-content-start mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+      <input id="technician-input" class="form-control rounded" placeholder="Search by name, street, place, ..."
+        #technicianInput (keyup)='filterAcademies(checkboxHQ.checked, technicianInput.value)'>
+    </div>
+  </div>
+  <div class="col-6 form-group">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <input class="" type="checkbox" #checkboxHQ
+            (change)="filterAcademies(checkboxHQ.checked, technicianInput.value)">
+        </div>
+      </div>
+      <input type="text" class="form-control" disabled placeholder="Filter Headquarters">
+    </div>
+  </div>
+</div>
+<table id="table-academies" class="table table-striped">
+  <thead class="thead-dark">
+    <tr class="small">
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Street</th>
+      <th scope="col">House No.</th>
+      <th scope="col">Place</th>
+      <th scope="col">HQ?</th>
+      <th scope="col">More</th>
+    </tr>
+  </thead>
+  <tbody id="allAcademies" class="border">
+    <tr class="small" [attr.id]="'Academy_' + academy.academy_id" *ngFor='let academy of academies'>
+      <td class="academyId">#{{academy.academy_id}}</td>
+      <td class="academyName">{{academy.academy_name}}</td>
+      <td class="academyStreet">{{academy.academy_street}}</td>
+      <td class="academyHouseNumber">{{academy.academy_house_number}}</td>
+      <td class="academyPlaceId">{{academy.academy_place_name}}</td>
+      <td>
+        <div *ngIf="academy.academy_headquarter=='0'; else elseBlock">No</div>
+        <ng-template #elseBlock>Yes</ng-template>
+      </td>
+      <td>
+        <button type="button" class="btn btn-link btn-sm" data-toggle="modal"
+          [attr.data-target]="'#Modal_' + academy.academy_id" (click)=findAcademy(academy.academy_id)>
+          <i class="fas fa-info-circle"></i>
+        </button>
+        <div class="modal fade" [attr.id]="'Modal_' + academy.academy_id" tabindex="-1" role="dialog"
+          [attr.aria-labelledby]="'ModalLabel_' + academy.academy_id" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" [attr.id]="'ModalLabel_' + academy.academy_id">{{academy.academy_name}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Contact</h5>
+                    <div class="row">
+                      <div class="col-12">
+                        <ul id="academy-info-list" class="list">
+                          <li class="list-item" *ngIf="academy.academy_street||academy.academy_house_number != ''">
+                            <div class="academy-info">
+                              <i class="fas fa-map-marker-alt mr-2"></i>
+                              <label>{{academy.academy_street}} {{academy.academy_house_number}},
+                                {{academy.academy_place_name}}</label>
+                            </div>
+                          </li>
+                          <li class="list-item" *ngIf="academy.academy_phone != ''">
+                            <div class="academy-info">
+                              <a [attr.href]="'tel:0' + academy.academy_phone">
+                                <i class="fas fa-phone mr-2"></i>
+                                <label>0{{academy.academy_phone}}</label>
+                              </a>
+                            </div>
+                          </li>
+                          <li class="list-item"
+                            *ngIf="academy.academy_director_last_name||academy.academy_director_first_name != ''">
+                            <div class="academy-info">
+                              <i class="fas fa-envelope mr-2"></i>
+                              <label>{{academy.academy_director_last_name}}
+                                {{academy.academy_director_first_name}} (director)</label>
+                            </div>
+                          </li>
+                          <li class="list-item" *ngIf="academy.academy_homepage_url != ''">
+                            <div class="academy-info">
+                              <a [attr.href]="'https://' + academy.academy_homepage_url" target="_blank">
+                                <i class="fas fa-globe mr-2"></i>
+                                <label>{{academy.academy_homepage_url}}</label>
+                              </a>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="academy-info" *ngIf="academy.academy_educational_net_type != ''">
+                              <i class="fas fa-info mr-2"></i>
+                              <label>{{academy.academy_educational_net_type}}</label>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <a [routerLink]="['./academy', academy.academy_id]" class="btn btn-primary btn-small"
+                  data-dismiss="modal">Go to academy page</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

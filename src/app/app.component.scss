@@ -1,9 +1,25 @@
 app-home-header {
-  display: block;
-  height: 50px;
+  display: block !important;
+  height: 10%;
+  position: absolute;
 }
 
-app-home-footer {
+router-outlet {
   display: block;
-  height: 50px;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+/* app-technician {
+  display: block;
+  height: auto;
+  max-height: 80%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+} */
+
+app-home-footer {
+  display: block !important;
+  position: absolute;
+  height: 10%;
 }

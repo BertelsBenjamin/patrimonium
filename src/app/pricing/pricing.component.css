@@ -1,7 +1,8 @@
+.container {
+  color: blue !important;
+}
+
 section.pricing {
-  background: #007bff;
-  background: -webkit-gradient(linear, left top, right top, from(#0062E6), to(#33AEFF));
-  background: linear-gradient(to right, #0062E6, #33AEFF);
   border-radius: 10px;
 }
 

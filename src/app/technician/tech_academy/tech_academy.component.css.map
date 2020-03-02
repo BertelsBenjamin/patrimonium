@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,MAAM,CAAC;EACL,OAAO,EAAE,MAAM;CAChB",
+    "sources": [
+        "tech_academy.component.scss"
+    ],
+    "names": [],
+    "file": "tech_academy.component.css"
+}

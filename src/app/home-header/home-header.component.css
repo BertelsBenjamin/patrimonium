@@ -1,9 +1,41 @@
 header {
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 100%;
-  text-align: center;
-  border-bottom: 1px solid lightgray;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 1px;
+  font-weight: 100;
+  color: blue;
+  background-color: white;
+  border-bottom: 2px solid blue;
+}
+
+header #logo {
+  margin: 5px;
+}
+
+header a {
+  color: blue;
+}
+
+header .active-link {
+  color: white;
+  background-color: orangered;
+  border: white;
+  border-radius: 5px;
+}
+
+header li {
+  display: inline-block;
+  -webkit-box-align: right;
+      -ms-flex-align: right;
+          align-items: right;
+}
+
+header li:hover :hover {
+  text-decoration: unset;
+}
+
+header button hr {
+  margin: 5px 5px;
+  width: 20px;
+  background-color: #e65817;
 }
 /*# sourceMappingURL=home-header.component.css.map */
