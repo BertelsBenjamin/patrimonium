@@ -63,6 +63,8 @@ export class DispatcherComponent implements OnInit {
     );
   }
 
+  addAcademy() {}
+
   ngOnInit() {
     console.log(this.user);
     this.getAllAcademies();

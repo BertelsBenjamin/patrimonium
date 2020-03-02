@@ -2,9 +2,9 @@ header {
   font-family: "Poppins", sans-serif;
   letter-spacing: 1px;
   font-weight: 100;
-  color: blue;
+  color: #007bff;
   background-color: white;
-  border-bottom: 2px solid blue;
+  border-bottom: 2px solid #007bff;
 }
 
 header #logo {
@@ -12,7 +12,7 @@ header #logo {
 }
 
 header a {
-  color: blue;
+  color: #007bff;
 }
 
 header .active-link {

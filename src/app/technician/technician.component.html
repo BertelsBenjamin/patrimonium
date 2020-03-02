@@ -1,5 +1,23 @@
 <div class="container">
-  <h3>Academies</h3>
+  <div class="row mb-3">
+    <div class="col-8">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active" routerLink='/dispatcher/academies' routerLinkActive="active-link">Academies</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-4">
+      <ul class="nav nav-pills justify-content-end">
+        <li class="list-item">
+          <a class="nav-link" href=".">
+            <small>Logged in as {{user.user_first_name}} {{user.user_last_name}}</small>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr>
   <div class="row">
     <div class="col-6">
       <div class="input-group d-flex justify-content-start mb-3">

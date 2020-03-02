@@ -7,16 +7,16 @@ header {
   font-family: $font-text, sans-serif;
   letter-spacing: 1px;
   font-weight: 100;
-  color: blue;
+  color: hsl(211, 100%, 50%);
   background-color: white;
-  border-bottom: 2px solid blue;
+  border-bottom: 2px solid hsl(211, 100%, 50%);
 
   #logo {
     margin: 5px;
   }
 
   a {
-    color: blue;
+    color: hsl(211, 100%, 50%);
   }
 
 

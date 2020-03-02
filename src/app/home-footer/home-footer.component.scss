@@ -5,17 +5,17 @@ $font-text: 'Poppins';
 footer {
   width: 100%;
   text-align: center;
-  color: blue;
-  border-top: 2px solid blue;
+  color: hsl(211, 100%, 50%);
+  border-top: 2px solid hsl(211, 100%, 50%);
   background-color: white;
   font-family: $font-text;
 
   p {
-    color: blue;
+    color: hsl(211, 100%, 50%);
   }
 
   a {
-    color: blue;
+    color: hsl(211, 100%, 50%);
   }
 
   a:hover {
@@ -27,5 +27,5 @@ footer {
 .fab {
   margin-right: 2vw;
   font-weight: 900;
-  color: blue;
+  color: hsl(211, 100%, 50%);
 }

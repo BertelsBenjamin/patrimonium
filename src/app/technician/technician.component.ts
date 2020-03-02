@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AcademiesService } from "../shared/services/academies/academies.service";
 import { Academy } from "../shared/models/academy.model";
 import { FormControl } from "@angular/forms";
+import { LoginService } from "../shared/services/login/login.service";
 
 @Component({
   selector: "app-technician",
@@ -15,6 +16,7 @@ export class TechnicianComponent implements OnInit {
   technicianInput = new FormControl("");
   checkboxHQ = new FormControl("");
   HQLabelValue = "";
+  user = this.LoginService.user;
 
   getAllAcademies() {
     this.AcademiesService.getAllAcademies().subscribe(
@@ -53,7 +55,10 @@ export class TechnicianComponent implements OnInit {
     );
   }
 
-  constructor(public AcademiesService: AcademiesService) {}
+  constructor(
+    public AcademiesService: AcademiesService,
+    public LoginService: LoginService
+  ) {}
 
   ngOnInit() {
     this.getAllAcademies();

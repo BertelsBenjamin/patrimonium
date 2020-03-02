@@ -1,43 +1,58 @@
-<ul class="nav nav-pills">
-  <li class="nav-item">
-    <a class="nav-link" routerLink='/dispatcher/academies' routerLinkActive="active-link">Academies</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" routerLink="/dispatcher/technicians" routerLinkActive="active-link">Technicians</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" routerLink="/dispatcher/logs" routerLinkActive="active-link">Logs<span
-        class="badge badge-secondary"></span></a>
-  </li>
-</ul>
-<hr>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Tony</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" routerLink='/dispatcher/academies' routerLinkActive="active-link">Academies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" routerLink="/dispatcher/technicians" routerLinkActive="active-link">Technicians</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dispatcher/logs" routerLinkActive="active-link">Logs<span
+              class="badge badge-danger">4</span></a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-4">
+      <ul class="nav nav-pills justify-content-end">
+        <li class="list-item">
+          <a class="nav-link" href=".">
+            <small>Logged in as {{user.user_first_name}} {{user.user_last_name}}</small>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <hr>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Tony</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

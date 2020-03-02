@@ -1,5 +1,5 @@
 .container {
-  color: blue !important;
+  color: #353b41 !important;
 }
 
 .maps {
@@ -18,10 +18,10 @@ ul {
 }
 
 a {
-  color: blue;
+  color: #22262a;
 }
 
 a:hover {
-  color: #5b5bf5;
+  color: #007bff;
 }
 /*# sourceMappingURL=contact.component.css.map */

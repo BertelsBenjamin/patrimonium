@@ -1,1 +1,38 @@
-/* No CSS *//*# sourceMappingURL=dispatcher.component.css.map */
+.container {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#filterHQ {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.add_academy_label {
+  width: 100px;
+}
+
+#academy-info-list {
+  list-style-type: none;
+}
+
+#academy-info-list .academy-info i {
+  display: inline;
+}
+
+#academy-info-list .academy-info .fa-map-marker-alt {
+  color: #f64201;
+}
+
+#academy-info-list .academy-info .fa-phone {
+  color: rgba(255, 230, 0, 0.952);
+}
+
+#academy-info-list .academy-info .fa-envelope {
+  color: #02ce02;
+}
+
+#academy-info-list .academy-info label {
+  font-size: medium;
+}
+/*# sourceMappingURL=dispatcher.component.css.map */

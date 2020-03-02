@@ -1,18 +1,18 @@
 footer {
   width: 100%;
   text-align: center;
-  color: blue;
-  border-top: 2px solid blue;
+  color: #007bff;
+  border-top: 2px solid #007bff;
   background-color: white;
   font-family: "Poppins";
 }
 
 footer p {
-  color: blue;
+  color: #007bff;
 }
 
 footer a {
-  color: blue;
+  color: #007bff;
 }
 
 footer a:hover {
@@ -22,6 +22,6 @@ footer a:hover {
 .fab {
   margin-right: 2vw;
   font-weight: 900;
-  color: blue;
+  color: #007bff;
 }
 /*# sourceMappingURL=home-footer.component.css.map */
