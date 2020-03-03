@@ -164,6 +164,10 @@ app.get('/pianos/:academyId', urlencode, (req, res) => {
   queryToDatabase(`SELECT pianos.piano_id, sorts.sort_sort AS 'piano_sort', brands.brand_name AS 'piano_brand', types.type_type AS 'piano_type', pianos.piano_serial_number, academies.academy_id AS 'piano_academy_id', pianos.piano_room FROM pianos JOIN sorts ON pianos.piano_sort_id = sorts.sort_id JOIN brands ON pianos.piano_brand_id = brands.brand_id JOIN types ON pianos.piano_type_id = types.type_id JOIN academies ON pianos.piano_academy_id = academies.academy_id WHERE pianos.piano_academy_id = ${req.params.academyId}`, req, res)
 })
 
+app.delete('/pianos/delete/:pianoID', urlencode, (req, res) => {
+  queryToDatabase(`DELETE FROM pianos WHERE pianos.piano_id = ${req.params.pianoID}`, req, res)
+})
+
 
 /* --> LOGS <-- */
 app.get('/logs/:pianoId', urlencode, (req, res) => {

@@ -1,1 +1,224 @@
-<p>disp-academy works!</p>
+<div class="container">
+  <div class="row" *ngIf="currentAcademy$ | async as academy">
+    <h2 class="title">{{academy[0].academy_name}} - {{academy[0].academy_place_name}}</h2>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col d-flex">
+      <h4 class="title justify-self-start">Instruments</h4>
+      <button id="addPiano" type="button" class="btn btn-success ml-3" data-target='#Modal_add_piano'
+        data-toggle="modal">
+        <i class="fas fa-plus"></i>
+      </button>
+      <div class="modal fade" id='Modal_add_piano' tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+          <div class="modal-content modal-content-center">
+            <div class="modal-header">
+              <h3 class="modal-title">Add new instrument</h3>
+            </div>
+            <div class="modal-body">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                          <label class="input-group-text" for="add_select_sort">Sort</label>
+                        </div>
+                        <select class="custom-select" id="add_select_sort">
+                          <option selected>Upright</option>
+                          <option value="1">Grand</option>
+                          <option value="2">Harpsichord</option>
+                          <option value="3">Pianoforte</option>
+                          <option value="4">Other</option>
+                        </select>
+                      </div>
+                      <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="add_input_brand">Brand</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                          aria-describedby="add_input_brand">
+                      </div>
+                      <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="add_input_type">Type</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                          aria-describedby="add_input_type">
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="add_input_serial_number">Serial No.</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                          aria-describedby="add_input_serial_number">
+                      </div>
+                      <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="add_input_academy">Academy</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                          aria-describedby="add_input_academy">
+                      </div>
+                      <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="add_input_room">Room</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                          aria-describedby="add_input_room">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success" data-dismiss="modal" (click)='addPiano()'>Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <table id="table-pianos" class="table table-striped mt-3" *ngIf="currentAcademyPianos$ | async as pianos">
+      <thead class="thead-dark">
+        <tr class="small">
+          <th scope="col">PianoID</th>
+          <th scope="col">Sort</th>
+          <th scope="col">Brand</th>
+          <th scope="col">Type</th>
+          <th scope="col">Serial No.</th>
+          <th scope="col">Room</th>
+          <th scope="col">Comments</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody id="allPianos" class="border">
+        <tr class="small" [attr.id]="'Piano_' + piano.piano_id" *ngFor='let piano of pianos'>
+          <td class="pianoID">#{{piano.piano_id}}</td>
+          <td class="pianoSort">{{piano.piano_sort}}</td>
+          <td class="pianoBrand">{{piano.piano_brand}}</td>
+          <td class="pianoType">{{piano.piano_type}}</td>
+          <td class="pianoSerialNumber">{{piano.piano_serial_number}}</td>
+          <td class="pianoRoom">{{piano.piano_room}}</td>
+          <td>
+            <button type="button" class="btn btn-link btn-sm" data-toggle="modal"
+              [attr.data-target]="'#Modal_comment_' + piano.piano_id" (click)='getInterventions(piano.piano_id)'>
+              <i class="far fa-comment"></i>
+            </button>
+            <div class="modal fade" [attr.id]="'Modal_comment_' + piano.piano_id" tabindex="-1" role="dialog"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">{{piano.piano_brand}}
+                      {{piano.piano_type}} ({{piano.piano_serial_number}}) - {{piano.piano_sort}}
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col">
+                            <div class="col-6 d-flex justify-content-start">
+                              <h4 class="mt-3 title inline">Latest intervention</h4>
+                              <button class="btn btn-primary mt-3 ml-3" (click)="getInterventions(piano.piano_id)">
+                                <i class="fas fa-sync"></i>
+                              </button>
+                            </div>
+                            <table id="piano_details" class="table table-striped mt-3 ml-3"
+                              *ngIf='pianoLogs$ | async as logs'>
+                              <thead class="thead-dark">
+                                <th scope="col">LogID</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Technician</th>
+                                <th scope="col">Tuning</th>
+                                <th scope="col">Regulation</th>
+                                <th scope="col">Intonation</th>
+                                <th scope="col">Comment</th>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor='let log of logs'>
+                                  <td class="log_id">{{log.log_id}}</td>
+                                  <td class="log_date">{{log.log_date}}</td>
+                                  <td class="log_technician">{{log.log_user_username}}</td>
+                                  <td class="log_tuning" *ngIf='log.log_tuning===1; else tuningNo'>Yes</td>
+                                  <ng-template #tuningNo>
+                                    <td class="log_tuning">No</td>
+                                  </ng-template>
+                                  <td class="log_regulation" *ngIf='log.log_regulation===1; else regulationNo'>Yes</td>
+                                  <ng-template #regulationNo>
+                                    <td class="log_regulation">No</td>
+                                  </ng-template>
+                                  <td class="log_intonation" *ngIf='log.log_intonation===1; else intonationNo'>Yes</td>
+                                  <ng-template #intonationNo>
+                                    <td class="log_intonation">No</td>
+                                  </ng-template>
+                                  <td class="log_comment">{{log.log_comment}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <button type="button" class="btn btn-link btn-sm" data-toggle="modal"
+              [attr.data-target]="'#Modal_edit_' + piano.piano_id">
+              <i class="fas fa-edit"></i>
+            </button>
+            <div class="modal fade" [attr.id]="'Modal_edit_' + piano.piano_id" tabindex="-1" role="dialog"
+              [attr.aria-labelledby]="'ModalLabel_' + piano.piano_id" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h3 class="modal-title">{{piano.piano_brand}}
+                      {{piano.piano_type}} ({{piano.piano_serial_number}}) - {{piano.piano_sort}}
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="card">
+                      <div class="card-body">
+                        <h4>Edit piano</h4>
+                        <p>Change room from "{{piano.piano_room}}" to:</p>
+                        <input class="form-control" type='text' #updateRoomInput>
+                        <button class="btn btn-success btn-small mt-3"
+                          (click)='updateRoom(piano.piano_id, piano.piano_room, updateRoomInput.value)'
+                          data-dismiss="modal">Update</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <button type="button" class="btn btn-sm" (click)='deletePiano(piano.piano_id)'><i class="far fa-trash-alt"
+                style="color: red;"></i></button>
+          </td>
+        </tr>
+    </table>
+  </div>
+</div>

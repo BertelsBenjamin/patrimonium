@@ -29,4 +29,9 @@ export class PianosService {
       { headers: headers }
     );
   }
+
+  deletePiano(pianoID: number) {
+    //const headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this.http.delete(`${this.url}pianos/delete/${pianoID}`);
+  }
 }
