@@ -7,6 +7,7 @@ import { LoginService } from "../../shared/services/login/login.service";
 import { LogsService } from "../../shared/services/logs/logs.service";
 import { ActivatedRoute } from "@angular/router";
 import { Observable } from "rxjs";
+import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
 import { PianosService } from "src/app/shared/services/pianos/pianos.service";
 
 @Component({
@@ -22,6 +23,9 @@ export class DispAcademyComponent implements OnInit {
   currentAcademyPianos: Piano[];
   pianoLogs$: Observable<Log[]>;
   pianoLogs: Log[];
+  academies$: Observable<Academy[]>;
+  academies: any;
+  public model: any;
 
   constructor(
     public AcademiesService: AcademiesService,
@@ -30,6 +34,24 @@ export class DispAcademyComponent implements OnInit {
     public LoginService: LoginService,
     private route: ActivatedRoute
   ) {}
+
+  getAllAcademies() {
+    this.academies$ = this.AcademiesService.getAllAcademies();
+    this.academies$.subscribe(result => (this.academies = result));
+
+    search = (text$: Observable<string>) =>
+      text$.pipe(
+        debounceTime(200),
+        distinctUntilChanged(),
+        map(term =>
+          term.length < 2
+            ? []
+            : this.academies
+                .filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)
+                .slice(0, 10)
+        )
+      );
+  }
 
   getCurrentAcademy() {
     this.currentAcademy$ = this.AcademiesService.findAcademy(
@@ -88,9 +110,7 @@ export class DispAcademyComponent implements OnInit {
     this.getCurrentAcademyPianos();
   }
 
-  addPiano() {
-    console.log("This function doesn't work yet.");
-  }
+  addPiano() {}
 
   deletePiano(pianoID: number) {
     this.PianosService.deletePiano(pianoID).subscribe((response: string) => {
@@ -100,6 +120,7 @@ export class DispAcademyComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllAcademies();
     this.getCurrentAcademy();
     this.getCurrentAcademyPianos();
     // LOG RESULTS

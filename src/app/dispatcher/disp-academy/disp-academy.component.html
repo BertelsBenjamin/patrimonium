@@ -63,7 +63,7 @@
                           <span class="input-group-text" id="add_input_academy">Academy</span>
                         </div>
                         <input type="text" class="form-control" aria-label="Sizing example input"
-                          aria-describedby="add_input_academy">
+                          aria-describedby="add_input_academy" [(ngModel)]="model" [ngbTypeahead]="search">
                       </div>
                       <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
