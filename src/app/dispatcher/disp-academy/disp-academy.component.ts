@@ -39,7 +39,7 @@ export class DispAcademyComponent implements OnInit {
     this.academies$ = this.AcademiesService.getAllAcademies();
     this.academies$.subscribe(result => (this.academies = result));
 
-    search = (text$: Observable<string>) =>
+    /* search = (text$: Observable<string>) =>
       text$.pipe(
         debounceTime(200),
         distinctUntilChanged(),
@@ -50,7 +50,7 @@ export class DispAcademyComponent implements OnInit {
                 .filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1)
                 .slice(0, 10)
         )
-      );
+      ); */
   }
 
   getCurrentAcademy() {
