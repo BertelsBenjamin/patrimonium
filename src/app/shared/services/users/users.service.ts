@@ -12,5 +12,9 @@ export class UsersService {
     return this.http.get<User[]>(`${this.url}users`);
   }
 
+  filterTechniciansOnDispInput(input) {
+    return this.http.get<User[]>(`${this.url}users/filter/${input}`);
+  }
+
   constructor(private http: HttpClient) {}
 }

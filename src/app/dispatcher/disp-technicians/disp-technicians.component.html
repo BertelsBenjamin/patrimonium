@@ -34,7 +34,7 @@
           </span>
         </div>
         <input id="dispatcher-input" class="form-control rounded" placeholder="Search by name, street, place, ..."
-          #dispatcherInput (keyup)='filterTechnicians()'>
+          #dispatcherInput (keyup)='filterTechniciansOnDispInput(dispatcherInput.value)'>
         <button type="button" class="btn btn-success ml-3" click="addNewTechnician()">
           <i class="fas fa-plus mr-3"></i>Add new technician
         </button>
@@ -48,8 +48,10 @@
           <th scope="col">Country</th>
           <th scope="col">Department</th>
           <th scope="col">Level</th>
-          <th scope="col">Contact</th>
           <th scope="col">Province</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody id="allTechnicians" class="border">
@@ -59,11 +61,16 @@
           <td>{{technician.user_country_code}}</td>
           <td>{{technician.user_department}}</td>
           <td>{{technician.user_level}}</td>
+          <td>{{technician.user_province_name}}</td>
           <td>
             <a class="mr-3" [attr.href]="'mailto:' + technician.user_email"><i class="fas fa-envelope"></i></a>
-            <a [attr.href]="'tel:' + technician.user_mobile"><i class="fas fa-phone green"></i></a>
           </td>
-          <td>{{technician.user_province_name}}</td>
+          <td>
+            <a [attr.href]="'tel:' + technician.user_mobile"><i class="fas fa-phone"
+                style="color: hsl(134, 61%, 41%);"></i>
+            </a>
+          </td>
+          <td><i class="fas fa-trash-alt" style="color: red;"></i></td>
         </tr>
       </tbody>
     </table>

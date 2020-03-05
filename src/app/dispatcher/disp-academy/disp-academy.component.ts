@@ -113,10 +113,13 @@ export class DispAcademyComponent implements OnInit {
   addPiano() {}
 
   deletePiano(pianoID: number) {
-    this.PianosService.deletePiano(pianoID).subscribe((response: string) => {
-      console.log(response);
-    });
-    this.getCurrentAcademyPianos();
+    let sure = confirm("Are you sure?");
+    if (sure) {
+      this.PianosService.deletePiano(pianoID).subscribe((response: string) => {
+        console.log(response);
+      });
+      this.getCurrentAcademyPianos();
+    }
   }
 
   ngOnInit() {

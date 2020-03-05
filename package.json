@@ -41,6 +41,7 @@
     "jsdom": "^15.2.1",
     "mapbox-gl": "^1.8.1",
     "mysql": "^2.18.1",
+    "nvm": "0.0.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "rxjs": "~6.4.0",
