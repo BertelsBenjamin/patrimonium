@@ -16,5 +16,13 @@ export class UsersService {
     return this.http.get<User[]>(`${this.url}users/filter/${input}`);
   }
 
+  deleteTechnician(id) {
+    return this.http.delete(`${this.url}users/technician/delete/${id}`);
+  }
+
+  getRoles() {
+    return this.http.get(`${this.url}roles`);
+  }
+
   constructor(private http: HttpClient) {}
 }

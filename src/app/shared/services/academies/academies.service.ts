@@ -44,4 +44,8 @@ export class AcademiesService {
       .get<Academy>(`${this.url}academies/${id}`)
       .pipe(tap(result => console.log("TECH_SERVICE: findAcademy", result)));
   }
+
+  deleteAcademy(id: number) {
+    return this.http.delete(`${this.url}academies/delete/${id}`);
+  }
 }

@@ -8,7 +8,8 @@ const mysql = require('mysql');
 const urlencode = bodyParser.urlencoded({
   extended: true
 });
-const bcrypt = require('bcrypt');
+const cors = require('cors')
+//const bcrypt = require('bcrypt');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -58,6 +59,7 @@ function queryToDatabase(query, req, res) {
 /* HEADER SETTINGS */
 
 app.use(function (req, res, next) {
+  cors();
   express.json();
   bodyParser.json();
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -69,6 +71,8 @@ app.use(function (req, res, next) {
   res.setHeader('Cache-Control', 'no-cache');
   next();
 });
+
+app.options('*', cors())
 
 /* CONNECT TO DATABASE */
 connect();
@@ -86,6 +90,11 @@ JOIN departments ON users.user_department_id = departments.department_id
 JOIN user_functions ON users.user_user_function_id = user_functions.user_function_id
 JOIN levels ON users.user_level_id = levels.level_id
 JOIN provinces ON users.user_province_id = provinces.province_id`, req, res)
+})
+
+// DELETE TECHNICIAN
+app.delete('/users/technician/delete/:userId', urlencode, (req, res) => {
+  queryToDatabase(`DELETE FROM users WHERE user_id = '${req.params.userId}'`, req, res)
 })
 
 // FILTER USERS ON INPUT
@@ -106,11 +115,14 @@ OR levels.level_description LIKE "%${req.params.input}%"
 OR user_email LIKE "%${req.params.input}%"
 OR user_mobile LIKE "%${req.params.input}%"
 OR provinces.province_name LIKE "%${req.params.input}%"
-ORDER BY user_username
-`, req, res)
+ORDER BY user_username`, req, res)
 })
 
-app.post('/signup', bodyParser.json(), async (req, res) => {
+app.get('/roles', bodyParser.json(), (req, res) => {
+  queryToDatabase('SELECT * FROM user_roles', req, res)
+})
+
+/* app.post('/signup', bodyParser.json(), async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     console.log(hashedPassword)
@@ -123,7 +135,7 @@ app.post('/signup', bodyParser.json(), async (req, res) => {
   } catch {
     res.status(500).send('Something went wrong!')
   }
-});
+}); */
 
 app.post('/login', bodyParser.json(), async (req, res) => {
   const query = `
@@ -186,6 +198,10 @@ app.get('/academies/filter/hq/:hq', urlencode, function (req, res) {
 // FILTER ACADEMIES BY TECHNICIAN'S INPUT AND HQ
 app.get('/academies/filter/hq/:hq/input/:input', urlencode, function (req, res) {
   queryToDatabase(`SELECT academies.academy_id, academies.academy_name, academies.academy_headquarter, academies.academy_street, academies.academy_house_number, academies.academy_phone, academies.academy_fax, places.place_name AS academy_place_name, directors.director_last_name AS academy_director_last_name, directors.director_first_name AS academy_director_first_name, directors.director_email AS academy_director_email, homepages.homepage_url AS academy_homepage_url, educational_nets.educational_net_type AS academy_educational_net_type FROM academies JOIN places ON academies.academy_place_id = places.place_id JOIN directors ON academies.academy_director_id = directors.director_id JOIN homepages ON academies.academy_homepage_id = homepages.homepage_id JOIN educational_nets ON academies.academy_net_id = educational_nets.educational_net_id WHERE academies.academy_id LIKE "%${req.params.input}%" OR academies.academy_name LIKE "%${req.params.input}%" OR academies.academy_street LIKE "%${req.params.input}%" OR academies.academy_house_number LIKE "%${req.params.input}%" OR academies.academy_phone LIKE "%${req.params.input}%" OR academies.academy_fax LIKE "%${req.params.input}%" OR places.place_name LIKE "%${req.params.input}%" AND academies.academy_headquarter = ${req.params.hq} ORDER BY academy_place_name LIMIT 9`, req, res)
+})
+// DELETE ACADEMY
+app.delete('/academies/delete/:academyID', urlencode, (req, res) => {
+  queryToDatabase(`DELETE FROM academies WHERE academy_id = ${req.params.academyID}`, req, res)
 })
 
 

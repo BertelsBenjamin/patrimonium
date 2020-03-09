@@ -5,6 +5,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { RoutingModule } from "./routing/routing.module";
 import { Routes, RouterModule } from "@angular/router";
 import { ReactiveFormsModule } from "@angular/forms";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
+import { FormsModule } from "@angular/forms";
 
 // COMPONENTS
 import { AppComponent } from "./app.component";
@@ -67,7 +70,10 @@ const routes: Routes = [
     HttpClientModule,
     RoutingModule,
     RouterModule.forRoot(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    NgbModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [AcademiesService, LoginService],
   bootstrap: [AppComponent]

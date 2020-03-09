@@ -123,6 +123,7 @@
         <th scope="col">Place</th>
         <th scope="col">HQ?</th>
         <th scope="col">More</th>
+        <th scope="col">Delete</th>
       </tr>
     </thead>
     <tbody id="allAcademies" class="border">
@@ -209,6 +210,11 @@
               </div>
             </div>
           </div>
+        </td>
+        <td>
+          <button type="button" class="btn btn-link btn-sm" (click)=deleteAcademy(academy.academy_id)>
+            <i class="fas fa-trash-alt" style="color: red;"></i>
+          </button>
         </td>
       </tr>
     </tbody>

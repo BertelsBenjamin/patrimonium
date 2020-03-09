@@ -3,6 +3,7 @@ import { LoginService } from "../shared/services/login/login.service";
 import { AcademiesService } from "../shared/services/academies/academies.service";
 import { Academy } from "../shared/models/academy.model";
 import { FormControl } from "@angular/forms";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-dispatcher",
@@ -65,6 +66,26 @@ export class DispatcherComponent implements OnInit {
 
   addAcademy() {
     console.log("This function doesn't work yet.");
+  }
+
+  deleteAcademy(id) {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete!"
+    }).then(result => {
+      if (result.value) {
+        this.AcademiesService.deleteAcademy(id).subscribe(result => {
+          console.log("Deleted!"), this.AcademiesService.getAllAcademies;
+        });
+        Swal.fire("Deleted!", "Academy has been deleted.", "success");
+        this.getAllAcademies();
+      }
+    });
   }
 
   ngOnInit() {
