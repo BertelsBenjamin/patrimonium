@@ -1,6 +1,6 @@
 {
     "version": 3,
-    "mappings": "",
+    "mappings": "AAAA,AAAA,iBAAiB,CAAC;EAChB,KAAK,EAAE,KAAK;CACb",
     "sources": [
         "disp-technicians.component.scss"
     ],

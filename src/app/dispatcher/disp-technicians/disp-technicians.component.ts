@@ -18,27 +18,51 @@ import Swal from "sweetalert2";
   styleUrls: ["./disp-technicians.component.scss"]
 })
 export class DispTechniciansComponent implements OnInit {
-  model: any;
+  constructor(
+    public LoginService: LoginService,
+    public UsersService: UsersService,
+    public AcademiesService: AcademiesService
+  ) {}
+
+  // VARIABLES
+  /* USERS */
   user = this.LoginService.user;
   users$: Observable<any>;
   users = [];
   technicians = [];
+
+  /* ROLES */
+  new_tech_role: any;
   roles$: Observable<any>;
   roles = [];
+  roleValues = [];
 
-  @ViewChild("instance", { static: true }) instance: NgbTypeahead;
-  focus$ = new Subject<string>();
-  click$ = new Subject<string>();
+  /* DEPARTMENTS */
+  new_tech_department: any;
+  departments$: Observable<any>;
+  departments = [];
+  departmentValues = [];
 
-  search = (text$: Observable<string>) => {
+  /* PROVINCES */
+  new_tech_province: any;
+  provinces$: Observable<any>;
+  provinces = [];
+  provinceValues = [];
+
+  // DECORATORS
+  @ViewChild("role", { static: true }) instance_role: NgbTypeahead;
+  focus_role$ = new Subject<string>();
+  click_role$ = new Subject<string>();
+
+  search_role = (text$: Observable<string>) => {
     const debouncedText$ = text$.pipe(
       debounceTime(200),
       distinctUntilChanged()
     );
-    const clicksWithClosedPopup$ = this.click$.pipe(
-      filter(() => !this.instance.isPopupOpen())
+    const clicksWithClosedPopup$ = this.click_role$.pipe(
+      filter(() => !this.instance_role.isPopupOpen())
     );
-    const inputFocus$ = this.focus$;
+    const inputFocus$ = this.focus_role$;
 
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map(term =>
@@ -52,11 +76,57 @@ export class DispTechniciansComponent implements OnInit {
     );
   };
 
-  constructor(
-    public LoginService: LoginService,
-    public UsersService: UsersService,
-    public AcademiesService: AcademiesService
-  ) {}
+  @ViewChild("department", { static: true }) instance_department: NgbTypeahead;
+  focus_department$ = new Subject<string>();
+  click_department$ = new Subject<string>();
+
+  search_department = (text$: Observable<string>) => {
+    const debouncedText$ = text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged()
+    );
+    const clicksWithClosedPopup$ = this.click_department$.pipe(
+      filter(() => !this.instance_department.isPopupOpen())
+    );
+    const inputFocus$ = this.focus_department$;
+
+    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+      map(term =>
+        (term === ""
+          ? this.departments
+          : this.departments.filter(
+              v => v.toLowerCase().indexOf(term.toLowerCase()) > -1
+            )
+        ).slice(0, 10)
+      )
+    );
+  };
+
+  @ViewChild("province", { static: true }) instance_province: NgbTypeahead;
+  focus_province$ = new Subject<string>();
+  click_province$ = new Subject<string>();
+
+  search_province = (text$: Observable<string>) => {
+    const debouncedText$ = text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged()
+    );
+    const clicksWithClosedPopup$ = this.click_province$.pipe(
+      filter(() => !this.instance_province.isPopupOpen())
+    );
+    const inputFocus$ = this.focus_province$;
+
+    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+      map(term =>
+        (term === ""
+          ? this.provinces
+          : this.provinces.filter(
+              v => v.toLowerCase().indexOf(term.toLowerCase()) > -1
+            )
+        ).slice(0, 10)
+      )
+    );
+  };
 
   // FUNCTIONS
   getUsersAndTechnicians() {
@@ -128,9 +198,26 @@ export class DispTechniciansComponent implements OnInit {
       (this.roles = result), console.log("DISP_TECH_roles:", this.roles);
     });
   }
+  getDepartments() {
+    this.departments$ = this.UsersService.getDepartments();
+    this.departments$.subscribe(result => {
+      (this.departments = result),
+        console.log("DISP_TECH_departments:", this.departments);
+    });
+  }
+
+  getProvinces() {
+    this.provinces$ = this.UsersService.getProvinces();
+    this.provinces$.subscribe(result => {
+      (this.provinces = result),
+        console.log("DISP_TECH_provinces:", this.provinces);
+    });
+  }
 
   ngOnInit() {
     this.getUsersAndTechnicians();
     this.getRoles();
+    this.getDepartments();
+    this.getProvinces();
   }
 }

@@ -122,6 +122,14 @@ app.get('/roles', bodyParser.json(), (req, res) => {
   queryToDatabase('SELECT * FROM user_roles', req, res)
 })
 
+app.get('/departments', bodyParser.json(), (req, res) => {
+  queryToDatabase('SELECT * FROM departments', req, res)
+})
+
+app.get('/provinces', bodyParser.json(), (req, res) => {
+  queryToDatabase('SELECT * FROM provinces', req, res)
+})
+
 /* app.post('/signup', bodyParser.json(), async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)

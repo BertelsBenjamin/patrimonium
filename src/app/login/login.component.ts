@@ -35,21 +35,6 @@ export class LoginComponent implements OnInit {
         throw err;
       }
     }
-
-    /* this.LoginService.login(userName, userPassword).subscribe({
-      next(response) {
-        this.currentUser = response;
-        console.log(this.currentUser.user_role);
-        this.router.navigate([`/${this.currentUser.user_role}`]);
-      },
-      error(err) {
-        console.log("Error:", err);
-        this.loginError = err;
-      },
-      complete() {
-        console.log("Request completed.");
-      }
-    }); */
   }
 
   ngOnInit() {}

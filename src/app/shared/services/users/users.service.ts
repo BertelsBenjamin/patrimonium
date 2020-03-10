@@ -24,5 +24,13 @@ export class UsersService {
     return this.http.get(`${this.url}roles`);
   }
 
+  getDepartments() {
+    return this.http.get(`${this.url}departments`);
+  }
+
+  getProvinces() {
+    return this.http.get(`${this.url}provinces`);
+  }
+
   constructor(private http: HttpClient) {}
 }
