@@ -68,9 +68,9 @@ export class DispTechniciansComponent implements OnInit {
       map(term =>
         (term === ""
           ? this.roles
-          : this.roles.filter(
-              v => v.toLowerCase().indexOf(term.toLowerCase()) > -1
-            )
+          : this.roles.filter(v => {
+              v.toLowerCase().indexOf(term.toLowerCase()) > -1;
+            })
         ).slice(0, 10)
       )
     );
@@ -195,13 +195,19 @@ export class DispTechniciansComponent implements OnInit {
   getRoles() {
     this.roles$ = this.UsersService.getRoles();
     this.roles$.subscribe(result => {
-      (this.roles = result), console.log("DISP_TECH_roles:", this.roles);
+      result.forEach(e => {
+        this.roles.push(e.role_role);
+      }),
+        console.log("DISP_TECH_roles:", this.roles);
     });
   }
+
   getDepartments() {
     this.departments$ = this.UsersService.getDepartments();
     this.departments$.subscribe(result => {
-      (this.departments = result),
+      result.forEach(e => {
+        this.departments.push(e.department_name);
+      }),
         console.log("DISP_TECH_departments:", this.departments);
     });
   }
@@ -209,7 +215,9 @@ export class DispTechniciansComponent implements OnInit {
   getProvinces() {
     this.provinces$ = this.UsersService.getProvinces();
     this.provinces$.subscribe(result => {
-      (this.provinces = result),
+      result.forEach(e => {
+        this.provinces.push(e.province_name);
+      }),
         console.log("DISP_TECH_provinces:", this.provinces);
     });
   }
