@@ -1,4 +1,8 @@
 .input-group-text {
   width: 100px;
 }
+
+.form-control {
+  width: 100%;
+}
 /*# sourceMappingURL=disp-technicians.component.css.map */

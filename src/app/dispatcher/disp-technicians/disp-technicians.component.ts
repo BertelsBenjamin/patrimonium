@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { User } from "../../shared/models/user.model";
 import { LoginService } from "src/app/shared/services/login/login.service";
 import { UsersService } from "src/app/shared/services/users/users.service";
 import { AcademiesService } from "src/app/shared/services/academies/academies.service";
@@ -30,12 +31,13 @@ export class DispTechniciansComponent implements OnInit {
   users$: Observable<any>;
   users = [];
   technicians = [];
+  newUser: any;
 
   /* ROLES */
   new_tech_role: any;
   roles$: Observable<any>;
   roles = [];
-  roleValues = [];
+  roleIDsd = [];
 
   /* DEPARTMENTS */
   new_tech_department: any;
@@ -168,8 +170,23 @@ export class DispTechniciansComponent implements OnInit {
     }
   }
 
-  addNewTechnician() {
+  addNewTechnician(firstName, lastName) {
     console.log("This function doesn't work yet.");
+    console.log(this.new_tech_role);
+    this.newUser = {
+      username: "",
+      country_code: "",
+      first_name: firstName,
+      last_name: lastName,
+      department_id: "",
+      level_id: "",
+      email: "",
+      mobile: "",
+      province_id: "",
+      birth_day: "",
+      password: "test",
+      role: ""
+    };
   }
 
   deleteTechnician(id) {
@@ -195,8 +212,10 @@ export class DispTechniciansComponent implements OnInit {
   getRoles() {
     this.roles$ = this.UsersService.getRoles();
     this.roles$.subscribe(result => {
-      result.forEach(e => {
-        this.roles.push(e.role_role);
+      result.forEach(role => {
+        this.roles.push(role.role_role);
+        for (let key in role) {
+        }
       }),
         console.log("DISP_TECH_roles:", this.roles);
     });
@@ -205,8 +224,8 @@ export class DispTechniciansComponent implements OnInit {
   getDepartments() {
     this.departments$ = this.UsersService.getDepartments();
     this.departments$.subscribe(result => {
-      result.forEach(e => {
-        this.departments.push(e.department_name);
+      result.forEach(department => {
+        this.departments.push(department.department_name);
       }),
         console.log("DISP_TECH_departments:", this.departments);
     });
@@ -215,8 +234,8 @@ export class DispTechniciansComponent implements OnInit {
   getProvinces() {
     this.provinces$ = this.UsersService.getProvinces();
     this.provinces$.subscribe(result => {
-      result.forEach(e => {
-        this.provinces.push(e.province_name);
+      result.forEach(province => {
+        this.provinces.push(province.province_name);
       }),
         console.log("DISP_TECH_provinces:", this.provinces);
     });

@@ -10,7 +10,6 @@ export class User {
     public level_id: any,
     public email: string,
     public mobile: string,
-    public skype: boolean,
     public province_id: any,
     public birth_day: string,
     public password: string,
