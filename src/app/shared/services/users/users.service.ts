@@ -32,5 +32,9 @@ export class UsersService {
     return this.http.get(`${this.url}provinces`);
   }
 
+  getLevels() {
+    return this.http.get(`${this.url}levels`);
+  }
+
   constructor(private http: HttpClient) {}
 }

@@ -112,7 +112,7 @@
                           <div class="form-group">
                             <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="label_role">Department</span>
+                                <span class="input-group-text" id="label_department">Department</span>
                               </div>
                               <input id="department-focus" type="text" class="form-control" placeholder="Department"
                                 [(ngModel)]="new_tech_department" [ngbTypeahead]="search_department"
@@ -126,17 +126,17 @@
                           <!--FORM RIGHT COLUMN-->
                         </div>
                         <div class="col-6">
+                          <!-- START: LEVEL -->
                           <div class="form-group">
-                            <!--START: LEVEL-->
                             <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <label class="input-group-text" for="select_level">Level</label>
+                                <span class="input-group-text" id="label_level">Level</span>
                               </div>
-                              <select class="custom-select" id="select_level" #new_tech_level ngModel name="level">
-                                <option #option_junior value="junior" selected>Junior</option>
-                                <option #option_senior value="senior">Senior</option>
-                                <option #option_expert value="expert">Expert</option>
-                              </select>
+                              <input id="level-focus" type="text" class="form-control" placeholder="Level"
+                                [(ngModel)]="new_tech_level" [ngbTypeahead]="search_level"
+                                (focus)="focus_level$.next($event.target.value)"
+                                (click)="click_level$.next($event.target.value)" #level="ngbTypeahead" ngModel
+                                name="level" />
                             </div>
                           </div>
                           <!--END: LEVEL-->
@@ -155,7 +155,7 @@
                           <div class="form-group">
                             <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="label_role">Province</span>
+                                <span class="input-group-text" id="label_province">Province</span>
                               </div>
                               <input id="province-focus" type="text" class="form-control" placeholder="Province"
                                 [(ngModel)]="new_tech_province" [ngbTypeahead]="search_province"
@@ -198,7 +198,7 @@
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-success" data-dismiss="modal"
-                  (click)='addNewTechnician(new_tech_first_name.value, new_tech_last_name.value)'>Add</button>
+                  (click)='addNewTechnician(addTechnicianForm)'>Add</button>
               </div>
               <!--END: BUTTON SUBMIT TECHNICIAN:CLOSE-->
             </div>

@@ -55,7 +55,6 @@ function queryToDatabase(query, req, res) {
   //disconnect();
 }
 
-
 /* HEADER SETTINGS */
 
 app.use(function (req, res, next) {
@@ -128,6 +127,10 @@ app.get('/departments', bodyParser.json(), (req, res) => {
 
 app.get('/provinces', bodyParser.json(), (req, res) => {
   queryToDatabase('SELECT * FROM provinces', req, res)
+})
+
+app.get('/levels', bodyParser.json(), (req, res) => {
+  queryToDatabase('SELECT * FROM levels', req, res);
 })
 
 /* app.post('/signup', bodyParser.json(), async (req, res) => {

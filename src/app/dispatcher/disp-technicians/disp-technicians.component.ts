@@ -12,6 +12,7 @@ import {
 } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import Swal from "sweetalert2";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: "app-disp-technicians",
@@ -26,6 +27,9 @@ export class DispTechniciansComponent implements OnInit {
   ) {}
 
   // VARIABLES
+  /* FORMS */
+  // ADD TECHNICIAN FORM
+  addTechnicianForm = new FormsModule();
   /* USERS */
   user = this.LoginService.user;
   users$: Observable<any>;
@@ -36,20 +40,30 @@ export class DispTechniciansComponent implements OnInit {
   /* ROLES */
   new_tech_role: any;
   roles$: Observable<any>;
-  roles = [];
+  roles;
+  rolesArray = [];
   roleIDsd = [];
 
   /* DEPARTMENTS */
   new_tech_department: any;
   departments$: Observable<any>;
-  departments = [];
+  departments;
+  departmentsArray = [];
   departmentValues = [];
 
   /* PROVINCES */
   new_tech_province: any;
   provinces$: Observable<any>;
-  provinces = [];
+  provinces;
+  provincesArray = [];
   provinceValues = [];
+
+  /* LEVELS */
+  new_tech_level: any;
+  levels$: Observable<any>;
+  levels;
+  levelsArray = [];
+  levelValues = [];
 
   // DECORATORS
   @ViewChild("role", { static: true }) instance_role: NgbTypeahead;
@@ -69,8 +83,8 @@ export class DispTechniciansComponent implements OnInit {
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map(term =>
         (term === ""
-          ? this.roles
-          : this.roles.filter(v => {
+          ? this.rolesArray
+          : this.rolesArray.filter(v => {
               v.toLowerCase().indexOf(term.toLowerCase()) > -1;
             })
         ).slice(0, 10)
@@ -95,8 +109,8 @@ export class DispTechniciansComponent implements OnInit {
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map(term =>
         (term === ""
-          ? this.departments
-          : this.departments.filter(
+          ? this.departmentsArray
+          : this.departmentsArray.filter(
               v => v.toLowerCase().indexOf(term.toLowerCase()) > -1
             )
         ).slice(0, 10)
@@ -121,8 +135,34 @@ export class DispTechniciansComponent implements OnInit {
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
       map(term =>
         (term === ""
-          ? this.provinces
-          : this.provinces.filter(
+          ? this.provincesArray
+          : this.provincesArray.filter(
+              v => v.toLowerCase().indexOf(term.toLowerCase()) > -1
+            )
+        ).slice(0, 10)
+      )
+    );
+  };
+
+  @ViewChild("level", { static: true }) instance_level: NgbTypeahead;
+  focus_level$ = new Subject<string>();
+  click_level$ = new Subject<string>();
+
+  search_level = (text$: Observable<string>) => {
+    const debouncedText$ = text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged()
+    );
+    const clicksWithClosedPopup$ = this.click_level$.pipe(
+      filter(() => !this.instance_level.isPopupOpen())
+    );
+    const inputFocus$ = this.focus_level$;
+
+    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+      map(term =>
+        (term === ""
+          ? this.levelsArray
+          : this.levelsArray.filter(
               v => v.toLowerCase().indexOf(term.toLowerCase()) > -1
             )
         ).slice(0, 10)
@@ -170,23 +210,78 @@ export class DispTechniciansComponent implements OnInit {
     }
   }
 
-  addNewTechnician(firstName, lastName) {
-    console.log("This function doesn't work yet.");
-    console.log(this.new_tech_role);
+  addNewTechnician(form) {
     this.newUser = {
-      username: "",
-      country_code: "",
-      first_name: firstName,
-      last_name: lastName,
+      username: `${form.controls.first_name.value} ${form.controls.last_name.value}`,
+      country_code: `${form.controls.country.value}`,
+      first_name: `${form.controls.first_name.value}`,
+      last_name: `${form.controls.last_name.value}`,
       department_id: "",
       level_id: "",
-      email: "",
-      mobile: "",
-      province_id: "",
-      birth_day: "",
+      email: `${form.controls.email.value}`,
+      mobile: `${form.controls.phone.value}`,
+      province_id: ``,
+      birth_day: `${form.controls.birthday.value}`,
       password: "test",
-      role: ""
+      role_id: ""
     };
+    console.log("This function doesn't work yet.");
+    console.log(this.new_tech_role);
+    console.log("Form:", form);
+
+    //CHECK FOR MATCHING ROLE
+    this.roles.forEach(role => {
+      form._directives.forEach(directive => {
+        if (role.role_role == directive.value) {
+          console.log(role.role_role, directive.value, role.role_id);
+          this.newUser.role_id = role.role_id;
+        }
+      });
+    });
+
+    //CHECK FOR MATCHING DEPARTMENT
+    this.departments.forEach(department => {
+      form._directives.forEach(directive => {
+        if (department.department_name == directive.value) {
+          console.log(
+            department.department_name,
+            directive.value,
+            department.department_id
+          );
+          this.newUser.department_id = department.department_id;
+        }
+      });
+    });
+
+    //CHECK FOR MATCHING PROVINCE
+    this.provinces.forEach(province => {
+      form._directives.forEach(directive => {
+        if (province.province_name == directive.value) {
+          console.log(
+            province.province_name,
+            directive.value,
+            province.province_name
+          );
+          this.newUser.province_id = province.province_id;
+        }
+      });
+    });
+    console.log(this.newUser);
+
+    //CHECK FOR MATCHING LEVELS
+    this.levels.forEach(level => {
+      form._directives.forEach(directive => {
+        if (level.level_description == directive.value) {
+          console.log(
+            level.level_description,
+            directive.value,
+            level.level_description
+          );
+          this.newUser.level_id = level.level_description;
+        }
+      });
+    });
+    console.log(this.newUser);
   }
 
   deleteTechnician(id) {
@@ -212,8 +307,10 @@ export class DispTechniciansComponent implements OnInit {
   getRoles() {
     this.roles$ = this.UsersService.getRoles();
     this.roles$.subscribe(result => {
+      this.roles = result;
+      console.log("Roles:", result);
       result.forEach(role => {
-        this.roles.push(role.role_role);
+        this.rolesArray.push(role.role_role);
         for (let key in role) {
         }
       }),
@@ -224,8 +321,9 @@ export class DispTechniciansComponent implements OnInit {
   getDepartments() {
     this.departments$ = this.UsersService.getDepartments();
     this.departments$.subscribe(result => {
-      result.forEach(department => {
-        this.departments.push(department.department_name);
+      this.departments = result;
+      this.departments.forEach(department => {
+        this.departmentsArray.push(department.department_name);
       }),
         console.log("DISP_TECH_departments:", this.departments);
     });
@@ -234,10 +332,22 @@ export class DispTechniciansComponent implements OnInit {
   getProvinces() {
     this.provinces$ = this.UsersService.getProvinces();
     this.provinces$.subscribe(result => {
-      result.forEach(province => {
-        this.provinces.push(province.province_name);
+      this.provinces = result;
+      this.provinces.forEach(province => {
+        this.provincesArray.push(province.province_name);
       }),
         console.log("DISP_TECH_provinces:", this.provinces);
+    });
+  }
+
+  getLevels() {
+    this.levels$ = this.UsersService.getLevels();
+    this.levels$.subscribe(result => {
+      this.levels = result;
+      this.levels.forEach(level => {
+        this.levelsArray.push(level.level_description);
+      }),
+        console.log("DISP_TECH_levels:", this.levels);
     });
   }
 
@@ -246,5 +356,6 @@ export class DispTechniciansComponent implements OnInit {
     this.getRoles();
     this.getDepartments();
     this.getProvinces();
+    this.getLevels();
   }
 }
