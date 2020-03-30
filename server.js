@@ -82,13 +82,20 @@ connect();
 
 // GET ALL USERS
 app.get('/users', bodyParser.json(), (req, res) => {
-  queryToDatabase(`SELECT user_id, user_username, user_password, user_roles.role_role AS 'user_role', updated_at AS 'user_updated_at', created_at AS 'user_created_at', user_country_code, user_last_name, user_first_name, departments.department_name AS 'user_department', user_functions.user_function_description AS 'user_user_function', levels.level_description AS 'user_level', user_email, user_mobile, provinces.province_name AS 'user_province_name', user_birth_day
+  queryToDatabase(`SELECT user_id, user_username, user_password, user_roles.role_role AS 'user_role', updated_at AS 'user_updated_at', created_at AS 'user_created_at', user_country_id, user_last_name, user_first_name, departments.department_name AS 'user_department', user_functions.user_function_description AS 'user_user_function', levels.level_description AS 'user_level', user_email, user_mobile, provinces.province_name AS 'user_province_name', user_birth_day
 FROM users
 JOIN user_roles ON users.user_role_id = user_roles.role_id
 JOIN departments ON users.user_department_id = departments.department_id
 JOIN user_functions ON users.user_user_function_id = user_functions.user_function_id
 JOIN levels ON users.user_level_id = levels.level_id
 JOIN provinces ON users.user_province_id = provinces.province_id`, req, res)
+})
+
+// ADD TECHNICIAN
+app.post('/users/technician/post', bodyParser.json(), (req, res) => {
+  console.log(req.body)
+  queryToDatabase(`INSERT INTO users (user_username, user_password, user_role_id, user_country_id, user_last_name, user_first_name, user_department_id, user_user_function_id, user_level_id, user_email, user_mobile, user_province_id, user_birth_day)
+  VALUES ("${req.body.user_username}", "${req.body.user_password}", ${req.body.user_role_id}, ${req.body.user_country_id}, "${req.body.user_last_name}", "${req.body.user_first_name}", ${req.body.user_department_id}, 1, ${req.body.user_level_id}, "${req.body.user_email}", "${req.body.user_mobile}", ${req.body.user_province_id}, "${req.body.user_birth_day}")`, req, res)
 })
 
 // DELETE TECHNICIAN
@@ -98,7 +105,7 @@ app.delete('/users/technician/delete/:userId', urlencode, (req, res) => {
 
 // FILTER USERS ON INPUT
 app.get('/users/filter/:input', bodyParser.json(), (req, res) => {
-  queryToDatabase(`SELECT user_id, user_username, user_password, user_roles.role_role AS 'user_role', updated_at AS 'user_updated_at', created_at AS 'user_created_at', user_country_code, user_last_name, user_first_name, departments.department_name AS 'user_department', user_functions.user_function_description AS 'user_user_function', levels.level_description AS 'user_level', user_email, user_mobile, provinces.province_name AS 'user_province_name', user_birth_day
+  queryToDatabase(`SELECT user_id, user_username, user_password, user_roles.role_role AS 'user_role', updated_at AS 'user_updated_at', created_at AS 'user_created_at', user_country_id, user_last_name, user_first_name, departments.department_name AS 'user_department', user_functions.user_function_description AS 'user_user_function', levels.level_description AS 'user_level', user_email, user_mobile, provinces.province_name AS 'user_province_name', user_birth_day
 FROM users
 JOIN user_roles ON users.user_role_id = user_roles.role_id
 JOIN departments ON users.user_department_id = departments.department_id
@@ -108,7 +115,7 @@ JOIN provinces ON users.user_province_id = provinces.province_id
 WHERE user_id LIKE "%${req.params.input}%"
 OR user_username LIKE "%${req.params.input}%"
 OR user_roles.role_role LIKE "%${req.params.input}%"
-OR user_country_code LIKE "%${req.params.input}%"
+OR user_country_id LIKE "%${req.params.input}%"
 OR departments.department_name LIKE "%${req.params.input}%"
 OR levels.level_description LIKE "%${req.params.input}%"
 OR user_email LIKE "%${req.params.input}%"
@@ -127,6 +134,10 @@ app.get('/departments', bodyParser.json(), (req, res) => {
 
 app.get('/provinces', bodyParser.json(), (req, res) => {
   queryToDatabase('SELECT * FROM provinces', req, res)
+})
+
+app.get('/countries', bodyParser.json(), (req, res) => {
+  queryToDatabase('SELECT * FROM countries', req, res);
 })
 
 app.get('/levels', bodyParser.json(), (req, res) => {
@@ -150,7 +161,7 @@ app.get('/levels', bodyParser.json(), (req, res) => {
 
 app.post('/login', bodyParser.json(), async (req, res) => {
   const query = `
-  SELECT users.user_id, users.user_password, users.user_username, users.updated_at, users.created_at, users.user_country_code, users.user_last_name, users.user_first_name, users.user_email, users.user_mobile, users.user_birth_day, provinces.province_name AS user_province_name, levels.level_description AS user_level, user_functions.user_function_description AS user_function_description, departments.department_name AS user_department, user_roles.role_role AS user_role
+  SELECT users.user_id, users.user_password, users.user_username, users.updated_at, users.created_at, users.user_country_id, users.user_last_name, users.user_first_name, users.user_email, users.user_mobile, users.user_birth_day, provinces.province_name AS user_province_name, levels.level_description AS user_level, user_functions.user_function_description AS user_function_description, departments.department_name AS user_department, user_roles.role_role AS user_role
   FROM users
   JOIN user_roles ON users.user_role_id = user_roles.role_id
   JOIN departments ON users.user_department_id = departments.department_id

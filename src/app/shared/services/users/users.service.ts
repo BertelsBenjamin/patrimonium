@@ -12,6 +12,13 @@ export class UsersService {
     return this.http.get<User[]>(`${this.url}users`);
   }
 
+  addTechnician(technician: User) {
+    const headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this.http.post(`${this.url}users/technician/post`, technician, {
+      headers: headers
+    });
+  }
+
   filterTechniciansOnDispInput(input) {
     return this.http.get<User[]>(`${this.url}users/filter/${input}`);
   }
@@ -30,6 +37,10 @@ export class UsersService {
 
   getProvinces() {
     return this.http.get(`${this.url}provinces`);
+  }
+
+  getCountries() {
+    return this.http.get(`${this.url}countries`);
   }
 
   getLevels() {

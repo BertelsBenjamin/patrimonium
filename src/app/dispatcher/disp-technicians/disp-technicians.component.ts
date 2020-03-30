@@ -58,6 +58,13 @@ export class DispTechniciansComponent implements OnInit {
   provincesArray = [];
   provinceValues = [];
 
+  /* COUNTRIES */
+  new_tech_country: any;
+  countries$: Observable<any>;
+  countries;
+  countriesArray = [];
+  countriesValues = [];
+
   /* LEVELS */
   new_tech_level: any;
   levels$: Observable<any>;
@@ -144,6 +151,32 @@ export class DispTechniciansComponent implements OnInit {
     );
   };
 
+  @ViewChild("country", { static: true }) instance_country: NgbTypeahead;
+  focus_country$ = new Subject<string>();
+  click_country$ = new Subject<string>();
+
+  search_country = (text$: Observable<string>) => {
+    const debouncedText$ = text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged()
+    );
+    const clicksWithClosedPopup$ = this.click_country$.pipe(
+      filter(() => !this.instance_country.isPopupOpen())
+    );
+    const inputFocus$ = this.focus_country$;
+
+    return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+      map(term =>
+        (term === ""
+          ? this.countriesArray
+          : this.countriesArray.filter(
+              v => v.toLowerCase().indexOf(term.toLowerCase()) > -1
+            )
+        ).slice(0, 10)
+      )
+    );
+  };
+
   @ViewChild("level", { static: true }) instance_level: NgbTypeahead;
   focus_level$ = new Subject<string>();
   click_level$ = new Subject<string>();
@@ -181,15 +214,12 @@ export class DispTechniciansComponent implements OnInit {
           if (e.user_user_function == "Technician") {
             this.technicians.push(e);
           }
-        }),
-        console.log("DISP_TECH_users:", this.users),
-        console.log("DISP_TECH_technicians:", this.technicians)
+        })
       )
     );
   }
 
   filterTechniciansOnDispInput(input) {
-    console.log("This function doesn't work yet.");
     if (input == "") {
       this.getUsersAndTechnicians();
     } else {
@@ -202,9 +232,7 @@ export class DispTechniciansComponent implements OnInit {
             if (e.user_user_function == "Technician") {
               this.technicians.push(e);
             }
-          }),
-          console.log("DISP_TECH_users(filtered):", this.users),
-          console.log("DISP_TECH_technicians(filtered):", this.technicians)
+          })
         )
       );
     }
@@ -212,29 +240,25 @@ export class DispTechniciansComponent implements OnInit {
 
   addNewTechnician(form) {
     this.newUser = {
-      username: `${form.controls.first_name.value} ${form.controls.last_name.value}`,
-      country_code: `${form.controls.country.value}`,
-      first_name: `${form.controls.first_name.value}`,
-      last_name: `${form.controls.last_name.value}`,
-      department_id: "",
-      level_id: "",
-      email: `${form.controls.email.value}`,
-      mobile: `${form.controls.phone.value}`,
-      province_id: ``,
-      birth_day: `${form.controls.birthday.value}`,
-      password: "test",
-      role_id: ""
+      user_username: `${form.controls.first_name.value} ${form.controls.last_name.value}`,
+      user_country_id: `${form.controls.country.value}`,
+      user_first_name: `${form.controls.first_name.value}`,
+      user_last_name: `${form.controls.last_name.value}`,
+      user_department_id: "",
+      user_level_id: "",
+      user_email: `${form.controls.email.value}`,
+      user_mobile: `${form.controls.phone.value}`,
+      user_province_id: ``,
+      user_birth_day: `${form.controls.birthday.value}`,
+      user_password: "test",
+      user_role_id: ""
     };
-    console.log("This function doesn't work yet.");
-    console.log(this.new_tech_role);
-    console.log("Form:", form);
 
     //CHECK FOR MATCHING ROLE
     this.roles.forEach(role => {
       form._directives.forEach(directive => {
         if (role.role_role == directive.value) {
-          console.log(role.role_role, directive.value, role.role_id);
-          this.newUser.role_id = role.role_id;
+          this.newUser.user_role_id = role.role_id;
         }
       });
     });
@@ -243,12 +267,7 @@ export class DispTechniciansComponent implements OnInit {
     this.departments.forEach(department => {
       form._directives.forEach(directive => {
         if (department.department_name == directive.value) {
-          console.log(
-            department.department_name,
-            directive.value,
-            department.department_id
-          );
-          this.newUser.department_id = department.department_id;
+          this.newUser.user_department_id = department.department_id;
         }
       });
     });
@@ -257,31 +276,36 @@ export class DispTechniciansComponent implements OnInit {
     this.provinces.forEach(province => {
       form._directives.forEach(directive => {
         if (province.province_name == directive.value) {
-          console.log(
-            province.province_name,
-            directive.value,
-            province.province_name
-          );
-          this.newUser.province_id = province.province_id;
+          this.newUser.user_province_id = province.province_id;
         }
       });
     });
-    console.log(this.newUser);
+
+    //CHECK FOR MATCHING COUNTRY
+    this.countries.forEach(country => {
+      console.log(country);
+      form._directives.forEach(directive => {
+        if (country.country_name == directive.value) {
+          this.newUser.user_country_id = country.country_id;
+        }
+      });
+    });
 
     //CHECK FOR MATCHING LEVELS
     this.levels.forEach(level => {
       form._directives.forEach(directive => {
         if (level.level_description == directive.value) {
-          console.log(
-            level.level_description,
-            directive.value,
-            level.level_description
-          );
-          this.newUser.level_id = level.level_description;
+          this.newUser.user_level_id = level.level_id;
         }
       });
     });
+
     console.log(this.newUser);
+
+    this.UsersService.addTechnician(this.newUser).subscribe((newUser: User) => {
+      console.log("NEW TECHNICIAN:", newUser);
+    });
+    this.getUsersAndTechnicians();
   }
 
   deleteTechnician(id) {
@@ -308,13 +332,11 @@ export class DispTechniciansComponent implements OnInit {
     this.roles$ = this.UsersService.getRoles();
     this.roles$.subscribe(result => {
       this.roles = result;
-      console.log("Roles:", result);
       result.forEach(role => {
         this.rolesArray.push(role.role_role);
         for (let key in role) {
         }
-      }),
-        console.log("DISP_TECH_roles:", this.roles);
+      });
     });
   }
 
@@ -335,8 +357,17 @@ export class DispTechniciansComponent implements OnInit {
       this.provinces = result;
       this.provinces.forEach(province => {
         this.provincesArray.push(province.province_name);
-      }),
-        console.log("DISP_TECH_provinces:", this.provinces);
+      });
+    });
+  }
+
+  getCountries() {
+    this.countries$ = this.UsersService.getCountries();
+    this.countries$.subscribe(result => {
+      this.countries = result;
+      this.countries.forEach(country => {
+        this.countriesArray.push(country.country_name);
+      });
     });
   }
 
@@ -346,8 +377,7 @@ export class DispTechniciansComponent implements OnInit {
       this.levels = result;
       this.levels.forEach(level => {
         this.levelsArray.push(level.level_description);
-      }),
-        console.log("DISP_TECH_levels:", this.levels);
+      });
     });
   }
 
@@ -356,6 +386,7 @@ export class DispTechniciansComponent implements OnInit {
     this.getRoles();
     this.getDepartments();
     this.getProvinces();
+    this.getCountries();
     this.getLevels();
   }
 }

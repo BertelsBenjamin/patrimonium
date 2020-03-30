@@ -98,13 +98,13 @@
                           <div class="form-group">
                             <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <label class="input-group-text" for="select_country_code">Country</label>
+                                <span class="input-group-text" id="label_country">Country</span>
                               </div>
-                              <select class="custom-select" id="select_country_code" ngModel name="country">
-                                <option value="">Choose country...</option>
-                                <option #option_B>België</option>
-                                <option #option_NL value="NL">Nederland</option>
-                              </select>
+                              <input id="country-focus" type="text" class="form-control" placeholder="Country"
+                                [(ngModel)]="new_tech_country" [ngbTypeahead]="search_country"
+                                (focus)="focus_country$.next($event.target.value)"
+                                (click)="click_country$.next($event.target.value)" #country="ngbTypeahead"
+                                name="country" />
                             </div>
                           </div>
                           <!--END: COUNTRY-->
