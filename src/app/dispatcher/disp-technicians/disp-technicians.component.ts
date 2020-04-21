@@ -214,9 +214,11 @@ export class DispTechniciansComponent implements OnInit {
           if (e.user_user_function == "Technician") {
             this.technicians.push(e);
           }
+          console.log(this.technicians);
         })
       )
     );
+    console.log(this.technicians);
   }
 
   filterTechniciansOnDispInput(input) {
@@ -283,7 +285,6 @@ export class DispTechniciansComponent implements OnInit {
 
     //CHECK FOR MATCHING COUNTRY
     this.countries.forEach(country => {
-      console.log(country);
       form._directives.forEach(directive => {
         if (country.country_name == directive.value) {
           this.newUser.user_country_id = country.country_id;
@@ -300,11 +301,10 @@ export class DispTechniciansComponent implements OnInit {
       });
     });
 
-    console.log(this.newUser);
-
     this.UsersService.addTechnician(this.newUser).subscribe((newUser: User) => {
       console.log("NEW TECHNICIAN:", newUser);
     });
+
     this.getUsersAndTechnicians();
   }
 

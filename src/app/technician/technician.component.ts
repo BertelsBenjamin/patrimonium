@@ -7,7 +7,7 @@ import { LoginService } from "../shared/services/login/login.service";
 @Component({
   selector: "app-technician",
   templateUrl: "./technician.component.html",
-  styleUrls: ["./technician.component.scss"]
+  styleUrls: ["./technician.component.scss"],
 })
 export class TechnicianComponent implements OnInit {
   academies: Academy[];
@@ -20,7 +20,7 @@ export class TechnicianComponent implements OnInit {
 
   getAllAcademies() {
     this.AcademiesService.getAllAcademies().subscribe(
-      result => (this.academies = result)
+      (result) => (this.academies = result)
     );
   }
 
@@ -29,29 +29,29 @@ export class TechnicianComponent implements OnInit {
     console.log(hq, input);
     if (hq == "0" && input == "") {
       this.AcademiesService.getAllAcademies().subscribe(
-        result => (this.academies = result)
+        (result) => (this.academies = result)
       );
     }
     if (hq == "0" && input !== "") {
       this.AcademiesService.filterAcademiesByInput(input).subscribe(
-        result => (this.academies = result)
+        (result) => (this.academies = result)
       );
     }
     if (hq == "1" && input == "") {
       this.AcademiesService.filterAcademiesByHQ(hq).subscribe(
-        result => (this.academies = result)
+        (result) => (this.academies = result)
       );
     }
     if (hq == "1" && input !== "") {
       this.AcademiesService.filterAcademiesByHQAndInput(hq, input).subscribe(
-        result => (this.academies = result)
+        (result) => (this.academies = result)
       );
     }
   }
 
   findAcademy(id: number) {
     this.AcademiesService.findAcademy(id).subscribe(
-      result => (this.academy = result)
+      (result) => (this.academy = result)
     );
   }
 

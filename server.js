@@ -1,5 +1,5 @@
-/* VARIABLES */
-
+/* CONFIG */
+// VARIABLES
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -22,20 +22,27 @@ const users = [];
 
 /* FUNCTIONS */
 
+// Connect to DB
 function connect() {
   connection.connect((err) => {
     if (err) {
       console.log(err);
-      console.log('Error connecting to Db');
+      console.log('Error connecting to DB');
       return;
     }
     console.log('Connected');
   });
 }
 
+// Disconnect from DB
 function disconnect() {
   connection.end((err) => {
-    // Terminat the connection
+    if (err) {
+      console.log(err);
+      console.log('Error disconnecting from DB');
+      return;
+    }
+    console.log('Disconnected')
   });
 }
 
@@ -64,7 +71,7 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
+  res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
 
   //Verwijder caching om de laatste data te ontvangen
   res.setHeader('Cache-Control', 'no-cache');
@@ -82,14 +89,16 @@ connect();
 
 // GET ALL USERS
 app.get('/users', bodyParser.json(), (req, res) => {
-  queryToDatabase(`SELECT user_id, user_username, user_password, user_roles.role_role AS 'user_role', updated_at AS 'user_updated_at', created_at AS 'user_created_at', user_country_id, user_last_name, user_first_name, departments.department_name AS 'user_department', user_functions.user_function_description AS 'user_user_function', levels.level_description AS 'user_level', user_email, user_mobile, provinces.province_name AS 'user_province_name', user_birth_day
+  queryToDatabase(`SELECT user_id, user_username, user_password, user_roles.role_role AS 'user_role', updated_at AS 'user_updated_at', created_at AS 'user_created_at', user_country_id, countries.country_name AS 'user_country', user_last_name, user_first_name, departments.department_name AS 'user_department', user_functions.user_function_description AS 'user_user_function', levels.level_description AS 'user_level', user_email, user_mobile, provinces.province_name AS 'user_province_name', user_birth_day
 FROM users
 JOIN user_roles ON users.user_role_id = user_roles.role_id
+JOIN countries ON users.user_country_id = countries.country_id
 JOIN departments ON users.user_department_id = departments.department_id
 JOIN user_functions ON users.user_user_function_id = user_functions.user_function_id
 JOIN levels ON users.user_level_id = levels.level_id
-JOIN provinces ON users.user_province_id = provinces.province_id`, req, res)
-})
+JOIN provinces ON users.user_province_id = provinces.province_id
+ORDER BY user_last_name`, req, res)
+});
 
 // ADD TECHNICIAN
 app.post('/users/technician/post', bodyParser.json(), (req, res) => {
@@ -105,9 +114,10 @@ app.delete('/users/technician/delete/:userId', urlencode, (req, res) => {
 
 // FILTER USERS ON INPUT
 app.get('/users/filter/:input', bodyParser.json(), (req, res) => {
-  queryToDatabase(`SELECT user_id, user_username, user_password, user_roles.role_role AS 'user_role', updated_at AS 'user_updated_at', created_at AS 'user_created_at', user_country_id, user_last_name, user_first_name, departments.department_name AS 'user_department', user_functions.user_function_description AS 'user_user_function', levels.level_description AS 'user_level', user_email, user_mobile, provinces.province_name AS 'user_province_name', user_birth_day
+  queryToDatabase(`SELECT user_id, user_username, user_password, user_roles.role_role AS 'user_role', updated_at AS 'user_updated_at', created_at AS 'user_created_at', user_country_id, countries.country_name AS 'user_country', user_last_name, user_first_name, departments.department_name AS 'user_department', user_functions.user_function_description AS 'user_user_function', levels.level_description AS 'user_level', user_email, user_mobile, provinces.province_name AS 'user_province_name', user_birth_day
 FROM users
 JOIN user_roles ON users.user_role_id = user_roles.role_id
+JOIN countries ON users.user_country_id = countries.country_id
 JOIN departments ON users.user_department_id = departments.department_id
 JOIN user_functions ON users.user_user_function_id = user_functions.user_function_id
 JOIN levels ON users.user_level_id = levels.level_id
@@ -116,6 +126,7 @@ WHERE user_id LIKE "%${req.params.input}%"
 OR user_username LIKE "%${req.params.input}%"
 OR user_roles.role_role LIKE "%${req.params.input}%"
 OR user_country_id LIKE "%${req.params.input}%"
+OR countries.country_name LIKE "%${req.params.input}%"
 OR departments.department_name LIKE "%${req.params.input}%"
 OR levels.level_description LIKE "%${req.params.input}%"
 OR user_email LIKE "%${req.params.input}%"

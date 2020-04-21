@@ -124,6 +124,7 @@
         <th scope="col">HQ?</th>
         <th scope="col">More</th>
         <th scope="col">Delete</th>
+        <th scope="col">PDF</th>
       </tr>
     </thead>
     <tbody id="allAcademies" class="border">
@@ -214,6 +215,11 @@
         <td>
           <button type="button" class="btn btn-link btn-sm" (click)=deleteAcademy(academy.academy_id)>
             <i class="fas fa-trash-alt" style="color: red;"></i>
+          </button>
+        </td>
+        <td>
+          <button type="button" class="btn btn-link btn-sm" (click)=generatePDF(academy.academy_id)>
+            <i class="fas fa-file-pdf" style="color: green;"></i>
           </button>
         </td>
       </tr>
