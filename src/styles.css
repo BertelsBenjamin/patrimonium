@@ -1,13 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
-html,
-body {
-  height: 100%;
-}
-
 body {
   margin: 0;
   font-family: "Poppins", sans-serif !important;
-  background-color: white !important;
-  color: #353b41 !important;
+}
+
+app-root {
+  display: -ms-grid;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  -ms-grid-rows: 1fr 5fr 1fr;
+      grid-template-rows: 1fr 5fr 1fr;
+      grid-template-areas: 'header router footer';
 }
 /*# sourceMappingURL=styles.css.map */

@@ -8,7 +8,7 @@ import {
   debounceTime,
   distinctUntilChanged,
   filter,
-  map
+  map,
 } from "rxjs/operators";
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import Swal from "sweetalert2";
@@ -17,7 +17,7 @@ import { FormsModule } from "@angular/forms";
 @Component({
   selector: "app-disp-technicians",
   templateUrl: "./disp-technicians.component.html",
-  styleUrls: ["./disp-technicians.component.scss"]
+  styleUrls: ["./disp-technicians.component.scss"],
 })
 export class DispTechniciansComponent implements OnInit {
   constructor(
@@ -88,10 +88,10 @@ export class DispTechniciansComponent implements OnInit {
     const inputFocus$ = this.focus_role$;
 
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term =>
+      map((term) =>
         (term === ""
           ? this.rolesArray
-          : this.rolesArray.filter(v => {
+          : this.rolesArray.filter((v) => {
               v.toLowerCase().indexOf(term.toLowerCase()) > -1;
             })
         ).slice(0, 10)
@@ -114,11 +114,11 @@ export class DispTechniciansComponent implements OnInit {
     const inputFocus$ = this.focus_department$;
 
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term =>
+      map((term) =>
         (term === ""
           ? this.departmentsArray
           : this.departmentsArray.filter(
-              v => v.toLowerCase().indexOf(term.toLowerCase()) > -1
+              (v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1
             )
         ).slice(0, 10)
       )
@@ -140,11 +140,11 @@ export class DispTechniciansComponent implements OnInit {
     const inputFocus$ = this.focus_province$;
 
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term =>
+      map((term) =>
         (term === ""
           ? this.provincesArray
           : this.provincesArray.filter(
-              v => v.toLowerCase().indexOf(term.toLowerCase()) > -1
+              (v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1
             )
         ).slice(0, 10)
       )
@@ -166,11 +166,11 @@ export class DispTechniciansComponent implements OnInit {
     const inputFocus$ = this.focus_country$;
 
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term =>
+      map((term) =>
         (term === ""
           ? this.countriesArray
           : this.countriesArray.filter(
-              v => v.toLowerCase().indexOf(term.toLowerCase()) > -1
+              (v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1
             )
         ).slice(0, 10)
       )
@@ -192,11 +192,11 @@ export class DispTechniciansComponent implements OnInit {
     const inputFocus$ = this.focus_level$;
 
     return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
-      map(term =>
+      map((term) =>
         (term === ""
           ? this.levelsArray
           : this.levelsArray.filter(
-              v => v.toLowerCase().indexOf(term.toLowerCase()) > -1
+              (v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1
             )
         ).slice(0, 10)
       )
@@ -207,10 +207,10 @@ export class DispTechniciansComponent implements OnInit {
   getUsersAndTechnicians() {
     this.users$ = this.UsersService.getUsers();
     this.users$.subscribe(
-      result => (
+      (result) => (
         (this.users = result),
         (this.technicians = []),
-        result.forEach(e => {
+        result.forEach((e) => {
           if (e.user_user_function == "Technician") {
             this.technicians.push(e);
           }
@@ -227,10 +227,10 @@ export class DispTechniciansComponent implements OnInit {
     } else {
       this.users$ = this.UsersService.filterTechniciansOnDispInput(input);
       this.users$.subscribe(
-        result => (
+        (result) => (
           (this.users = result),
           (this.technicians = []),
-          result.forEach(e => {
+          result.forEach((e) => {
             if (e.user_user_function == "Technician") {
               this.technicians.push(e);
             }
@@ -253,12 +253,12 @@ export class DispTechniciansComponent implements OnInit {
       user_province_id: ``,
       user_birth_day: `${form.controls.birthday.value}`,
       user_password: "test",
-      user_role_id: ""
+      user_role_id: "",
     };
 
     //CHECK FOR MATCHING ROLE
-    this.roles.forEach(role => {
-      form._directives.forEach(directive => {
+    this.roles.forEach((role) => {
+      form._directives.forEach((directive) => {
         if (role.role_role == directive.value) {
           this.newUser.user_role_id = role.role_id;
         }
@@ -266,8 +266,8 @@ export class DispTechniciansComponent implements OnInit {
     });
 
     //CHECK FOR MATCHING DEPARTMENT
-    this.departments.forEach(department => {
-      form._directives.forEach(directive => {
+    this.departments.forEach((department) => {
+      form._directives.forEach((directive) => {
         if (department.department_name == directive.value) {
           this.newUser.user_department_id = department.department_id;
         }
@@ -275,8 +275,8 @@ export class DispTechniciansComponent implements OnInit {
     });
 
     //CHECK FOR MATCHING PROVINCE
-    this.provinces.forEach(province => {
-      form._directives.forEach(directive => {
+    this.provinces.forEach((province) => {
+      form._directives.forEach((directive) => {
         if (province.province_name == directive.value) {
           this.newUser.user_province_id = province.province_id;
         }
@@ -284,8 +284,8 @@ export class DispTechniciansComponent implements OnInit {
     });
 
     //CHECK FOR MATCHING COUNTRY
-    this.countries.forEach(country => {
-      form._directives.forEach(directive => {
+    this.countries.forEach((country) => {
+      form._directives.forEach((directive) => {
         if (country.country_name == directive.value) {
           this.newUser.user_country_id = country.country_id;
         }
@@ -293,8 +293,8 @@ export class DispTechniciansComponent implements OnInit {
     });
 
     //CHECK FOR MATCHING LEVELS
-    this.levels.forEach(level => {
-      form._directives.forEach(directive => {
+    this.levels.forEach((level) => {
+      form._directives.forEach((directive) => {
         if (level.level_description == directive.value) {
           this.newUser.user_level_id = level.level_id;
         }
@@ -316,10 +316,10 @@ export class DispTechniciansComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then(result => {
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
       if (result.value) {
-        this.UsersService.deleteTechnician(id).subscribe(response => {
+        this.UsersService.deleteTechnician(id).subscribe((response) => {
           console.log(response);
         });
         Swal.fire("Deleted!", "Technician has been deleted.", "success");
@@ -330,9 +330,9 @@ export class DispTechniciansComponent implements OnInit {
 
   getRoles() {
     this.roles$ = this.UsersService.getRoles();
-    this.roles$.subscribe(result => {
+    this.roles$.subscribe((result) => {
       this.roles = result;
-      result.forEach(role => {
+      result.forEach((role) => {
         this.rolesArray.push(role.role_role);
         for (let key in role) {
         }
@@ -342,9 +342,9 @@ export class DispTechniciansComponent implements OnInit {
 
   getDepartments() {
     this.departments$ = this.UsersService.getDepartments();
-    this.departments$.subscribe(result => {
+    this.departments$.subscribe((result) => {
       this.departments = result;
-      this.departments.forEach(department => {
+      this.departments.forEach((department) => {
         this.departmentsArray.push(department.department_name);
       }),
         console.log("DISP_TECH_departments:", this.departments);
@@ -353,9 +353,9 @@ export class DispTechniciansComponent implements OnInit {
 
   getProvinces() {
     this.provinces$ = this.UsersService.getProvinces();
-    this.provinces$.subscribe(result => {
+    this.provinces$.subscribe((result) => {
       this.provinces = result;
-      this.provinces.forEach(province => {
+      this.provinces.forEach((province) => {
         this.provincesArray.push(province.province_name);
       });
     });
@@ -363,9 +363,9 @@ export class DispTechniciansComponent implements OnInit {
 
   getCountries() {
     this.countries$ = this.UsersService.getCountries();
-    this.countries$.subscribe(result => {
+    this.countries$.subscribe((result) => {
       this.countries = result;
-      this.countries.forEach(country => {
+      this.countries.forEach((country) => {
         this.countriesArray.push(country.country_name);
       });
     });
@@ -373,9 +373,9 @@ export class DispTechniciansComponent implements OnInit {
 
   getLevels() {
     this.levels$ = this.UsersService.getLevels();
-    this.levels$.subscribe(result => {
+    this.levels$.subscribe((result) => {
       this.levels = result;
-      this.levels.forEach(level => {
+      this.levels.forEach((level) => {
         this.levelsArray.push(level.level_description);
       });
     });

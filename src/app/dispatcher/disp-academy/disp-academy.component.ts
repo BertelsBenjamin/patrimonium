@@ -13,7 +13,7 @@ import { PianosService } from "src/app/shared/services/pianos/pianos.service";
 @Component({
   selector: "app-disp-academy",
   templateUrl: "./disp-academy.component.html",
-  styleUrls: ["./disp-academy.component.scss"]
+  styleUrls: ["./disp-academy.component.scss"],
 })
 export class DispAcademyComponent implements OnInit {
   // VARIABLES
@@ -37,7 +37,7 @@ export class DispAcademyComponent implements OnInit {
 
   getAllAcademies() {
     this.academies$ = this.AcademiesService.getAllAcademies();
-    this.academies$.subscribe(result => (this.academies = result));
+    this.academies$.subscribe((result) => (this.academies = result));
 
     /* search = (text$: Observable<string>) =>
       text$.pipe(
@@ -57,7 +57,7 @@ export class DispAcademyComponent implements OnInit {
     this.currentAcademy$ = this.AcademiesService.findAcademy(
       this.route.snapshot.params.id
     );
-    this.currentAcademy$.subscribe(result => (this.currentAcademy = result));
+    this.currentAcademy$.subscribe((result) => (this.currentAcademy = result));
   }
 
   getCurrentAcademyPianos() {
@@ -65,13 +65,13 @@ export class DispAcademyComponent implements OnInit {
       this.route.snapshot.params.id
     );
     this.currentAcademyPianos$.subscribe(
-      result => (this.currentAcademyPianos = result)
+      (result) => (this.currentAcademyPianos = result)
     );
   }
 
   getInterventions(piano_id) {
     this.pianoLogs$ = this.LogsService.getLogs(piano_id);
-    this.pianoLogs$.subscribe(result => (this.pianoLogs = result));
+    this.pianoLogs$.subscribe((result) => (this.pianoLogs = result));
   }
 
   postIntervention(
@@ -101,7 +101,7 @@ export class DispAcademyComponent implements OnInit {
   }
 
   updateRoom(pianoID: number, oldRoom: string, newRoom: string) {
-    this.PianosService.updateRoom(pianoID, oldRoom, newRoom).subscribe(
+    this.PianosService.updateRoom(pianoID, newRoom).subscribe(
       (postedRoom: string) => {
         console.log(postedRoom);
         console.log("UPDATE ROOM:", { pianoID, oldRoom, newRoom });

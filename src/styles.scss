@@ -1,18 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
-$primary-blue: #292d3e;
-$primary-orange: rgba(255, 255, 255, 0.918);
-$primary-grey: #545e8a;
-$primary-light-blue: #d1b486;
-$font-text: 'Poppins';
-
-html,
-body {
-  height: 100%;
-}
+// IMPORTS
+@import 'variables';
 
 body {
   margin: 0;
   font-family: $font-text, sans-serif !important;
-  background-color: rgb(255, 255, 255) !important;
-  color: hsl(210, 10%, 23%) !important;
+  height: 100vh;
+  width: 100vw;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+app-root {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-rows: 1fr 5fr 1fr;
+  grid-template-areas: 'header router footer';
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

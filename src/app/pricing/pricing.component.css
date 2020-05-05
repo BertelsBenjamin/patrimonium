@@ -2,6 +2,11 @@
   color: #353b41 !important;
 }
 
+.title-wrapper {
+  display: block;
+  text-align: center;
+}
+
 section.pricing {
   border-radius: 10px;
 }

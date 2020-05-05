@@ -147,8 +147,7 @@
                       <p>Change room from "{{piano.piano_room}}" to:</p>
                       <input class="form-control" type='text' #updateRoomInput>
                       <button class="btn btn-success btn-small mt-3"
-                        (click)='updateRoom(piano.piano_id, piano.piano_room, updateRoomInput.value)'
-                        data-dismiss="modal">Update</button>
+                        (click)='updateRoom(piano.piano_id, updateRoomInput.value)' data-dismiss="modal">Update</button>
                     </div>
                   </div>
                 </div>

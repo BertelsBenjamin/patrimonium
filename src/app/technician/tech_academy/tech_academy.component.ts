@@ -12,7 +12,7 @@ import { PianosService } from "src/app/shared/services/pianos/pianos.service";
 @Component({
   selector: "app-tech-academy",
   templateUrl: "./tech_academy.component.html",
-  styleUrls: ["./tech_academy.component.scss"]
+  styleUrls: ["./tech_academy.component.scss"],
 })
 export class TechAcademyComponent implements OnInit {
   // VARIABLES
@@ -35,7 +35,7 @@ export class TechAcademyComponent implements OnInit {
     this.currentAcademy$ = this.AcademiesService.findAcademy(
       this.route.snapshot.params.id
     );
-    this.currentAcademy$.subscribe(result => (this.currentAcademy = result));
+    this.currentAcademy$.subscribe((result) => (this.currentAcademy = result));
   }
 
   getCurrentAcademyPianos() {
@@ -43,13 +43,13 @@ export class TechAcademyComponent implements OnInit {
       this.route.snapshot.params.id
     );
     this.currentAcademyPianos$.subscribe(
-      result => (this.currentAcademyPianos = result)
+      (result) => (this.currentAcademyPianos = result)
     );
   }
 
   getInterventions(piano_id) {
     this.pianoLogs$ = this.LogsService.getLogs(piano_id);
-    this.pianoLogs$.subscribe(result => (this.pianoLogs = result));
+    this.pianoLogs$.subscribe((result) => (this.pianoLogs = result));
   }
 
   postIntervention(
@@ -78,11 +78,11 @@ export class TechAcademyComponent implements OnInit {
     this.getInterventions(piano_id);
   }
 
-  updateRoom(pianoID: number, oldRoom: string, newRoom: string) {
-    this.PianosService.updateRoom(pianoID, oldRoom, newRoom).subscribe(
+  updateRoom(pianoID: number, newRoom: string) {
+    this.PianosService.updateRoom(pianoID, newRoom).subscribe(
       (postedRoom: string) => {
         console.log(postedRoom);
-        console.log("UPDATE ROOM:", { pianoID, oldRoom, newRoom });
+        console.log("UPDATE ROOM:", { pianoID, newRoom });
       }
     );
     this.getCurrentAcademyPianos();

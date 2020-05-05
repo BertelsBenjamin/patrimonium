@@ -1,25 +1,11 @@
 app-home-header {
-  display: block !important;
-  height: 10%;
-  position: absolute;
+  grid-area: header;
 }
 
 router-outlet {
-  display: block;
-  margin-top: 10%;
-  margin-bottom: 10%;
+  grid-area: router;
 }
 
-/* app-technician {
-  display: block;
-  height: auto;
-  max-height: 80%;
-  margin-top: 10%;
-  margin-bottom: 10%;
-} */
-
 app-home-footer {
-  display: block !important;
-  position: absolute;
-  height: 10%;
+  grid-area: footer;
 }

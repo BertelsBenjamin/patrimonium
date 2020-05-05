@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class PianosService {
   constructor(private http: HttpClient) {}
@@ -17,15 +17,17 @@ export class PianosService {
     return this.http
       .get<Piano[]>(`${this.url}pianos/${academyId}`)
       .pipe(
-        tap(result => console.log("TECH_SERVICE: findPianosByAcademy", result))
+        tap((result) =>
+          console.log("TECH_SERVICE: findPianosByAcademy", result)
+        )
       );
   }
 
-  updateRoom(pianoID: number, oldRoom: string, newRoom: string) {
+  updateRoom(pianoID: number, newRoom: string) {
     const headers = new HttpHeaders().set("Content-Type", "application/json");
     return this.http.put(
       `${this.url}rooms/update`,
-      { pianoID: pianoID, oldRoom: oldRoom, newRoom: newRoom },
+      { pianoID: pianoID, newRoom: newRoom },
       { headers: headers }
     );
   }
