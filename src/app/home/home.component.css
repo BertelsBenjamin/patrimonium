@@ -1,4 +1,15 @@
 .container {
   color: #22262a !important;
 }
+
+h5 {
+  margin-top: 2vh;
+  text-align: center;
+}
+
+.fas {
+  display: block;
+  text-align: center;
+  margin: 2vh 2vw;
+}
 /*# sourceMappingURL=home.component.css.map */

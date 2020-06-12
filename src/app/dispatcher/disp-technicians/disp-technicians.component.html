@@ -4,14 +4,20 @@
     <div class="col-8">
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <a class="nav-link" routerLink='/dispatcher/academies' routerLinkActive="active-link">Academies</a>
+          <a
+            class="nav-link"
+            routerLink="/dispatcher/academies"
+            routerLinkActive="active-link"
+            >Academies</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link active" routerLink="/dispatcher/technicians" routerLinkActive="active-link">Technicians</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/dispatcher/logs" routerLinkActive="active-link">Logs<span
-              class="badge badge-danger">4</span></a>
+          <a
+            class="nav-link active"
+            routerLink="/dispatcher/technicians"
+            routerLinkActive="active-link"
+            >Technicians</a
+          >
         </li>
       </ul>
     </div>
@@ -19,14 +25,17 @@
       <ul class="nav nav-pills justify-content-end">
         <li class="list-item">
           <a class="nav-link" href=".">
-            <small>Logged in as {{user.user_first_name}} {{user.user_last_name}}</small>
+            <small
+              >Logged in as {{ user.user_first_name }}
+              {{ user.user_last_name }}</small
+            >
           </a>
         </li>
       </ul>
     </div>
   </div>
   <!--END: SUB NAVIGATOR-->
-  <hr>
+  <hr />
   <div class="row">
     <div class="col">
       <!--START: SEARCH FILTER-->
@@ -36,16 +45,35 @@
             <i class="fas fa-search"></i>
           </span>
         </div>
-        <input id="dispatcher-input" class="form-control rounded" placeholder="Search by name, street, place, ..."
-          #dispatcherInput (keyup)='filterTechniciansOnDispInput(dispatcherInput.value)'>
+        <input
+          id="dispatcher-input"
+          class="form-control rounded"
+          placeholder="Search by name, street, place, ..."
+          #dispatcherInput
+          (keyup)="filterTechniciansOnDispInput(dispatcherInput.value)"
+        />
         <!--START: BUTTON ADD TECHNICIAN-->
-        <button type="button" class="btn btn-success ml-3" data-toggle="modal" data-target="#Modal_add_technician">
+        <button
+          type="button"
+          class="btn btn-success ml-3"
+          data-toggle="modal"
+          data-target="#Modal_add_technician"
+        >
           <i class="fas fa-plus mr-3"></i>Add new technician
         </button>
         <!--END: BUTTON ADD TECHNICIAN-->
         <!--START: MODAL ADD TECHNICIAN-->
-        <div class="modal fade" id='Modal_add_technician' tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div
+          class="modal fade"
+          id="Modal_add_technician"
+          tabindex="-1"
+          role="dialog"
+          aria-hidden="true"
+        >
+          <div
+            class="modal-dialog modal-dialog-centered modal-lg"
+            role="document"
+          >
             <div class="modal-content modal-content-center">
               <div class="modal-header">
                 <h3 class="modal-title">Add new technician</h3>
@@ -54,18 +82,29 @@
                 <div class="card">
                   <div class="card-body">
                     <div class="row">
-                      <form class="form-inline" #addTechnicianForm='ngForm'>
-                        {{addTechnicianForm.value | json}}
+                      <form class="form-inline" #addTechnicianForm="ngForm">
                         <!--START: FORM LEFT COLUMN-->
                         <div class="col-6">
                           <div class="form-group">
                             <!--START: FIRST NAME-->
                             <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="label_first_name">First Name</span>
+                                <span
+                                  class="input-group-text"
+                                  id="label_first_name"
+                                  >First Name</span
+                                >
                               </div>
-                              <input type="text" class="form-control" placeholder="First Name" aria-label="First Name"
-                                aria-describedby="label_first_name" #new_tech_first_name ngModel name="first_name">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="First Name"
+                                aria-label="First Name"
+                                aria-describedby="label_first_name"
+                                #new_tech_first_name
+                                ngModel
+                                name="first_name"
+                              />
                             </div>
                           </div>
                           <!--END: FIRST NAME-->
@@ -73,10 +112,22 @@
                           <div class="form-group">
                             <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="label_last_name">Last Name</span>
+                                <span
+                                  class="input-group-text"
+                                  id="label_last_name"
+                                  >Last Name</span
+                                >
                               </div>
-                              <input type="text" class="form-control" placeholder="Last name" aria-label="Last Name"
-                                aria-describedby="label_last_name" #new_tech_last_name ngModel name="last_name">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Last name"
+                                aria-label="Last Name"
+                                aria-describedby="label_last_name"
+                                #new_tech_last_name
+                                ngModel
+                                name="last_name"
+                              />
                             </div>
                           </div>
                           <!--END: LAST NAME-->
@@ -84,13 +135,23 @@
                           <div class="form-group">
                             <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="label_role">Role</span>
+                                <span class="input-group-text" id="label_role"
+                                  >Role</span
+                                >
                               </div>
-                              <input id="role-focus" type="text" class="form-control" placeholder="Role"
-                                [(ngModel)]="new_tech_role" [ngbTypeahead]="search_role"
+                              <input
+                                id="role-focus"
+                                type="text"
+                                class="form-control"
+                                placeholder="Role"
+                                [(ngModel)]="new_tech_role"
+                                [ngbTypeahead]="search_role"
                                 (focus)="focus_role$.next($event.target.value)"
-                                (click)="click_role$.next($event.target.value)" #role="ngbTypeahead" ngModel
-                                name="role" />
+                                (click)="click_role$.next($event.target.value)"
+                                #role="ngbTypeahead"
+                                ngModel
+                                name="role"
+                              />
                             </div>
                           </div>
                           <!--END: ROLE-->
@@ -98,13 +159,28 @@
                           <div class="form-group">
                             <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="label_country">Country</span>
+                                <span
+                                  class="input-group-text"
+                                  id="label_country"
+                                  >Country</span
+                                >
                               </div>
-                              <input id="country-focus" type="text" class="form-control" placeholder="Country"
-                                [(ngModel)]="new_tech_country" [ngbTypeahead]="search_country"
-                                (focus)="focus_country$.next($event.target.value)"
-                                (click)="click_country$.next($event.target.value)" #country="ngbTypeahead"
-                                name="country" />
+                              <input
+                                id="country-focus"
+                                type="text"
+                                class="form-control"
+                                placeholder="Country"
+                                [(ngModel)]="new_tech_country"
+                                [ngbTypeahead]="search_country"
+                                (focus)="
+                                  focus_country$.next($event.target.value)
+                                "
+                                (click)="
+                                  click_country$.next($event.target.value)
+                                "
+                                #country="ngbTypeahead"
+                                name="country"
+                              />
                             </div>
                           </div>
                           <!--END: COUNTRY-->
@@ -112,13 +188,28 @@
                           <div class="form-group">
                             <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="label_department">Department</span>
+                                <span
+                                  class="input-group-text"
+                                  id="label_department"
+                                  >Department</span
+                                >
                               </div>
-                              <input id="department-focus" type="text" class="form-control" placeholder="Department"
-                                [(ngModel)]="new_tech_department" [ngbTypeahead]="search_department"
-                                (focus)="focus_department$.next($event.target.value)"
-                                (click)="click_department$.next($event.target.value)" #department="ngbTypeahead"
-                                name="department" />
+                              <input
+                                id="department-focus"
+                                type="text"
+                                class="form-control"
+                                placeholder="Department"
+                                [(ngModel)]="new_tech_department"
+                                [ngbTypeahead]="search_department"
+                                (focus)="
+                                  focus_department$.next($event.target.value)
+                                "
+                                (click)="
+                                  click_department$.next($event.target.value)
+                                "
+                                #department="ngbTypeahead"
+                                name="department"
+                              />
                             </div>
                           </div>
                           <!--END DEPARTMENT-->
@@ -130,13 +221,23 @@
                           <div class="form-group">
                             <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="label_level">Level</span>
+                                <span class="input-group-text" id="label_level"
+                                  >Level</span
+                                >
                               </div>
-                              <input id="level-focus" type="text" class="form-control" placeholder="Level"
-                                [(ngModel)]="new_tech_level" [ngbTypeahead]="search_level"
+                              <input
+                                id="level-focus"
+                                type="text"
+                                class="form-control"
+                                placeholder="Level"
+                                [(ngModel)]="new_tech_level"
+                                [ngbTypeahead]="search_level"
                                 (focus)="focus_level$.next($event.target.value)"
-                                (click)="click_level$.next($event.target.value)" #level="ngbTypeahead" ngModel
-                                name="level" />
+                                (click)="click_level$.next($event.target.value)"
+                                #level="ngbTypeahead"
+                                ngModel
+                                name="level"
+                              />
                             </div>
                           </div>
                           <!--END: LEVEL-->
@@ -144,10 +245,20 @@
                           <div class="form-group">
                             <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="label_email">Email</span>
+                                <span class="input-group-text" id="label_email"
+                                  >Email</span
+                                >
                               </div>
-                              <input type="text" class="form-control" placeholder="Email" aria-label="email"
-                                aria-describedby="label_email" #new_tech_email ngModel name="email">
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Email"
+                                aria-label="email"
+                                aria-describedby="label_email"
+                                #new_tech_email
+                                ngModel
+                                name="email"
+                              />
                             </div>
                           </div>
                           <!--END: EMAIL-->
@@ -155,13 +266,29 @@
                           <div class="form-group">
                             <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="label_province">Province</span>
+                                <span
+                                  class="input-group-text"
+                                  id="label_province"
+                                  >Province</span
+                                >
                               </div>
-                              <input id="province-focus" type="text" class="form-control" placeholder="Province"
-                                [(ngModel)]="new_tech_province" [ngbTypeahead]="search_province"
-                                (focus)="focus_province$.next($event.target.value)"
-                                (click)="click_province$.next($event.target.value)" #province="ngbTypeahead" ngModel
-                                name="province" />
+                              <input
+                                id="province-focus"
+                                type="text"
+                                class="form-control"
+                                placeholder="Province"
+                                [(ngModel)]="new_tech_province"
+                                [ngbTypeahead]="search_province"
+                                (focus)="
+                                  focus_province$.next($event.target.value)
+                                "
+                                (click)="
+                                  click_province$.next($event.target.value)
+                                "
+                                #province="ngbTypeahead"
+                                ngModel
+                                name="province"
+                              />
                             </div>
                           </div>
                           <!--END: PROVINCE-->
@@ -169,10 +296,20 @@
                           <div class="form-group">
                             <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="label_mobile">Phone</span>
+                                <span class="input-group-text" id="label_mobile"
+                                  >Phone</span
+                                >
                               </div>
-                              <input type="tel" class="form-control" placeholder="Phone" aria-label="phone"
-                                aria-describedby="label_mobile" #new_tech_mobile ngModel name="phone">
+                              <input
+                                type="tel"
+                                class="form-control"
+                                placeholder="Phone"
+                                aria-label="phone"
+                                aria-describedby="label_mobile"
+                                #new_tech_mobile
+                                ngModel
+                                name="phone"
+                              />
                             </div>
                           </div>
                           <!--END: MOBILE-->
@@ -180,10 +317,22 @@
                           <div class="form-group">
                             <div class="input-group input-group-sm mb-3">
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="label_birthday">Birthday</span>
+                                <span
+                                  class="input-group-text"
+                                  id="label_birthday"
+                                  >Birthday</span
+                                >
                               </div>
-                              <input type="date" class="form-control" placeholder="Birthday" aria-label="phone"
-                                aria-describedby="label_birthday" #new_tech_birthday ngModel name="birthday">
+                              <input
+                                type="date"
+                                class="form-control"
+                                placeholder="Birthday"
+                                aria-label="phone"
+                                aria-describedby="label_birthday"
+                                #new_tech_birthday
+                                ngModel
+                                name="birthday"
+                              />
                             </div>
                           </div>
                           <!--END: BIRTHDAY-->
@@ -196,9 +345,21 @@
               </div>
               <!--START: BUTTON SUBMIT TECHNICIAN/CLOSE-->
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal"
-                  (click)='addNewTechnician(addTechnicianForm)'>Add</button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  data-dismiss="modal"
+                  (click)="addNewTechnician(addTechnicianForm)"
+                >
+                  Add
+                </button>
               </div>
               <!--END: BUTTON SUBMIT TECHNICIAN:CLOSE-->
             </div>
@@ -227,23 +388,31 @@
       <!--END: TABLE HEAD-->
       <!--START: TABLE BODY-->
       <tbody id="allTechnicians" class="border">
-        <tr class="small" [attr.id]="'Technician_' + technician.user_id" *ngFor='let technician of technicians'>
-          <td>{{technician.user_id}}</td>
-          <td>{{technician.user_username}}</td>
-          <td>{{technician.user_country}}</td>
-          <td>{{technician.user_department}}</td>
-          <td>{{technician.user_level}}</td>
-          <td>{{technician.user_province_name}}</td>
+        <tr
+          class="small"
+          [attr.id]="'Technician_' + technician.user_id"
+          *ngFor="let technician of technicians"
+        >
+          <td>{{ technician.user_id }}</td>
+          <td>{{ technician.user_username }}</td>
+          <td>{{ technician.user_country }}</td>
+          <td>{{ technician.user_department }}</td>
+          <td>{{ technician.user_level }}</td>
+          <td>{{ technician.user_province_name }}</td>
           <td>
-            <a class="mr-3" [attr.href]="'mailto:' + technician.user_email"><i class="fas fa-envelope"></i></a>
+            <a class="mr-3" [attr.href]="'mailto:' + technician.user_email"
+              ><i class="fas fa-envelope"></i
+            ></a>
           </td>
           <td>
-            <a [attr.href]="'tel:' + technician.user_mobile"><i class="fas fa-phone"
-                style="color: hsl(134, 61%, 41%);"></i>
+            <a [attr.href]="'tel:' + technician.user_mobile"
+              ><i class="fas fa-phone" style="color: hsl(134, 61%, 41%);"></i>
             </a>
           </td>
-          <td><a type="button" (click)='deleteTechnician(technician.user_id)'><i class="fas fa-trash-alt"
-                style="color: red;"></i></a>
+          <td>
+            <a type="button" (click)="deleteTechnician(technician.user_id)"
+              ><i class="fas fa-trash-alt" style="color: red;"></i
+            ></a>
           </td>
         </tr>
       </tbody>

@@ -1,28 +1,48 @@
-<div class="container d-flex justify-content-center align-items-center">
+<div
+  class="main-wrapper container d-flex justify-content-center align-items-center"
+>
   <div class="form-container">
     <div class="text-center col-12">
       <h2>Login</h2>
     </div>
-    <form class="col" [formGroup]='loginInput'>
+    <form class="col" [formGroup]="loginInput">
       <div class="form-group">
         <label for="input-username">Username</label>
-        <input type="username" class="form-control" id="input-username" aria-describedby="usernameHelp" #userEmail
-          required autofocus>
+        <input
+          type="username"
+          class="form-control"
+          id="input-username"
+          aria-describedby="usernameHelp"
+          #userEmail
+          required
+          autofocus
+        />
       </div>
       <div class="form-group">
         <label for="input-password">Password</label>
-        <input type="password" class="form-control" id="input-password" #userPassword>
+        <input
+          type="password"
+          class="form-control"
+          id="input-password"
+          #userPassword
+        />
       </div>
       <!-- <div>
         <label>{{loginError.error}}</label>
       </div> -->
       <div class="form-group">
-        <small id="usernameHelp" class="form-text text-muted">Need an account or forgot password?
+        <small id="usernameHelp" class="form-text text-muted"
+          >Need an account or forgot password?
           <a href="tel:123456789">Call support.</a>
         </small>
       </div>
-      <button class="btn btn-success" id="btn-login"
-        (click)="login(userEmail.value, userPassword.value)">Submit</button>
+      <button
+        class="btn btn-success"
+        id="btn-login"
+        (click)="login(userEmail.value, userPassword.value)"
+      >
+        Submit
+      </button>
     </form>
   </div>
 </div>

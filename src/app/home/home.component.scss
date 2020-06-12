@@ -1,7 +1,17 @@
 $primary-blue: #292d3e;
 $primary-orange: rgb(230, 88, 23);
-$font-text: 'Poppins';
+$font-text: "Poppins";
 
 .container {
   color: hsl(210, 11%, 15%) !important;
+}
+
+h5 {
+  margin-top: 2vh;
+  text-align: center;
+}
+.fas {
+  display: block;
+  text-align: center;
+  margin: 2vh 2vw;
 }

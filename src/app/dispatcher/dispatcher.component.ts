@@ -144,6 +144,8 @@ export class DispatcherComponent implements OnInit {
 
   async generatePDF(academyID: number) {
     let result = await this.findAcademy(academyID);
+    let pianoKeys = [];
+    let pianoValues = [];
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
     console.group("PDF INFO:");
     console.log(this.academy);
@@ -151,40 +153,33 @@ export class DispatcherComponent implements OnInit {
     console.log(this.logs);
     console.groupEnd();
 
-    /* this.docDefinition = {
+    this.pianos.forEach((piano) => {
+      console.log(piano);
+      pianoKeys = Object.keys(piano);
+      pianoValues = Object.values(piano);
+    });
+
+    console.log("pianoKeys:", pianoKeys, typeof pianoKeys);
+    console.log("pianoValues:", pianoValues);
+
+    this.docDefinition = {
       content: [
         {
-          layout: "lightHorizontalLines", // optional
+          layout: "lightHorizontalLines",
+          text: this.academy.toString(),
           table: {
-            // headers are automatically repeated if the table spans over multiple pages
-            // you can declare how many rows should be treated as headers
             headerRows: 1,
-            widths: ["auto", "auto", "auto", "auto", "auto", "auto"],
-            body: [
-              [
-                "Brand",
-                "Type",
-                "Serial Number",
-                "Room",
-                "Last Intervention",
-                "Technician",
-              ],
-              [
-                `${piano.piano_brand}`,
-                `${piano.piano_type}`,
-                `${piano.piano_serial_number}`,
-                `${piano.piano_room}`,
-                `${log.log_comment}`,
-                `${log.log_user_username}`,
-              ],
-            ],
+            widths: ["auto", "auto", "auto", "auto", "auto", "auto", "auto"],
+            body: [pianoKeys, pianoValues],
           },
         },
       ],
-    }; */
+    };
 
     // CREATE PDF
     pdfMake.createPdf(this.docDefinition).open();
+    // DOWNLOAD PDF
+    //pdfMake.createPdf(this.docDefinition).download();
   }
 
   ngOnInit() {
