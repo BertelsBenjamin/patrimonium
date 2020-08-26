@@ -1,6 +1,8 @@
 # Patrimonium
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.3.
+Import "patrimonium-dummy.sql" on your local server.
+Different usernames to log in are "technician", "dispatcher" and "manager". All have the same password: "test".
 
 ## Development server
 
