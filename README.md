@@ -4,6 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Import "patrimonium-dummy.sql" on your local server.
 Different usernames to log in are "technician", "dispatcher" and "manager". All have the same password: "test".
 
+## Demo note
+There are only piano's and logs in "Academie Noord-Limburg Michielshof". When logged in as "dispatcher", filter academies on this name and view comments. Only comments available for Yamaha U1 (serial number 4135086).
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
