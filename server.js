@@ -13,7 +13,7 @@ const cors = require('cors')
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'mypasswordformysql',
   database: 'patrimonium',
   port: '3306'
 });
@@ -35,7 +35,7 @@ function connect() {
 }
 
 // Disconnect from DB
-function disconnect() {
+/* function disconnect() {
   connection.end((err) => {
     if (err) {
       console.log(err);
@@ -44,7 +44,7 @@ function disconnect() {
     }
     console.log('Disconnected')
   });
-}
+} */
 
 function queryToDatabase(query, req, res) {
   //connect()
